@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\General">
+      <UniqueIdentifier>{23e905d4-c1ed-45de-a322-4c6f49b07bd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\General">
+      <UniqueIdentifier>{05f3d1dd-f19b-424b-bdae-88edd9a2a900}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tools">
+      <UniqueIdentifier>{5a688529-bf07-49f0-ba65-b4ce56ee229c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{854d81f5-068f-41c7-894d-a4152d8f5216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\States">
+      <UniqueIdentifier>{1e9ded25-b61d-4c21-bdd7-c6ec86e5986c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\States">
+      <UniqueIdentifier>{5b3c70bc-64f6-4616-b286-88dbf8639601}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Commands">
+      <UniqueIdentifier>{822bbe39-01c4-4eee-8fa5-2e780f62bb0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components">
+      <UniqueIdentifier>{92659301-e94f-447d-befc-59033a7f4ed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tools">
+      <UniqueIdentifier>{42545d00-074b-40f0-97ae-00de5f022bf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Input">
+      <UniqueIdentifier>{3f6fd182-7b69-400d-802c-c0eff05181bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Graphics">
+      <UniqueIdentifier>{c3732f99-5cbb-4dba-9f21-354c9ef4f620}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Physics">
+      <UniqueIdentifier>{7bb68b85-ca19-4c2f-abaa-dcab8f6c4b74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Input">
+      <UniqueIdentifier>{dd6437de-9c42-4afb-83a5-e8af677981ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Graphics">
+      <UniqueIdentifier>{1fa82346-adde-45fd-b398-f50aa223e201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Objects">
+      <UniqueIdentifier>{f8c92c45-8460-4120-acd9-7366f23b52c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Objects">
+      <UniqueIdentifier>{43c40b49-2939-415e-889b-bb1255fa5aaf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="YEngine\Command.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\StateManager.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\State.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\Locator.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\D3D.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\ID3D.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\GameTime.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\IGameTime.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\InputComponent.h">
+      <Filter>Header Files\Components\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\KeyboardComponent.h">
+      <Filter>Header Files\Components\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\ControllerComponent.h">
+      <Filter>Header Files\Components\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\GameObject.h">
+      <Filter>Header Files\Components\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\Component.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\GamePlayState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine\GameManager.h">
+      <Filter>Header Files\General</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="YEngine\GameManager.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="YEngine\main.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="YEngine\StateManager.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="YEngine\D3D.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="YEngine\Locator.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="YEngine\InputComponent.cpp">
+      <Filter>Source Files\Components\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="YEngine\GameTime.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="YEngine\KeyboardComponent.cpp">
+      <Filter>Source Files\Components\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="YEngine\ControllerComponent.cpp">
+      <Filter>Source Files\Components\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="YEngine\GamePlayState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="YEngine\GameObject.cpp">
+      <Filter>Source Files\Components\Objects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
