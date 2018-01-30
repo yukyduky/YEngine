@@ -8,7 +8,8 @@ KeyboardComponent::KeyboardComponent(GameObject& obj) : InputComponent(obj)
 {
 	POINT p;
 	GetCursorPos(&p);
-	this->cursorPos.x = p.x;
+	this->cursorPos.x = (float)p.x;
+	this->cursorPos.y = (float)p.y;
 }
 
 void KeyboardComponent::receive(GameObject & obj, Message msg)
@@ -47,8 +48,8 @@ void KeyboardComponent::generateCommands()
 	// Converts the cursor pos to relative to the window
 	ScreenToClient(Locator::getD3D()->GEThwnd(), &p);
 
-	this->cursorPos.x = p.x;
-	this->cursorPos.y = p.y;
+	this->cursorPos.x = (float)p.x;
+	this->cursorPos.x = (float)p.y;
 }
 
 XMFLOAT2 KeyboardComponent::GETcursorPos()

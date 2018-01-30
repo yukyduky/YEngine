@@ -119,34 +119,48 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="YEngine\Command.h" />
-    <ClInclude Include="YEngine\Component.h" />
-    <ClInclude Include="YEngine\ControllerComponent.h" />
-    <ClInclude Include="YEngine\D3D.h" />
-    <ClInclude Include="YEngine\GameManager.h" />
-    <ClInclude Include="YEngine\GameObject.h" />
-    <ClInclude Include="YEngine\GamePlayState.h" />
-    <ClInclude Include="YEngine\GameTime.h" />
-    <ClInclude Include="YEngine\ID3D.h" />
-    <ClInclude Include="YEngine\IGameTime.h" />
-    <ClInclude Include="YEngine\InputComponent.h" />
-    <ClInclude Include="YEngine\KeyboardComponent.h" />
-    <ClInclude Include="YEngine\Locator.h" />
-    <ClInclude Include="YEngine\State.h" />
-    <ClInclude Include="YEngine\StateManager.h" />
+    <ClInclude Include="ActorObject.h" />
+    <ClInclude Include="CollisionComponent.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="ControllerComponent.h" />
+    <ClInclude Include="D3D.h" />
+    <ClInclude Include="DeferredRenderer.h" />
+    <ClInclude Include="EntityObject.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GamePlayState.h" />
+    <ClInclude Include="GameTime.h" />
+    <ClInclude Include="GraphicsComponent.h" />
+    <ClInclude Include="ID3D.h" />
+    <ClInclude Include="IGameTime.h" />
+    <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="KeyboardComponent.h" />
+    <ClInclude Include="Locator.h" />
+    <ClInclude Include="PhysicsComponent.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="YEngine\ControllerComponent.cpp" />
-    <ClCompile Include="YEngine\D3D.cpp" />
-    <ClCompile Include="YEngine\GameManager.cpp" />
-    <ClCompile Include="YEngine\GameObject.cpp" />
-    <ClCompile Include="YEngine\GamePlayState.cpp" />
-    <ClCompile Include="YEngine\GameTime.cpp" />
-    <ClCompile Include="YEngine\InputComponent.cpp" />
-    <ClCompile Include="YEngine\KeyboardComponent.cpp" />
-    <ClCompile Include="YEngine\Locator.cpp" />
-    <ClCompile Include="YEngine\main.cpp" />
-    <ClCompile Include="YEngine\StateManager.cpp" />
+    <ClCompile Include="ActorObject.cpp" />
+    <ClCompile Include="CollisionComponent.cpp" />
+    <ClCompile Include="ControllerComponent.cpp" />
+    <ClCompile Include="D3D.cpp" />
+    <ClCompile Include="DeferredRenderer.cpp" />
+    <ClCompile Include="EntityObject.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GamePlayState.cpp" />
+    <ClCompile Include="GameTime.cpp" />
+    <ClCompile Include="GraphicsComponent.cpp" />
+    <ClCompile Include="InputComponent.cpp" />
+    <ClCompile Include="KeyboardComponent.cpp" />
+    <ClCompile Include="Locator.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PhysicsComponent.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

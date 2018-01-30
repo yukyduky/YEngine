@@ -90,14 +90,14 @@ void ControllerComponent::generateCommands()
 		// Check if either LSHOULDER or RSHOULDER was triggered
 		if (nextState.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD) {
 			commandQueue.push_back(this->controllerCommandMap[CONTROLLER::LSHOULDER].command);
-			this->trigLValue = nextState.Gamepad.bLeftTrigger / 255;
+			this->trigLValue = nextState.Gamepad.bLeftTrigger / 255.0f;
 		}
 		else {
 			this->trigLValue = 0.0f;
 		}
 		if (nextState.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD) {
 			commandQueue.push_back(this->controllerCommandMap[CONTROLLER::RSHOULDER].command);
-			this->trigRValue = nextState.Gamepad.bRightTrigger / 255;
+			this->trigRValue = nextState.Gamepad.bRightTrigger / 255.0f;
 		}
 		else {
 			this->trigRValue = 0.0f;
@@ -115,8 +115,8 @@ void ControllerComponent::vibrate(size_t left, size_t right)
 	ZeroMemory(&vib, sizeof(XINPUT_VIBRATION));
 
 	// Set the Vibration Values
-	vib.wLeftMotorSpeed = left;
-	vib.wRightMotorSpeed = right;
+	vib.wLeftMotorSpeed = (WORD)left;
+	vib.wRightMotorSpeed = (WORD)right;
 
 	// Vibrate the controller
 	XInputSetState(controllerID, &vib);
