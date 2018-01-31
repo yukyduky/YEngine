@@ -4,6 +4,7 @@
 
 #include <unordered_map>
 #include <d3d11.h>
+#include <SimpleMath.h>
 #include <array>
 #include <stdint.h>
 
@@ -11,7 +12,12 @@ enum class OBJECTTYPE { BLOCK };
 
 enum class BUFFER { VERTEX, INDEX, CONSTANT };
 
+enum class RESOURCEID { TEXQUAD };
+
+using namespace DirectX::SimpleMath;
+
 struct ObjectData {
+	RESOURCEID ID;
 	void* vertices;
 	void* indices;
 	size_t numVertices;
@@ -21,8 +27,8 @@ struct ObjectData {
 	size_t cbSize;
 
 	ObjectData() {}
-	ObjectData(void* vertices, void* indices, size_t numVertices, size_t numIndices, size_t stride, size_t offset, size_t cbSize) : 
-		vertices(vertices), indices(indices), numVertices(numVertices), numIndices(numIndices), stride(stride), offset(offset), cbSize(cbSize) {}
+	ObjectData(RESOURCEID ID, void* vertices, void* indices, size_t numVertices, size_t numIndices, size_t stride, size_t offset, size_t cbSize) :
+		ID(ID), vertices(vertices), indices(indices), numVertices(numVertices), numIndices(numIndices), stride(stride), offset(offset), cbSize(cbSize) {}
 };
 
 struct vBufferData
@@ -58,31 +64,32 @@ struct cBufferData
 class ResourceManager
 {
 private:
-	std::unordered_map<size_t, vBufferData> vertexBufferMap;
-	std::unordered_map<size_t, iBufferData> indexBufferMap;
-	std::unordered_map<size_t, cBufferData> constantBufferMap;
+	std::unordered_map<RESOURCEID, vBufferData> vertexBufferMap;
+	std::unordered_map<RESOURCEID, iBufferData> indexBufferMap;
+	std::unordered_map<RESOURCEID, cBufferData> constantBufferMap;
 public:
 	/*--------------- INFORMATION --------------- 
 	1. Maps the data to the ID location
 	2. Creates a vertex buffer, index buffer, and a constant buffer
 	*/
-	void addResource(size_t ID, ObjectData& data);
+	void addResource(ObjectData& data);
 	/*--------------- INFORMATION ---------------
 	1. Updates the index buffer with the given data
 	*/
-	void updateVertexBuffer(size_t ID, void* pData);
+	void updateVertexBuffer(RESOURCEID ID, void* pData);
 	/*--------------- INFORMATION ---------------
 	1. Updates the vertex buffer with the given data
 	*/
-	void updateIndexBuffer(size_t ID, void* pData);
+	void updateIndexBuffer(RESOURCEID ID, void* pData);
 	/*--------------- INFORMATION ---------------
 	1. Updates the constant buffer with the given data
 	*/
-	void updateConstant(size_t ID, void* pData);
+	void updateConstantBuffer(RESOURCEID ID, void* pData);
 
-	vBufferData& getVBufferData(size_t ID);
-	iBufferData& getIBufferData(size_t ID);		
-	cBufferData& getCBufferData(size_t ID);
+	vBufferData& getVBufferData(RESOURCEID ID);
+	iBufferData& getIBufferData(RESOURCEID ID);
+	cBufferData& getCBufferData(RESOURCEID ID);
+	void initTexQuad();
 };
 
 #endif // !RESOURCEMANAGER_H

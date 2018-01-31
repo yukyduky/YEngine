@@ -1,8 +1,6 @@
 #include "GamePlayState.h"
 #include "GameManager.h"
 #include "Locator.h"
-#include "KeyboardComponent.h"
-#include "ControllerComponent.h"
 
 
 GamePlayState GamePlayState::sGamePlayState;

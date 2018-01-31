@@ -119,14 +119,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ActorObject.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="ControllerComponent.h" />
     <ClInclude Include="D3D.h" />
     <ClInclude Include="DeferredRenderer.h" />
-    <ClInclude Include="EntityObject.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GamePlayState.h" />
@@ -134,8 +131,6 @@
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="ID3D.h" />
     <ClInclude Include="IGameTime.h" />
-    <ClInclude Include="InputComponent.h" />
-    <ClInclude Include="KeyboardComponent.h" />
     <ClInclude Include="Locator.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -143,19 +138,14 @@
     <ClInclude Include="StateManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ActorObject.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
-    <ClCompile Include="ControllerComponent.cpp" />
     <ClCompile Include="D3D.cpp" />
     <ClCompile Include="DeferredRenderer.cpp" />
-    <ClCompile Include="EntityObject.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GamePlayState.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
-    <ClCompile Include="InputComponent.cpp" />
-    <ClCompile Include="KeyboardComponent.cpp" />
     <ClCompile Include="Locator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />

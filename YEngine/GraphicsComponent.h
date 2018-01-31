@@ -3,18 +3,20 @@
 #define GRAPHICSCOMPONENT_H
 
 #include "Component.h"
-#include <d3d11.h>
+#include "ResourceManager.h"
 
 class GraphicsComponent : public Component
 {
-private:
+protected:
 	const size_t ID;
-	size_t resourceID;
+	RESOURCEID resourceID;
+	Matrix world;
 public:
-	GraphicsComponent(GameObject& obj);
-	virtual const size_t getID();
-	virtual void receive(GameObject & obj, Message msg);
-	virtual size_t getResourceID();
+	virtual void receive(Message msg);
+	virtual void init(RESOURCEID resourceID);
+	virtual void cleanup();
+	virtual void update();
+	RESOURCEID getResourceID();
 };
 
 #endif // !GRAPHICSCOMPONENT_H

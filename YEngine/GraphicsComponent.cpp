@@ -1,22 +1,28 @@
 #include "GraphicsComponent.h"
 #include "GameObject.h"
 
-
-
-GraphicsComponent::GraphicsComponent(GameObject& obj) : ID(obj.getID())
+void GraphicsComponent::receive(Message msg)
 {
 }
 
-const size_t GraphicsComponent::getID()
+void GraphicsComponent::init(RESOURCEID resourceID)
 {
-	return this->ID;
+	this->resourceID = resourceID;
+	this->world = Matrix::CreateWorld(this->getHead()->getPosition(), Vector3(0.0f, 0.0f, 1.0f), Vector3(0.0f, 1.0f, 0.0f));
 }
 
-void GraphicsComponent::receive(GameObject & obj, Message msg)
+void GraphicsComponent::cleanup()
 {
 }
 
-size_t GraphicsComponent::getResourceID()
+void GraphicsComponent::update()
+{
+	this->world.Translation(this->getHead()->getPosition());
+	Vector3 rot = this->getHead()->getPosition();
+	this->world *= Matrix::CreateFromYawPitchRoll(rot.x, rot.y, rot.z) * Matrix::CreateScale(this->getHead()->getScale());
+}
+
+RESOURCEID GraphicsComponent::getResourceID()
 {
 	return this->resourceID;
 }

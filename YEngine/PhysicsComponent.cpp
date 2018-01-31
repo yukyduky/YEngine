@@ -1,16 +1,45 @@
 #include "PhysicsComponent.h"
 #include "GameObject.h"
+#include "Locator.h"
 
-
-PhysicsComponent::PhysicsComponent(GameObject & obj)
+void PhysicsComponent::receive(Message msg)
 {
 }
 
-const size_t PhysicsComponent::getID()
+void PhysicsComponent::init(float weight)
 {
-	return size_t();
+	this->acceleration = Vector3(0.0f, 0.0f, 0.0f);
+	this->velocity = Vector3(0.0f, 0.0f, 0.0f);
+	this->weight = weight;
 }
 
-void PhysicsComponent::receive(GameObject & obj, Message msg)
+void PhysicsComponent::cleanup()
 {
+}
+
+void PhysicsComponent::update()
+{
+	double dt = Locator::getGameTime()->getDeltaTime();
+	this->velocity += this->acceleration * dt;
+	this->getHead()->move(this->velocity * dt);
+}
+
+void PhysicsComponent::setVeloctiy(Vector3 velocity)
+{
+	this->velocity = velocity;
+}
+
+Vector3 PhysicsComponent::getVelocity()
+{
+	return this->velocity;
+}
+
+void PhysicsComponent::setAcceleration(Vector3 acceleration)
+{
+	this->acceleration = acceleration;
+}
+
+Vector3 PhysicsComponent::getAcceleration()
+{
+	return this->acceleration;
 }

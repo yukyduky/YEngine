@@ -2,16 +2,29 @@
 #include "GameObject.h"
 
 
-
-CollisionComponent::CollisionComponent(GameObject & obj)
+void CollisionComponent::receive(Message msg)
 {
 }
 
-const size_t CollisionComponent::getID()
+void CollisionComponent::init(float width, float height)
 {
-	return size_t();
+	this->bBox.Center = this->getHead()->getPosition();
 }
 
-void CollisionComponent::receive(GameObject & obj, Message msg)
+void CollisionComponent::cleanup()
 {
+}
+
+void CollisionComponent::update()
+{
+	this->bBox.Center = this->getHead()->getPosition();
+}
+
+bool CollisionComponent::intersects(BoundingBox bBox)
+{
+	bool doesIntersect = false;
+	if (bBox.Intersects(bBox)) {
+		doesIntersect = true;
+	}
+	return doesIntersect;
 }

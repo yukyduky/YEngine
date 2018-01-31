@@ -4,13 +4,13 @@
 
 /* Command pattern */
 
-class ActorObject;
+class GameObject;
 
 class Command
 {
 public:
 	// Executes the command
-	virtual void execute(ActorObject& actor) = 0;
+	virtual void execute(GameObject& obj) = 0;
 };
 
 #endif

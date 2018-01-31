@@ -3,16 +3,20 @@
 #define COLLISIONCOMPONENT_H
 
 #include "Component.h"
-#include <DirectXCollision.h>
+
+class PhysicsComponent;
 
 class CollisionComponent : public Component
 {
 private:
+	PhysicsComponent* physics;
 	BoundingBox bBox;
 public:
-	CollisionComponent(GameObject& obj);
-	virtual const size_t getID();
-	virtual void receive(GameObject & obj, Message msg);
+	virtual void receive(Message msg);
+	virtual void init(float width, float height);
+	virtual void cleanup();
+	virtual void update();
+	bool intersects(BoundingBox bBox);
 };
 
 #endif // !COLLISIONCOMPONENT_H

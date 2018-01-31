@@ -4,13 +4,14 @@
 
 #include <list>
 #include <d3d11.h>
-#include <DirectXMath.h>
+#include <SimpleMath.h>
 
 enum class OBJECTSTATE { IDLE, MOVING, DEAD, FROZEN, STOP };
 
 class Component;
 
 using namespace DirectX;
+using namespace DirectX::SimpleMath;
 
 struct Message
 {
@@ -21,8 +22,8 @@ struct Message
 class GameObject
 {
 public:
-	GameObject(const size_t ID) : ID(ID), pos(XMFLOAT3(0.0f, 0.0f, 0.0f)), state(OBJECTSTATE::IDLE) {}
-	GameObject(const size_t ID, XMFLOAT3 pos) : ID(ID), pos(pos), state(OBJECTSTATE::IDLE) {}
+	GameObject() : pos(Vector3(0.0f, 0.0f, 0.0f)), state(OBJECTSTATE::IDLE) {}
+	GameObject(Vector3 pos) : pos(pos), state(OBJECTSTATE::IDLE) {}
 
 	/*- - - - - - - -<INFORMATION>- - - - - - - -
 	1. Send the parameter 'msg'(obj) to all components that have been added to the object.
@@ -33,16 +34,23 @@ public:
 	1. Adds a component using the 'components.push_back()' function.
 	*/
 	void addComponent(Component* component);
+	void update();
 	void cleanup();
-	const size_t getID() const { return this->ID; }
-	void setPosition(XMFLOAT3 pos) { this->pos = pos; }
-	XMFLOAT3 getPosition() const { return this->pos; }
-	void setState(OBJECTSTATE state) { this->state = state; }
-	OBJECTSTATE getState() const { return this->state; }
+
+	void move(Vector3 offset);
+	void setPosition(Vector3 pos);
+	Vector3 getPosition();
+	void setRotation(Vector3 rot);
+	Vector3 getRotation();
+	void setScale(Vector3 scale);
+	Vector3 getScale();
+	void setState(OBJECTSTATE state);
+	OBJECTSTATE getState();
 private:
 	std::list<Component*> components;
-	const size_t ID;
-	XMFLOAT3 pos;
+	Vector3 pos;
+	Vector3 rot;
+	Vector3 scale;
 	OBJECTSTATE state;
 };
 
