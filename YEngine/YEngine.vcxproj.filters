@@ -76,6 +76,15 @@
     <Filter Include="Header Files\Components\Collision">
       <UniqueIdentifier>{34606258-6da8-49b8-9ea9-956c92a3effb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Renderers\Shaders">
+      <UniqueIdentifier>{19787fd1-fbf0-40d0-9052-629e45fb6a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderers\Shaders">
+      <UniqueIdentifier>{1a224960-81e6-47b9-8b41-f4512dad2549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders">
+      <UniqueIdentifier>{d9e8516d-3ea8-4d2f-90df-60fb2b586388}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h">
@@ -129,6 +138,9 @@
     <ClInclude Include="CollisionComponent.h">
       <Filter>Header Files\Components\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Renderers\Shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -170,10 +182,33 @@
     <ClCompile Include="PhysicsComponent.cpp">
       <Filter>Source Files\Components\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Renderers\Shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
       <Filter>Resource Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="geoVertexTexture.hlsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="geoVertexColor.hlsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="geoPixelColor.hlsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="geoPixelTexture.hlsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="lightVertex.hlsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="lightPixel.hlsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

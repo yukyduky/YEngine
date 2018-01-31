@@ -8,15 +8,16 @@ class PhysicsComponent;
 
 class CollisionComponent : public Component
 {
-private:
-	PhysicsComponent* physics;
+protected:
+	PhysicsComponent* physics_;
 	BoundingBox bBox;
 public:
 	virtual void receive(Message msg);
-	virtual void init(float width, float height);
+	virtual void init();
 	virtual void cleanup();
 	virtual void update();
-	bool intersects(BoundingBox bBox);
+	virtual void setup(PhysicsComponent* physics, float width, float height);
+	virtual void intersects(CollisionComponent* collision_) = 0;
 };
 
 #endif // !COLLISIONCOMPONENT_H

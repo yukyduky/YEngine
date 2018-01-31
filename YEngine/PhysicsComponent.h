@@ -12,9 +12,10 @@ private:
 	float weight;
 public:
 	virtual void receive(Message msg);
-	virtual void init(float weight);
+	virtual void init();
 	virtual void cleanup();
 	virtual void update();
+	void setup(float weight);
 	void setVeloctiy(Vector3 velocity);
 	Vector3 getVelocity();
 	void setAcceleration(Vector3 acceleration);

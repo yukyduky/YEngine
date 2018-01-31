@@ -13,9 +13,10 @@ protected:
 	Matrix world;
 public:
 	virtual void receive(Message msg);
-	virtual void init(RESOURCEID resourceID);
+	virtual void init();
 	virtual void cleanup();
 	virtual void update();
+	void setup(RESOURCEID resourceID);
 	RESOURCEID getResourceID();
 };
 

@@ -19,9 +19,21 @@ class Component
 private:
 	GameObject* head;
 public:
+	/*- - - - - - - -<INFORMATION>- - - - - - - -
+	1. Receives a message sent by another component that is connected to the same entity
+	*/
 	virtual void receive(Message msg) = 0;
+	/*- - - - - - - -<INFORMATION>- - - - - - - -
+	1. Resets the component
+	*/
 	virtual void init() = 0;
+	/*- - - - - - - -<INFORMATION>- - - - - - - -
+	1. Cleans up any memory the component may be using
+	*/
 	virtual void cleanup() = 0;
+	/*- - - - - - - -<INFORMATION>- - - - - - - -
+	1. Updates the component
+	*/
 	virtual void update() = 0;
 	GameObject* getHead() { return this->head; }
 };

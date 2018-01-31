@@ -6,11 +6,10 @@ void PhysicsComponent::receive(Message msg)
 {
 }
 
-void PhysicsComponent::init(float weight)
+void PhysicsComponent::init()
 {
 	this->acceleration = Vector3(0.0f, 0.0f, 0.0f);
 	this->velocity = Vector3(0.0f, 0.0f, 0.0f);
-	this->weight = weight;
 }
 
 void PhysicsComponent::cleanup()
@@ -22,6 +21,13 @@ void PhysicsComponent::update()
 	double dt = Locator::getGameTime()->getDeltaTime();
 	this->velocity += this->acceleration * dt;
 	this->getHead()->move(this->velocity * dt);
+}
+
+void PhysicsComponent::setup(float weight)
+{
+	this->weight = weight;
+
+	this->init();
 }
 
 void PhysicsComponent::setVeloctiy(Vector3 velocity)

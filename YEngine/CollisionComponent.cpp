@@ -6,7 +6,7 @@ void CollisionComponent::receive(Message msg)
 {
 }
 
-void CollisionComponent::init(float width, float height)
+void CollisionComponent::init()
 {
 	this->bBox.Center = this->getHead()->getPosition();
 }
@@ -20,11 +20,9 @@ void CollisionComponent::update()
 	this->bBox.Center = this->getHead()->getPosition();
 }
 
-bool CollisionComponent::intersects(BoundingBox bBox)
+void CollisionComponent::setup(PhysicsComponent * physics, float width, float height)
 {
-	bool doesIntersect = false;
-	if (bBox.Intersects(bBox)) {
-		doesIntersect = true;
-	}
-	return doesIntersect;
+	this->physics_ = physics;
+
+	this->init();
 }
