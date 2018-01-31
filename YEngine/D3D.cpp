@@ -170,6 +170,13 @@ void D3D::mapBuffer(ID3D11Buffer ** gBuffer, void * cbPtr, int structSize)
 	this->gDevCon->Unmap(*gBuffer, 0);
 }
 
+void D3D::cleanup()
+{
+	this->gDevice->Release();
+	this->gDevCon->Release();
+	this->gSwapChain->Release();
+}
+
 size_t & D3D::GETwWidth()
 {
 	return this->wWidth;

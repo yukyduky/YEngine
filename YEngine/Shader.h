@@ -12,7 +12,7 @@ public:
 
 	void SetShaders(ID3D11DeviceContext* gDevCon);
 	void CreateShaders(ID3D11Device* gDevice, const wchar_t* fileNameVertex, const wchar_t* fileNamePixel, const D3D11_INPUT_ELEMENT_DESC* inputDesc, int inputDescSize);
-	void Release();
+	void cleanup();
 
 private:
 	void CreateVertexShader(ID3D11Device* gDevice, const wchar_t* fileName, const D3D11_INPUT_ELEMENT_DESC* inputDesc, int inputDescSize);

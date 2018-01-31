@@ -47,6 +47,7 @@ public:
 	void init();
 	void firstpass();
 	void secondpass();
+	void cleanup();
 	void setShaderType(SHADERTYPE type);
 private:
 	const D3D11_INPUT_ELEMENT_DESC geoTexInputDesc[GEOTEX_INPUT_DESC_SIZE] =

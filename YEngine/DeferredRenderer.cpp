@@ -277,6 +277,28 @@ void DeferredRenderer::secondpass()
 	Locator::getD3D()->GETgDevCon()->PSSetShaderResources(0, NUM_DEFERRED_OUTPUTS, gNullSRV);
 }
 
+void DeferredRenderer::cleanup()
+{
+	for (auto &i : this->gRTVs) {
+		i->Release();
+	}
+	for (auto &i : this->gSRVs) {
+		i->Release();
+	}
+	for (auto &i : this->gDeferredTexs) {
+		i->Release();
+	}
+
+	this->gFinalRTV->Release();
+	this->gDSV->Release();
+	this->gDSB->Release();
+	this->gSampler->Release();
+	this->gQuadVertexBuffer->Release();
+	this->geoTexShaders.cleanup();
+	this->geoColorShaders.cleanup();
+	this->lightShaders.cleanup();
+}
+
 void DeferredRenderer::setShaderType(SHADERTYPE type)
 {
 	switch (type)

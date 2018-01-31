@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <d3d11.h>
 #include "IGameTime.h"
+#include "DeferredRenderer.h"
 
 class State;
 
@@ -13,6 +14,7 @@ class GameManager
 private:
 	bool isRunning;
 	IGameTime* gameTime;
+	DeferredRenderer defRenderer;
 
 public:
 	/*- - - - - - - -<INFORMATION>- - - - - - - -

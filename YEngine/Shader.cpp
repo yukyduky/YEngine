@@ -22,7 +22,7 @@ void Shader::CreateShaders(ID3D11Device* gDevice, const wchar_t* fileNameVertex,
 	CreatePixelShader(gDevice, fileNamePixel);
 }
 
-void Shader::Release()
+void Shader::cleanup()
 {
 	gVertexShader->Release();
 	gPixelShader->Release();

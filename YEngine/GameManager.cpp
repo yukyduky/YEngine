@@ -8,6 +8,8 @@
 void GameManager::init(HINSTANCE hInstance, int nCmdShow)
 {
 	this->isRunning = true;
+
+	this->defRenderer.init();
 	
 	// Creation of gameTime;
 	this->gameTime = new GameTime;
@@ -24,6 +26,7 @@ void GameManager::init(HINSTANCE hInstance, int nCmdShow)
 void GameManager::cleanup()
 {
 	delete this->gameTime;
+	this->defRenderer.cleanup();
 }
 
 void GameManager::changeState(State* state)
@@ -48,11 +51,13 @@ void GameManager::update()
 
 void GameManager::render()
 {
+	this->defRenderer.firstpass();
 	StateManager::render(this);
 }
 
 void GameManager::display(State* state)
 {
+	this->defRenderer.secondpass();
 }
 
 bool GameManager::getIsRunning()
