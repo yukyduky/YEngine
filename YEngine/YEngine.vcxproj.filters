@@ -85,6 +85,12 @@
     <Filter Include="Resource Files\Shaders">
       <UniqueIdentifier>{d9e8516d-3ea8-4d2f-90df-60fb2b586388}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\UI">
+      <UniqueIdentifier>{fc42d011-1da9-4d76-8494-1e311b63c226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\UI">
+      <UniqueIdentifier>{ba3f6293-ef81-48c4-ada6-d0e61ecf5aaf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h">
@@ -141,6 +147,12 @@
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Renderers\Shaders</Filter>
     </ClInclude>
+    <ClInclude Include="RenderOptimizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UIComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -184,6 +196,12 @@
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Renderers\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderOptimizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UIComponent.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

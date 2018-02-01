@@ -21,14 +21,19 @@ void GraphicsComponent::update()
 	this->world *= Matrix::CreateFromYawPitchRoll(rot.x, rot.y, rot.z) * Matrix::CreateScale(this->getHead()->getScale());
 }
 
-void GraphicsComponent::setup(RESOURCEID resourceID)
+void GraphicsComponent::setup(RESOURCEOBJECT::ID renderObjID)
 {
-	this->resourceID = resourceID;
+	this->renderObjID = renderObjID;
 
 	this->init();
 }
 
-RESOURCEID GraphicsComponent::getResourceID()
+RESOURCEGRAPHIC::ID GraphicsComponent::getRenderTexID()
 {
-	return this->resourceID;
+	return this->renderTexID;
+}
+
+RESOURCEOBJECT::ID GraphicsComponent::getRenderObjID()
+{
+	return this->renderObjID;
 }

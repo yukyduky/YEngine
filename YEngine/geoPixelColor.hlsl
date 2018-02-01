@@ -1,7 +1,6 @@
-#pragma once
 struct PS_IN {
 	float4 pos_S		: SV_POSITION;
-	float3 pos_W		: POSITION;
+	float4 pos_W		: POSITION;
 	float3 normal		: NORMAL;
 	float3 color		: COLOR;
 };
@@ -15,7 +14,7 @@ struct PS_OUT {
 PS_OUT PS(PS_IN input) {
 	PS_OUT output;
 
-	output.pos_W = float4(input.pos_W, 1.0f);
+	output.pos_W = input.pos_W;
 	output.normal = float4(input.normal, 1.0f);
 	output.diffuse = float4(input.color, 1.0f);
 

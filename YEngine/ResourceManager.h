@@ -6,29 +6,38 @@
 #include <d3d11.h>
 #include <SimpleMath.h>
 #include <array>
-#include <stdint.h>
+#include <string>
+#include <assimp\Importer.hpp>
 
 enum class OBJECTTYPE { BLOCK };
 
 enum class BUFFER { VERTEX, INDEX, CONSTANT };
 
-enum class RESOURCEID { TEXQUAD };
+namespace RESOURCEGRAPHIC {
+	enum ID { SIZE };
+}
 
+namespace RESOURCEOBJECT {
+	enum ID { TEXQUAD, SIZE };
+}
+
+//using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
 struct ObjectData {
-	RESOURCEID ID;
+	RESOURCEOBJECT::ID ID;
 	void* vertices;
 	void* indices;
 	size_t numVertices;
 	size_t numIndices;
 	size_t stride;
 	size_t offset;
+	size_t numFaces;
 	size_t cbSize;
 
 	ObjectData() {}
-	ObjectData(RESOURCEID ID, void* vertices, void* indices, size_t numVertices, size_t numIndices, size_t stride, size_t offset, size_t cbSize) :
-		ID(ID), vertices(vertices), indices(indices), numVertices(numVertices), numIndices(numIndices), stride(stride), offset(offset), cbSize(cbSize) {}
+	ObjectData(RESOURCEOBJECT::ID ID, void* vertices, void* indices, size_t numVertices, size_t numIndices, size_t stride, size_t offset, size_t numFaces, size_t cbSize) :
+		ID(ID), vertices(vertices), indices(indices), numVertices(numVertices), numIndices(numIndices), stride(stride), offset(offset), numFaces(numFaces), cbSize(cbSize) {}
 };
 
 struct vBufferData
@@ -46,10 +55,11 @@ struct iBufferData
 {
 	ID3D11Buffer* iBuffer;
 	size_t numIndices;
+	size_t numFaces;
 
 	iBufferData() {}
-	iBufferData(ObjectData data) : numIndices(data.numIndices) {}
-	iBufferData(ID3D11Buffer* iBuffer, ObjectData data) : iBuffer(iBuffer), numIndices(data.numIndices) {}
+	iBufferData(ObjectData data) : numIndices(data.numIndices), numFaces(data.numFaces) {}
+	iBufferData(ID3D11Buffer* iBuffer, ObjectData data) : iBuffer(iBuffer), numIndices(data.numIndices), numFaces(data.numFaces) {}
 };
 struct cBufferData
 {
@@ -64,31 +74,37 @@ struct cBufferData
 class ResourceManager
 {
 private:
-	std::unordered_map<RESOURCEID, vBufferData> vertexBufferMap;
-	std::unordered_map<RESOURCEID, iBufferData> indexBufferMap;
-	std::unordered_map<RESOURCEID, cBufferData> constantBufferMap;
-public:
-	/*--------------- INFORMATION --------------- 
+	Assimp::Importer importer;
+
+	std::unordered_map<RESOURCEGRAPHIC::ID, ID3D11ShaderResourceView*> texSRVMap;
+	std::unordered_map<RESOURCEOBJECT::ID, vBufferData> vertexBufferMap;
+	std::unordered_map<RESOURCEOBJECT::ID, iBufferData> indexBufferMap;
+	std::unordered_map<RESOURCEOBJECT::ID, cBufferData> constantBufferMap;
+
+	/*--------------- INFORMATION ---------------
 	1. Maps the data to the ID location
 	2. Creates a vertex buffer, index buffer, and a constant buffer
 	*/
-	void addResource(ObjectData& data);
+	void addObjectData(ObjectData& data);
+public:
+	void loadModel(RESOURCEGRAPHIC::ID texID, RESOURCEOBJECT::ID objID, std::string filename, std::wstring textureName);
+	void loadTexture(RESOURCEGRAPHIC::ID ID, std::wstring filename);
 	/*--------------- INFORMATION ---------------
 	1. Updates the index buffer with the given data
 	*/
-	void updateVertexBuffer(RESOURCEID ID, void* pData);
+	void updateVertexBuffer(RESOURCEOBJECT::ID ID, void* pData);
 	/*--------------- INFORMATION ---------------
 	1. Updates the vertex buffer with the given data
 	*/
-	void updateIndexBuffer(RESOURCEID ID, void* pData);
+	void updateIndexBuffer(RESOURCEOBJECT::ID ID, void* pData);
 	/*--------------- INFORMATION ---------------
 	1. Updates the constant buffer with the given data
 	*/
-	void updateConstantBuffer(RESOURCEID ID, void* pData);
+	void updateConstantBuffer(RESOURCEOBJECT::ID ID, void* pData);
 
-	vBufferData& getVBufferData(RESOURCEID ID);
-	iBufferData& getIBufferData(RESOURCEID ID);
-	cBufferData& getCBufferData(RESOURCEID ID);
+	vBufferData& getVBufferData(RESOURCEOBJECT::ID ID);
+	iBufferData& getIBufferData(RESOURCEOBJECT::ID ID);
+	cBufferData& getCBufferData(RESOURCEOBJECT::ID ID);
 	void initTexQuad();
 };
 

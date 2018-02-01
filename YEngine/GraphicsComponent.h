@@ -9,15 +9,17 @@ class GraphicsComponent : public Component
 {
 protected:
 	const size_t ID;
-	RESOURCEID resourceID;
+	RESOURCEGRAPHIC::ID renderTexID;
+	RESOURCEOBJECT::ID renderObjID;
 	Matrix world;
 public:
 	virtual void receive(Message msg);
 	virtual void init();
 	virtual void cleanup();
 	virtual void update();
-	void setup(RESOURCEID resourceID);
-	RESOURCEID getResourceID();
+	void setup(RESOURCEOBJECT::ID resourceID);
+	RESOURCEGRAPHIC::ID getRenderTexID();
+	RESOURCEOBJECT::ID getRenderObjID();
 };
 
 #endif // !GRAPHICSCOMPONENT_H

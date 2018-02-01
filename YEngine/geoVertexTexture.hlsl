@@ -7,7 +7,7 @@ struct VS_IN {
 
 struct VS_OUT {
 	float4 pos_S		: SV_POSITION;
-	float3 pos_W		: POSITION;
+	float4 pos_W		: POSITION;
 	float3 normal		: NORMAL;
 	float2 texCoord		: TEXCOORD;
 };
