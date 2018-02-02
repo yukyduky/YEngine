@@ -100,3 +100,31 @@ size_t Resource::getID()
 {
 	return this->ID;
 }
+
+/*void ResourceManager::initTexQuad()
+{
+	std::array<Vertex, 4> vertices;
+
+	vertices[0].position = Vector3(0.0f, 1.0f, 0.0f);
+	vertices[1].position = Vector3(0.0f, 0.0f, 0.0f);
+	vertices[2].position = Vector3(1.0f, 1.0f, 0.0f);
+	vertices[3].position = Vector3(1.0f, 0.0f, 0.0f);
+
+	vertices[0].normal = Vector3(0.0f, 0.0f, -1.0f);
+	vertices[1].normal = Vector3(0.0f, 0.0f, -1.0f);
+	vertices[2].normal = Vector3(0.0f, 0.0f, -1.0f);
+	vertices[3].normal = Vector3(0.0f, 0.0f, -1.0f);
+
+	vertices[0].texCoords = Vector2(0.0f, 1.0f);
+	vertices[1].texCoords = Vector2(0.0f, 0.0f);
+	vertices[2].texCoords = Vector2(1.0f, 1.0f);
+	vertices[3].texCoords = Vector2(1.0f, 0.0f);
+
+	size_t indices[] = {
+		0, 1, 2,
+		2, 1, 3,
+	};
+
+	ObjectData data = ObjectData(RESOURCEOBJECT::ID::TEXQUAD, vertices.data(), indices, vertices.size(), 6, sizeof(Vertex), 0, 0);
+	this->addResource(data);
+	}*/

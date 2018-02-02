@@ -132,9 +132,6 @@
     <ClInclude Include="GraphicsComponent.h">
       <Filter>Header Files\Components\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Header Files\General</Filter>
-    </ClInclude>
     <ClInclude Include="DeferredRenderer.h">
       <Filter>Header Files\Renderers</Filter>
     </ClInclude>
@@ -190,9 +187,6 @@
     </ClCompile>
     <ClCompile Include="GraphicsComponent.cpp">
       <Filter>Source Files\Components\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files\General</Filter>
     </ClCompile>
     <ClCompile Include="DeferredRenderer.cpp">
       <Filter>Source Files\Renderers</Filter>
