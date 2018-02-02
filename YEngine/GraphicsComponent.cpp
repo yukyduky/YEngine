@@ -20,20 +20,3 @@ void GraphicsComponent::update()
 	Vector3 rot = this->getHead()->getPosition();
 	this->world *= Matrix::CreateFromYawPitchRoll(rot.x, rot.y, rot.z) * Matrix::CreateScale(this->getHead()->getScale());
 }
-
-void GraphicsComponent::setup(RESOURCEOBJECT::ID renderObjID)
-{
-	this->renderObjID = renderObjID;
-
-	this->init();
-}
-
-RESOURCEGRAPHIC::ID GraphicsComponent::getRenderTexID()
-{
-	return this->renderTexID;
-}
-
-RESOURCEOBJECT::ID GraphicsComponent::getRenderObjID()
-{
-	return this->renderObjID;
-}

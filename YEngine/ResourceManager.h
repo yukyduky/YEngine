@@ -21,7 +21,6 @@ namespace RESOURCEOBJECT {
 	enum ID { TEXQUAD, SIZE };
 }
 
-//using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
 struct ObjectData {

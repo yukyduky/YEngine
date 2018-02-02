@@ -10,7 +10,6 @@ class GraphicsComponent;
 class RenderOptimizer
 {
 private:
-	std::array<std::array<std::list<GraphicsComponent*>, RESOURCEOBJECT::SIZE>, RESOURCEGRAPHIC::SIZE> allGraphics_;
 public:
 	void init();
 	void render();
