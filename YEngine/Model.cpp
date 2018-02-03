@@ -12,7 +12,7 @@ struct Vertex
 	Vector2 texCoords;
 };
 
-bool Model::loadModel(const char * modelFilename, const char* texFilename)
+bool Model::loadModel(const char * modelFilename, const wchar_t* texFilename)
 {
 	bool success = true;
 
@@ -30,10 +30,10 @@ bool Model::loadModel(const char * modelFilename, const char* texFilename)
 		std::vector<Vertex> vertices;
 		std::vector<size_t> indices;
 
-		for (int i = 0; i < scene->mNumMeshes; i++) {
+		for (size_t i = 0; i < scene->mNumMeshes; i++) {
 			aiMesh* mesh = scene->mMeshes[i];
 
-			for (int k = 0; k < mesh->mNumVertices; k++) {
+			for (size_t k = 0; k < mesh->mNumVertices; k++) {
 				Vertex v;
 
 				v.position.x = mesh->mVertices[k].x;
@@ -61,20 +61,24 @@ bool Model::loadModel(const char * modelFilename, const char* texFilename)
 		
 		ID3D11Buffer* vBuffer;
 		ID3D11Buffer* iBuffer;
+		ID3D11ShaderResourceView* SRV;
+		ID3D11Resource* texture;
 
-		success = this->createBuffers(&vBuffer, &iBuffer, vertices.data(), indices.data(), vertices.size(), indices.size(), sizeof(Vertex), 0);
-		if (success) {
+		bool loadedBuffers = this->createBuffers(&vBuffer, &iBuffer, vertices.data(), indices.data(), vertices.size(), indices.size(), sizeof(Vertex), 0);
+		bool loadedTexture = this->loadTexture(&SRV, &texture, texFilename);
+		if (loadedBuffers && loadedTexture) {
+			success = true;
 			this->loaded = true;
 			this->data.vData = VertexData(vBuffer, iBuffer, vertices.size(), indices.size(), indices.size() / 3, sizeof(Vertex), 0);
-
-			this->loadTexture(&this->data.texData.SRV, &this->data.texData.texture, texFilename);
+			this->data.texData.SRV = SRV;
+			this->data.texData.texture = texture;
 		}
 	}
 
 	return success;
 }
 
-bool Model::load(const char* modelFilename, const char* texFilename, RESOURCETYPE type, size_t ID)
+bool Model::load(const char* modelFilename, const wchar_t* texFilename, RESOURCETYPE type, size_t ID)
 {
 	this->loaded = this->loadModel(modelFilename, texFilename);
 

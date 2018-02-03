@@ -62,9 +62,9 @@ protected:
 	RESOURCETYPE type;
 
 	bool createBuffers(ID3D11Buffer** vBuffer, ID3D11Buffer** iBuffer, void* vertices, void* indices, size_t numVertices, size_t numIndices, size_t stride, size_t offset);
-	bool loadTexture(ID3D11ShaderResourceView** SRV, ID3D11Resource** texture, const char* filename);
+	bool loadTexture(ID3D11ShaderResourceView** SRV, ID3D11Resource** texture, const wchar_t* filename);
 public:
-	virtual bool load(const char* modelFilename, const char* texFilename, RESOURCETYPE type, size_t ID);
+	virtual bool load(const char* modelFilename, const wchar_t* texFilename, RESOURCETYPE type, size_t ID);
 	virtual bool load(ObjectData objData, RESOURCETYPE type, size_t ID);
 	virtual void unload() = 0;
 	virtual bool reload(void* vertices, void* indices) = 0;

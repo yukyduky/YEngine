@@ -10,12 +10,12 @@ class Model : public Resource
 private:
 	const aiScene* scene;
 	const char* modelFilename;
-	const char* texFilename;
+	const wchar_t* texFilename;
 	RenderData data;
 
-	bool loadModel(const char* modelFilename, const char* texFilename);
+	bool loadModel(const char* modelFilename, const wchar_t* texFilename);
 public:
-	bool load(const char* modelFilename, const char* texFilename, RESOURCETYPE type, size_t ID) override;
+	bool load(const char* modelFilename, const wchar_t* texFilename, RESOURCETYPE type, size_t ID) override;
 	void unload() override;
 	bool reload(void* vertices, void* indices) override;
 

@@ -1,6 +1,6 @@
 #include "Resource.h"
 #include "Locator.h"
-#include "WICTextureLoader.h"
+#include <WICTextureLoader.h>
 
 
 bool Resource::createVertexBuffer(ID3D11Buffer ** gVertexBuffer, void * v, size_t & stride, size_t & offset, size_t numVertices)
@@ -70,13 +70,18 @@ bool Resource::createBuffers(ID3D11Buffer ** vBuffer, ID3D11Buffer ** iBuffer, v
 	return allLoaded;
 }
 
-bool Resource::loadTexture(ID3D11ShaderResourceView** SRV, ID3D11Resource** texture, const char* filename)
+bool Resource::loadTexture(ID3D11ShaderResourceView** SRV, ID3D11Resource** texture, const wchar_t* filename)
 {
-	//CreateWICTextureFromFile(Locator::getD3D()->GETgDevice(), filename, texture, SRV);
-	return false;
+	bool success = true;
+	HRESULT hr = DirectX::CreateWICTextureFromFile(Locator::getD3D()->GETgDevice(), filename, texture, SRV);
+	if (FAILED(hr)) {
+		success = false;
+		assert(FAILED(hr) && "Failed to create texture from file - Resource");
+	}
+	return success;
 }
 
-bool Resource::load(const char * modelFilename, const char* texFilename, RESOURCETYPE type, size_t ID)
+bool Resource::load(const char * modelFilename, const wchar_t* texFilename, RESOURCETYPE type, size_t ID)
 {
 	return false;
 }

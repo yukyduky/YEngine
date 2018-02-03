@@ -18,7 +18,7 @@ void PhysicsComponent::cleanup()
 
 void PhysicsComponent::update()
 {
-	double dt = Locator::getGameTime()->getDeltaTime();
+	float dt = static_cast<float>(Locator::getGameTime()->getDeltaTime());
 	this->velocity += this->acceleration * dt;
 	this->getHead()->move(this->velocity * dt);
 }
