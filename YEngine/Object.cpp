@@ -23,11 +23,12 @@ void Object::unload()
 {
 	this->data.vBuffer->Release();
 	this->data.iBuffer->Release();
+	this->loaded = false;
 }
 
-bool Object::reload(void* vertices, void* indices)
+bool Object::reload()
 {
-	return this->loaded = this->createBuffers(&this->data.vBuffer, &this->data.iBuffer, vertices, indices, this->data.numVertices, this->data.numIndices, this->data.stride, this->data.offset);
+	return false; // this->loaded = this->createBuffers(&this->data.vBuffer, &this->data.iBuffer, vertices, indices, this->data.numVertices, this->data.numIndices, this->data.stride, this->data.offset);
 }
 
 VertexData Object::getRenderData()

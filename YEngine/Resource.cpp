@@ -91,6 +91,11 @@ bool Resource::load(ObjectData objData, RESOURCETYPE type, size_t ID)
 	return false;
 }
 
+bool Resource::load(const wchar_t* filename, RESOURCETYPE type, size_t ID)
+{
+	return false;
+}
+
 bool Resource::isLoaded()
 {
 	return this->loaded;

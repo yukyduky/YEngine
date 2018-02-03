@@ -66,9 +66,10 @@ protected:
 public:
 	virtual bool load(const char* modelFilename, const wchar_t* texFilename, RESOURCETYPE type, size_t ID);
 	virtual bool load(ObjectData objData, RESOURCETYPE type, size_t ID);
+	virtual bool load(const wchar_t* filename, RESOURCETYPE type, size_t ID);
 	virtual void unload() = 0;
-	virtual bool reload(void* vertices, void* indices) = 0;
-	virtual bool isLoaded();
+	virtual bool reload() = 0;
+	bool isLoaded();
 
 	virtual RESOURCETYPE getResourceType();
 	virtual size_t getID();

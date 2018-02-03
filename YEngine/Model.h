@@ -17,8 +17,7 @@ private:
 public:
 	bool load(const char* modelFilename, const wchar_t* texFilename, RESOURCETYPE type, size_t ID) override;
 	void unload() override;
-	bool reload(void* vertices, void* indices) override;
-
+	bool reload() override;
 };
 
 #endif // MODEL_H

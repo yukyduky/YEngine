@@ -11,7 +11,7 @@ private:
 public:
 	bool load(ObjectData objData, RESOURCETYPE type, size_t ID) override;
 	void unload() override;
-	bool reload(void* vertices, void* indices) override;
+	bool reload() override;
 
 	VertexData getRenderData();
 };

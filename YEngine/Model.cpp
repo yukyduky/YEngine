@@ -80,9 +80,7 @@ bool Model::loadModel(const char * modelFilename, const wchar_t* texFilename)
 
 bool Model::load(const char* modelFilename, const wchar_t* texFilename, RESOURCETYPE type, size_t ID)
 {
-	this->loaded = this->loadModel(modelFilename, texFilename);
-
-	return false;
+	return this->loaded = this->loadModel(modelFilename, texFilename);
 }
 
 void Model::unload()
@@ -91,9 +89,10 @@ void Model::unload()
 	this->data.vData.iBuffer->Release();
 	this->data.texData.SRV->Release();
 	this->data.texData.texture->Release();
+	this->loaded = false;
 }
 
-bool Model::reload(void * vertices, void * indices)
+bool Model::reload()
 {
 	return this->loaded = this->loadModel(this->modelFilename, this->texFilename);
 }

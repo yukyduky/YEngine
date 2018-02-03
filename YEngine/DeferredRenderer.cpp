@@ -1,7 +1,6 @@
 #include "DeferredRenderer.h"
 #include "Locator.h"
 #include <Windows.h>
-#include "Locator.h"
 
 
 void DeferredRenderer::initShaders()
