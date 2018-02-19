@@ -7,7 +7,6 @@
 class GraphicsComponent : public Component
 {
 protected:
-	const size_t ID;
 	Matrix world;
 public:
 	virtual void receive(Message msg);

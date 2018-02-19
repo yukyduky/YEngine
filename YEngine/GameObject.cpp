@@ -10,10 +10,13 @@ void GameObject::send(Message msg)
 	}
 }
 
-void GameObject::addComponent(Component* component)
+void GameObject::addComponent(Component* component, size_t type)
 {
 	this->components.push_back(component);
 	this->components.back()->head = this;
+	this->components.back()->type = type;
+	this->componentMap[type] = component;
+	this->componentTypes |= type;
 }
 
 void GameObject::update()
@@ -74,4 +77,18 @@ void GameObject::setState(OBJECTSTATE state)
 OBJECTSTATE GameObject::getState()
 {
 	return this->state;
+}
+
+size_t GameObject::getComponentTypes()
+{
+	return this->componentTypes;
+}
+
+Component* GameObject::getComponent(size_t type)
+{
+	Component* component = nullptr;
+	if (this->componentTypes & type == type) {
+		component = this->componentMap[type];
+	}
+	return component;
 }

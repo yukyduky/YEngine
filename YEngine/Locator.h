@@ -3,6 +3,7 @@
 #define LOCATOR_H
 
 #include "IGameTime.h"
+#include "IConfigHandler.h"
 #include "ID3D.h"
 
 /* Service Locator pattern */
@@ -11,6 +12,7 @@ class Locator
 {
 private:
 	static IGameTime* sGT;
+	static IConfigHandler* sCH;
 	static ID3D* sID3D;
 
 public:
@@ -19,6 +21,7 @@ public:
 	2. Passes the pointer to 'gameTime'(obj) as a parameter.
 	*/
 	static void provide(IGameTime* gameTime) { sGT = gameTime; }
+	static void provide(IConfigHandler* ch) { sCH = ch; }
 	static void provide(ID3D* d3d) { sID3D = d3d; }
 	
 	/*- - - - - - - -<INFORMATION>- - - - - - - -
@@ -26,6 +29,7 @@ public:
 	2. 'sGT'(ptr) points to the address of 'gameTime'(obj), thereby returning that address.
 	*/
 	static IGameTime* getGameTime() { return sGT; }
+	static IConfigHandler* getConfigHandler() { return sCH; }
 	static ID3D* getD3D() { return sID3D; }
 };
 

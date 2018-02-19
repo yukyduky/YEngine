@@ -118,8 +118,8 @@ void DeferredRenderer::createViewport()
 
 	this->viewport.TopLeftX = 0;
 	this->viewport.TopLeftY = 0;
-	this->viewport.Width = Locator::getD3D()->GETwWidth();
-	this->viewport.Height = Locator::getD3D()->GETwHeight();
+	this->viewport.Width = static_cast<FLOAT>(Locator::getD3D()->GETwWidth());
+	this->viewport.Height = static_cast<FLOAT>(Locator::getD3D()->GETwHeight());
 	this->viewport.MinDepth = 0.0f;
 	this->viewport.MaxDepth = 1.0f;
 }
@@ -157,7 +157,7 @@ void DeferredRenderer::createBackBufferRTV()
 	BackBuffer->Release();
 }
 
-void DeferredRenderer::createDepthStencilView(size_t width, size_t height, ID3D11DepthStencilView ** gDSV, ID3D11Texture2D ** gDSB)
+void DeferredRenderer::createDepthStencilView(int width, int height, ID3D11DepthStencilView ** gDSV, ID3D11Texture2D ** gDSB)
 {
 	HRESULT hr;
 

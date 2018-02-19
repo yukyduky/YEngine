@@ -1,4 +1,3 @@
-#pragma once
 Texture2D texPosition	: register(t0);
 Texture2D texNormal		: register(t1);
 Texture2D texDiffuse	: register(t2);

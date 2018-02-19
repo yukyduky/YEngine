@@ -91,6 +91,12 @@
     <Filter Include="Header Files\Components\UI">
       <UniqueIdentifier>{ba3f6293-ef81-48c4-ada6-d0e61ecf5aaf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\General\ResourceManager">
+      <UniqueIdentifier>{3ddda5cc-4d1f-4a95-8ce9-7f2c6d168f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\General\ResourceManager">
+      <UniqueIdentifier>{46ef5f24-10ea-41c5-8cb9-031d84857d6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h">
@@ -144,23 +150,29 @@
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Renderers\Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="RenderOptimizer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UIComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\General\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\General\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderOptimizer.h">
+      <Filter>Header Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Header Files\General\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigHandler.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="IConfigHandler.h">
+      <Filter>Header Files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="UIComponent.h">
+      <Filter>Header Files\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Header Files\General\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,23 +215,26 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Renderers\Shaders</Filter>
     </ClCompile>
-    <ClCompile Include="RenderOptimizer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UIComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\General\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="Resource.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\General\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="RenderOptimizer.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>Source Files\General\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigHandler.cpp">
+      <Filter>Source Files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="UIComponent.cpp">
+      <Filter>Source Files\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\General\ResourceManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

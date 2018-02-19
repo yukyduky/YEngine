@@ -1,4 +1,3 @@
-#pragma once
 struct VS_IN {
 	float3 pos_M		: POSITION;
 	float3 normal		: NORMAL;

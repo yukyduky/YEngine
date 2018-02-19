@@ -76,7 +76,7 @@ void D3D::createSwapChain()
 	}
 }
 
-void D3D::createVertexBuffer(ID3D11Buffer ** gVertexBuffer, void* v, size_t& stride, size_t& offset, size_t numVertices)
+void D3D::createVertexBuffer(ID3D11Buffer ** gVertexBuffer, void* v, size_t& stride, size_t& offset, int numVertices)
 {
 	// Describe the vertex buffer
 	D3D11_BUFFER_DESC vertexBufferDesc;
@@ -100,14 +100,14 @@ void D3D::createVertexBuffer(ID3D11Buffer ** gVertexBuffer, void* v, size_t& str
 	}
 }
 
-void D3D::createIndexBuffer(ID3D11Buffer ** gIndexBuffer, void* data, size_t& numIndices)
+void D3D::createIndexBuffer(ID3D11Buffer ** gIndexBuffer, void* data, int& numIndices)
 {
 	// Describe the index buffer
 	D3D11_BUFFER_DESC indexBufferDesc;
 	memset(&indexBufferDesc, 0, sizeof(indexBufferDesc));
 
 	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	indexBufferDesc.ByteWidth = sizeof(size_t) * numIndices;
+	indexBufferDesc.ByteWidth = sizeof(int) * numIndices;
 	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	indexBufferDesc.CPUAccessFlags = 0;
 	indexBufferDesc.MiscFlags = 0;
@@ -129,7 +129,7 @@ void D3D::setVertexBuffer(ID3D11Buffer ** gVertexBuffer, size_t& stride, size_t&
 	this->gDevCon->IASetVertexBuffers(0, 1, gVertexBuffer, &stride, &offset);
 }
 
-void D3D::setIndexBuffer(ID3D11Buffer * gIndexBuffer, size_t offset)
+void D3D::setIndexBuffer(ID3D11Buffer * gIndexBuffer, int offset)
 {
 	this->gDevCon->IASetIndexBuffer(gIndexBuffer, DXGI_FORMAT_R32_UINT, offset);
 }
@@ -177,12 +177,12 @@ void D3D::cleanup()
 	this->gSwapChain->Release();
 }
 
-size_t & D3D::GETwWidth()
+int & D3D::GETwWidth()
 {
 	return this->wWidth;
 }
 
-size_t & D3D::GETwHeight()
+int & D3D::GETwHeight()
 {
 	return this->wHeight;
 }

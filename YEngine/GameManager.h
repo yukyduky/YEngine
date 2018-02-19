@@ -6,6 +6,7 @@
 #include <d3d11.h>
 #include "IGameTime.h"
 #include "DeferredRenderer.h"
+#include "IConfigHandler.h"
 
 class State;
 
@@ -14,7 +15,9 @@ class GameManager
 private:
 	bool isRunning;
 	IGameTime* gameTime;
+	IConfigHandler* configHandler;
 	DeferredRenderer defRenderer;
+
 
 public:
 	/*- - - - - - - -<INFORMATION>- - - - - - - -

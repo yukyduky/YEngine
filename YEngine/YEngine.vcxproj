@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{A9F8C9F5-2F64-408A-9FF4-58FE94943872}</ProjectGuid>
     <RootNamespace>YEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -79,7 +79,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>xinput.lib;d3dcompiler.lib;d3d11.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>xinput.lib;d3dcompiler.lib;tinyobjloader.lib;d3d11.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -102,7 +102,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>xinput.lib;d3dcompiler.lib;d3d11.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>xinput.lib;d3dcompiler.lib;tinyobjloader.lib;d3d11.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,6 +122,7 @@
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="ConfigHandler.h" />
     <ClInclude Include="D3D.h" />
     <ClInclude Include="DeferredRenderer.h" />
     <ClInclude Include="GameManager.h" />
@@ -129,14 +130,15 @@
     <ClInclude Include="GamePlayState.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="GraphicsComponent.h" />
+    <ClInclude Include="IConfigHandler.h" />
     <ClInclude Include="ID3D.h" />
     <ClInclude Include="IGameTime.h" />
     <ClInclude Include="Locator.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="Object.h" />
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="RenderOptimizer.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
@@ -145,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionComponent.cpp" />
+    <ClCompile Include="ConfigHandler.cpp" />
     <ClCompile Include="D3D.cpp" />
     <ClCompile Include="DeferredRenderer.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -154,11 +157,11 @@
     <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="Locator.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="RenderOptimizer.cpp" />
     <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Texture.cpp" />

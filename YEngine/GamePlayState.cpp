@@ -1,6 +1,7 @@
 #include "GamePlayState.h"
 #include "GameManager.h"
 #include "Locator.h"
+#include "ResourceManager.h"
 
 
 GamePlayState GamePlayState::sGamePlayState;
@@ -8,6 +9,9 @@ GamePlayState GamePlayState::sGamePlayState;
 
 void GamePlayState::init()
 {
+	ResourceManager rm;
+	rm.createResource("Resources\\Models\\3x3x3\\3x3x3.obj", RESOURCETYPE::OBJECT, 0);
+	rm.createResource("Resources\\Models\\3x3x3\\3x3x3.png", RESOURCETYPE::TEXTURE, 1);
 }
 
 void GamePlayState::cleanup()

@@ -8,11 +8,14 @@ class Texture : public Resource
 {
 private:
 	TextureData data;
-	const wchar_t* filename;
+	std::wstring filename;
+	bool loadTexture(ID3D11ShaderResourceView** SRV, ID3D11Resource** texture, std::wstring filename);
+	bool load(std::wstring filename, RESOURCETYPE type);
 public:
-	virtual bool load(const wchar_t* filename, RESOURCETYPE type, size_t ID) override;
+	Texture(std::wstring filename, RESOURCETYPE type);
 	virtual void unload() override;
 	virtual bool reload() override;
+	TextureData getData();
 };
 
 #endif // TEXTURE_H

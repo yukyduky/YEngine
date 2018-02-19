@@ -42,7 +42,7 @@ private:
 	void createQuad();
 	void createViewport();
 	void createBackBufferRTV();
-	void createDepthStencilView(size_t width, size_t height, ID3D11DepthStencilView ** gDSV, ID3D11Texture2D ** gDSB);
+	void createDepthStencilView(int width, int height, ID3D11DepthStencilView ** gDSV, ID3D11Texture2D ** gDSB);
 public:
 	void init();
 	void firstpass();
