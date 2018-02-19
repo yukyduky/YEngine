@@ -253,7 +253,7 @@ bool Geometry::reload()
 	return false; // this->loaded = this->createBuffers(&this->data.vBuffer, &this->data.iBuffer, vertices, indices, this->data.numVertices, this->data.numIndices, this->data.stride, this->data.offset);
 }
 
-VertexData Geometry::getData()
+const VertexData& Geometry::getData() const
 {
 	return this->data;
 }

@@ -21,7 +21,7 @@ public:
 	Geometry(std::string filename, RESOURCETYPE type);
 	void unload() override;
 	bool reload() override;
-	VertexData getData();
+	const VertexData& getData() const;
 };
 
 #endif // OBJECT_H

@@ -49,6 +49,11 @@ bool ResourceManager::reloadResource(size_t ID)
 	return this->resourceMap[ID]->reload();
 }
 
+void ResourceManager::unloadResource(size_t ID)
+{
+	this->resourceMap[ID]->unload();
+}
+
 bool ResourceManager::isResourceLoaded(size_t ID)
 {
 	return this->resourceMap[ID]->isLoaded();

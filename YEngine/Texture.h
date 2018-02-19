@@ -15,7 +15,7 @@ public:
 	Texture(std::wstring filename, RESOURCETYPE type);
 	virtual void unload() override;
 	virtual bool reload() override;
-	TextureData getData();
+	const TextureData& getData() const;
 };
 
 #endif // TEXTURE_H

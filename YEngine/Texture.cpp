@@ -45,7 +45,7 @@ bool Texture::reload()
 	return this->loaded;
 }
 
-TextureData Texture::getData()
+const TextureData& Texture::getData() const
 {
 	return this->data;
 }
