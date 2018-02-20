@@ -177,6 +177,9 @@
     <ClInclude Include="YUtility.h">
       <Filter>Header Files\General</Filter>
     </ClInclude>
+    <ClInclude Include="EventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -240,6 +243,9 @@
       <Filter>Source Files\General\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="YUtility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

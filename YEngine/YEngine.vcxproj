@@ -125,6 +125,7 @@
     <ClInclude Include="ConfigHandler.h" />
     <ClInclude Include="D3D.h" />
     <ClInclude Include="DeferredRenderer.h" />
+    <ClInclude Include="EventHandler.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GamePlayState.h" />
@@ -151,6 +152,7 @@
     <ClCompile Include="ConfigHandler.cpp" />
     <ClCompile Include="D3D.cpp" />
     <ClCompile Include="DeferredRenderer.cpp" />
+    <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GamePlayState.cpp" />

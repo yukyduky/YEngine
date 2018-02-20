@@ -19,6 +19,7 @@ private:
 	bool load(std::string filename, RESOURCETYPE type);
 public:
 	Geometry(std::string filename, RESOURCETYPE type);
+	virtual ~Geometry() {}
 	void unload() override;
 	bool reload() override;
 	const VertexData& getData() const;

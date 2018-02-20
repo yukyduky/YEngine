@@ -13,6 +13,7 @@ private:
 	bool load(std::wstring filename, RESOURCETYPE type);
 public:
 	Texture(std::wstring filename, RESOURCETYPE type);
+	virtual ~Texture() {}
 	virtual void unload() override;
 	virtual bool reload() override;
 	const TextureData& getData() const;

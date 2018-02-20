@@ -31,6 +31,7 @@ void GameManager::init(HINSTANCE hInstance, int nCmdShow)
 void GameManager::cleanup()
 {
 	delete this->gameTime;
+	delete this->configHandler;
 	this->defRenderer.cleanup();
 }
 

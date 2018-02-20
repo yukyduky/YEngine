@@ -61,6 +61,7 @@ protected:
 	RESOURCETYPE type;
 
 public:
+	virtual ~Resource() {}
 	virtual void unload() = 0;
 	virtual bool reload() = 0;
 	bool isLoaded();

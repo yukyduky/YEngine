@@ -2,8 +2,6 @@
 #ifndef YUTILITY_H
 #define YUTILITY_H
 
-#include <new>
-
 namespace yUtility
 {
 	
