@@ -7,6 +7,7 @@
 #include "IGameTime.h"
 #include "DeferredRenderer.h"
 #include "IConfigHandler.h"
+#include "IEventHandler.h"
 
 class State;
 
@@ -16,8 +17,8 @@ private:
 	bool isRunning;
 	IGameTime* gameTime;
 	IConfigHandler* configHandler;
+	IEventHandler* eventHandler;
 	DeferredRenderer defRenderer;
-
 
 public:
 	/*- - - - - - - -<INFORMATION>- - - - - - - -

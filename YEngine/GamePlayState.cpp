@@ -40,6 +40,14 @@ void GamePlayState::handleEvents(GameManager * gm)
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+
+	Event event;
+
+	while (Locator::getEventHandler()->pollEvent(event)) {
+		if (event.event == EVENT::GAMEOVER) {
+			gm->quit();
+		}
+	}
 }
 
 void GamePlayState::update(GameManager * gm)

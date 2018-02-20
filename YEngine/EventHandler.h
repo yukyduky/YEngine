@@ -2,25 +2,16 @@
 #ifndef EVENTHANDLER_H
 #define EVENTHANDLER_H
 
+#include "IEventHandler.h"
 #include <deque>
 
-
-enum class EVENT { GAMEOVER };
-
-
-struct Event
-{
-	EVENT event;
-	size_t param;
-};
-
-class EventHandler
+class EventHandler : public IEventHandler
 {
 private:
 	std::deque<Event> eventQueue;
 public:
-	bool pollEvent(Event& event);
-	void addEvent(Event event);
+	bool pollEvent(Event& event) override;
+	void addEvent(Event event) override;
 };
 
 #endif // EVENTHANDLER_H

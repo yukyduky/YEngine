@@ -5,6 +5,7 @@
 #include "GameTime.h"
 #include "GamePlayState.h"
 #include "ConfigHandler.h"
+#include "EventHandler.h"
 
 
 void GameManager::init(HINSTANCE hInstance, int nCmdShow)
@@ -13,13 +14,14 @@ void GameManager::init(HINSTANCE hInstance, int nCmdShow)
 
 	this->defRenderer.init();
 	
-	// Creation of gameTime;
 	this->gameTime = new GameTime;
-	// Provide the gametime object to the service locator
 	Locator::provide(this->gameTime);
 
 	this->configHandler = new ConfigHandler;
-	Locator::provide(configHandler);
+	Locator::provide(this->configHandler);
+
+	this->eventHandler = new EventHandler;
+	Locator::provide(this->eventHandler);
 
 	// Start the game timer
 	Locator::getGameTime()->StartTimer();

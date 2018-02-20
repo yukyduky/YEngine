@@ -133,9 +133,11 @@
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="IConfigHandler.h" />
     <ClInclude Include="ID3D.h" />
+    <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="IGameTime.h" />
     <ClInclude Include="Locator.h" />
     <ClInclude Include="Geometry.h" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="RenderOptimizer.h" />
     <ClInclude Include="Resource.h" />
@@ -143,6 +145,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
+    <ClInclude Include="Subject.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="UIComponent.h" />
     <ClInclude Include="YUtility.h" />
@@ -167,6 +170,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="YUtility.cpp" />
