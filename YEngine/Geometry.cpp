@@ -180,6 +180,7 @@ bool Geometry::load(std::string filename, RESOURCETYPE type)
 		aiProcess_JoinIdenticalVertices |
 		aiProcess_SortByPType);
 	if (!scene) {
+		std::string errorStr = importer.GetErrorString();
 		assert(scene && "Resource (Model) - Failed to import model");
 		success = false;
 	}
@@ -221,6 +222,7 @@ bool Geometry::load(std::string filename, RESOURCETYPE type)
 
 		if (this->createBuffers(&vBuffer, &iBuffer, vertices.data(), indices.data(), vertices.size(), indices.size(), sizeof(Vertex), 0)) {
 			this->type = type;
+			this->filename = filename;
 			this->data = VertexData(vBuffer, iBuffer, vertices.size(), indices.size(), indices.size() / 3, sizeof(Vertex), 0);
 		}
 	}
@@ -252,7 +254,10 @@ void Geometry::unload()
 
 bool Geometry::reload()
 {
-	return false; // this->loaded = this->createBuffers(&this->data.vBuffer, &this->data.iBuffer, vertices, indices, this->data.numVertices, this->data.numIndices, this->data.stride, this->data.offset);
+	if (!this->loaded) {
+		this->loaded = this->load(this->filename, this->type);
+	}
+	return this->loaded;
 }
 
 const VertexData& Geometry::getData() const

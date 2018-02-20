@@ -12,6 +12,8 @@ void GamePlayState::init()
 	ResourceManager rm;
 	rm.createResource("Resources\\Models\\3x3x3\\3x3x3.obj", RESOURCETYPE::OBJECT, 0);
 	rm.createResource("Resources\\Models\\3x3x3\\3x3x3.png", RESOURCETYPE::TEXTURE, 1);
+	rm.unloadResource(0);
+	rm.reloadResource(0);
 	rm.cleanup();
 }
 

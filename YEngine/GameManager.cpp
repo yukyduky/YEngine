@@ -34,6 +34,7 @@ void GameManager::cleanup()
 {
 	delete this->gameTime;
 	delete this->configHandler;
+	delete this->eventHandler;
 	this->defRenderer.cleanup();
 }
 

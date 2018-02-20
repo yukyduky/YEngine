@@ -13,6 +13,7 @@ struct Event
 class IEventHandler
 {
 public:
+	virtual ~IEventHandler() {}
 	virtual bool pollEvent(Event& event) = 0;
 	virtual void addEvent(Event event) = 0;
 };

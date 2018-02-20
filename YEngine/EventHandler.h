@@ -10,6 +10,7 @@ class EventHandler : public IEventHandler
 private:
 	std::deque<Event> eventQueue;
 public:
+	virtual ~EventHandler() {}
 	bool pollEvent(Event& event) override;
 	void addEvent(Event event) override;
 };
