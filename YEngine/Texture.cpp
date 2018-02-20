@@ -32,9 +32,11 @@ Texture::Texture(std::wstring filename, RESOURCETYPE type)
 
 void Texture::unload()
 {
-	this->data.SRV->Release();
-	this->data.texture->Release();
-	this->loaded = false;
+	if (this->loaded) {
+		this->loaded = false;
+		this->data.SRV->Release();
+		this->data.texture->Release();
+	}
 }
 
 bool Texture::reload()

@@ -1,8 +1,6 @@
 #include "ResourceManager.h"
 #include "Geometry.h"
 #include "Texture.h"
-#include <cassert>
-#include <algorithm>
 
 
 std::wstring ResourceManager::convertStrToWStr(std::string str)
@@ -77,4 +75,12 @@ bool ResourceManager::getResourceData(TextureData & data, size_t ID)
 		data = static_cast<Texture*>(this->resourceMap[ID])->getData();
 	}
 	return success;
+}
+
+void ResourceManager::cleanup()
+{
+	for (auto &i : this->resourceMap) {
+		i.second->unload();
+		delete i.second;
+	}
 }

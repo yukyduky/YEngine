@@ -30,7 +30,7 @@ public:
 	bool isResourceLoaded(size_t ID);
 	bool getResourceData(VertexData& data, size_t ID);
 	bool getResourceData(TextureData& data, size_t ID);
-	
+	void cleanup();
 };
 
 #endif // RESOURCEMANAGER_H

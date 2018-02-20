@@ -144,6 +144,7 @@
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="UIComponent.h" />
+    <ClInclude Include="YUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionComponent.cpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="UIComponent.cpp" />
+    <ClCompile Include="YUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

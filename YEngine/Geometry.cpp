@@ -243,9 +243,11 @@ Geometry::Geometry(std::string filename, RESOURCETYPE type)
 
 void Geometry::unload()
 {
-	this->data.vBuffer->Release();
-	this->data.iBuffer->Release();
-	this->loaded = false;
+	if (this->loaded) {
+		this->data.vBuffer->Release();
+		this->data.iBuffer->Release();
+		this->loaded = false;
+	}
 }
 
 bool Geometry::reload()
