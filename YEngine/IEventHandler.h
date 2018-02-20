@@ -6,6 +6,9 @@ enum class EVENT { GAMEOVER };
 
 struct Event
 {
+	Event() : param(-1) {}
+	Event(EVENT event, size_t param) : event(event), param(param) {}
+
 	EVENT event;
 	size_t param;
 };
