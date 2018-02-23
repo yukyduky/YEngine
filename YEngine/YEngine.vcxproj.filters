@@ -189,6 +189,12 @@
     <ClInclude Include="IEventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IDHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="idlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -258,6 +264,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Subject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IDHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Component.h"
+#include "Locator.h"
 
 
 void GameObject::send(Message msg)
@@ -28,7 +29,6 @@ void GameObject::update()
 
 void GameObject::cleanup()
 {
-	// Cleanup all the components
 	for (auto &i : this->components) {
 		i->cleanup();
 	}
@@ -72,6 +72,9 @@ Vector3 GameObject::getScale()
 void GameObject::setState(OBJECTSTATE state)
 {
 	this->state = state;
+	if (state == OBJECTSTATE::DEAD) {
+		Locator::getEventHandler()->addEvent(Event(EVENT::OBJECTDIED, this->ID));
+	}
 }
 
 OBJECTSTATE GameObject::getState()

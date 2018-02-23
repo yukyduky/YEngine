@@ -133,6 +133,8 @@
     <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="IConfigHandler.h" />
     <ClInclude Include="ID3D.h" />
+    <ClInclude Include="IDHandler.h" />
+    <ClInclude Include="idlist.h" />
     <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="IGameTime.h" />
     <ClInclude Include="Locator.h" />
@@ -161,6 +163,7 @@
     <ClCompile Include="GamePlayState.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
+    <ClCompile Include="IDHandler.cpp" />
     <ClCompile Include="Locator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Geometry.cpp" />

@@ -8,8 +8,6 @@
 #include "Command.h"
 #include "GameObject.h"
 
-// If mingling with a POINT, just use x's and y's rather than mingling the entire structs
-
 class Command;
 class InputComponent;
 
@@ -17,6 +15,8 @@ class GamePlayState : public State
 {
 private:
 	static GamePlayState sGamePlayState;
+
+	std::vector<GameObject*> gameObjects;
 
 public:
 	/*- - - - - - - -<INFORMATION>- - - - - - - -

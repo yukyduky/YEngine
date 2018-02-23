@@ -49,6 +49,10 @@ void GamePlayState::handleEvents(GameManager * gm)
 		if (event.event == EVENT::GAMEOVER) {
 			gm->quit();
 		}
+		else if (event.event == EVENT::OBJECTDIED) {
+			this->gameObjects[event.param]->cleanup();
+			delete this->gameObjects[event.param];
+		}
 	}
 }
 

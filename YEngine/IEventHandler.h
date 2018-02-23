@@ -2,7 +2,7 @@
 #ifndef IEVENTHANDLER_H
 #define IEVENTHANDLER_H
 
-enum class EVENT { GAMEOVER };
+enum class EVENT { GAMEOVER, OBJECTDIED };
 
 struct Event
 {

@@ -8,7 +8,9 @@
 #include "DeferredRenderer.h"
 #include "IConfigHandler.h"
 #include "IEventHandler.h"
+#include "idlist.h"
 
+class GameObject;
 class State;
 
 class GameManager
@@ -20,16 +22,15 @@ private:
 	IEventHandler* eventHandler;
 	DeferredRenderer defRenderer;
 
+	idlist<GameObject*> gameObjects;
+
 public:
 	/*- - - - - - - -<INFORMATION>- - - - - - - -
-	1. Creates a/the 'GameTime'(class) object.
-	2. Provides the newly created 'gameTime'(obj) to 'Locator'(class).
-	3. Starts the game timer.
-	4. Set the first & initial 'State' via 'StateManager'(class).*/
+	Creates and initiates all the tools and sets the first state*/
 	void init(HINSTANCE hInstance, int nCmdShow);
 
 	/*- - - - - - - -<INFORMATION>- - - - - - - -
-	1. Delete the 'gameTime'(obj) object.
+	Cleans up all the memory used by GameManager
 	*/
 	void cleanup();
 

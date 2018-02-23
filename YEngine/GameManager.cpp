@@ -6,6 +6,7 @@
 #include "GamePlayState.h"
 #include "ConfigHandler.h"
 #include "EventHandler.h"
+#include "GameObject.h"
 
 
 void GameManager::init(HINSTANCE hInstance, int nCmdShow)

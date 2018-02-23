@@ -23,8 +23,8 @@ struct Message
 class GameObject
 {
 public:
-	GameObject() : pos(Vector3(0.0f, 0.0f, 0.0f)), state(OBJECTSTATE::IDLE), componentTypes(0) {}
-	GameObject(Vector3 pos) : pos(pos), state(OBJECTSTATE::IDLE), componentTypes(0) {}
+	GameObject(size_t ID) : ID(ID), pos(Vector3(0.0f, 0.0f, 0.0f)), state(OBJECTSTATE::IDLE), componentTypes(0) {}
+	GameObject(size_t ID, Vector3 pos) : ID(ID), pos(pos), state(OBJECTSTATE::IDLE), componentTypes(0) {}
 
 	/*- - - - - - - -<INFORMATION>- - - - - - - -
 	1. Send the parameter 'msg'(obj) to all components that have been added to the object.
@@ -39,6 +39,7 @@ public:
 	void cleanup();
 
 	void move(Vector3 offset);
+
 	void setPosition(Vector3 pos);
 	Vector3 getPosition();
 	void setRotation(Vector3 rot);
@@ -57,6 +58,7 @@ private:
 	Vector3 scale;
 	OBJECTSTATE state;
 	size_t componentTypes;
+	const size_t ID;
 };
 
 #endif // !GAMEOBJECT_H
