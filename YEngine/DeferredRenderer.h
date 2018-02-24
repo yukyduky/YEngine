@@ -16,20 +16,20 @@ constexpr int LIGHT_INPUT_DESC_SIZE = 1;
 class DeferredRenderer
 {
 private:
-	std::array<ID3D11RenderTargetView*, NUM_DEFERRED_OUTPUTS> gRTVs;
-	std::array<ID3D11ShaderResourceView*, NUM_DEFERRED_OUTPUTS> gSRVs;
-	std::array<ID3D11Texture2D*, NUM_DEFERRED_OUTPUTS> gDeferredTexs;
-	ID3D11RenderTargetView* gFinalRTV;
-	ID3D11DepthStencilView* gDSV;
-	ID3D11Texture2D* gDSB;
-	ID3D11SamplerState* gSampler;
-	ID3D11Buffer* gQuadVertexBuffer;
+	std::array<ID3D11RenderTargetView*, NUM_DEFERRED_OUTPUTS> gRTVs = {};
+	std::array<ID3D11ShaderResourceView*, NUM_DEFERRED_OUTPUTS> gSRVs = {};
+	std::array<ID3D11Texture2D*, NUM_DEFERRED_OUTPUTS> gDeferredTexs = {};
+	ID3D11RenderTargetView* gFinalRTV = nullptr;
+	ID3D11DepthStencilView* gDSV = nullptr;
+	ID3D11Texture2D* gDSB = nullptr;
+	ID3D11SamplerState* gSampler = nullptr;
+	ID3D11Buffer* gQuadVertexBuffer = nullptr;
 	D3D11_VIEWPORT viewport;
 
 	size_t vertBufferStride;
 	size_t vertBufferOffset;
 
-	Shader* currentGeoShaders;
+	Shader* currentGeoShaders = nullptr;
 	Shader geoColorShaders;
 	Shader geoTexShaders;
 	Shader lightShaders;

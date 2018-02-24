@@ -8,6 +8,7 @@
 #include "DeferredRenderer.h"
 #include "IConfigHandler.h"
 #include "IEventHandler.h"
+#include "MemoryManager.h"
 #include "idlist.h"
 
 class GameObject;
@@ -17,65 +18,118 @@ class GameManager
 {
 private:
 	bool isRunning;
-	IGameTime* gameTime;
-	IConfigHandler* configHandler;
-	IEventHandler* eventHandler;
+	IGameTime* gameTime = nullptr;
+	IConfigHandler* configHandler = nullptr;
+	IEventHandler* eventHandler = nullptr;
+	MemoryManager* stateMemory = nullptr;
 	DeferredRenderer defRenderer;
 
 	idlist<GameObject*> gameObjects;
 
 public:
-	/*- - - - - - - -<INFORMATION>- - - - - - - -
-	Creates and initiates all the tools and sets the first state*/
+	//***********************************************************
+	// Method:    init
+	// FullName:  GameManager::init
+	// Access:    public 
+	// Returns:   void
+	// Qualifier:
+	// Parameter: HINSTANCE hInstance
+	// Parameter: int nCmdShow
+	// Description: Creates and initiates all the tools and sets the first state
+	//***********************************************************
 	void init(HINSTANCE hInstance, int nCmdShow);
 
-	/*- - - - - - - -<INFORMATION>- - - - - - - -
-	Cleans up all the memory used by GameManager
-	*/
+	//***********************************************************
+	// Method:    cleanup
+	// FullName:  GameManager::cleanup
+	// Access:    public 
+	// Returns:   void
+	// Qualifier:
+	// Description: Cleans up all the memory used by GameManager
+	//***********************************************************
 	void cleanup();
 
-	/*- - - - - - - -<INFORMATION>- - - - - - - -
-	1. Change the current state.
-	2. Passes the 'State'(class) object as a parameter.
-	*/
+	//***********************************************************
+	// Method:    changeState
+	// FullName:  GameManager::changeState
+	// Access:    public 
+	// Returns:   void
+	// Qualifier:
+	// Parameter: State * state
+	// Description: Changes the state to the given state
+	//***********************************************************
 	void changeState(State* state);
 
-	/*- - - - - - - -<INFORMATION>- - - - - - - -
-	1. Calls the 'handleEvents()' function found within the 'StateManager'(class).
-	*/
+	//***********************************************************
+	// Method:    handleEvents
+	// FullName:  GameManager::handleEvents
+	// Access:    public 
+	// Returns:   void
+	// Qualifier:
+	// Description: All events, that the state cares about, are handled here
+	//***********************************************************
 	void handleEvents();
 
-	/*- - - - - - - -<INFORMATION>- - - - - - - -
-	1. Poll for new events via the 'PeekMessage()' function.
-	2. Passes the 'MSG'(class) object as a parameter.
-	*/
+	//***********************************************************
+	// Method:    pollEvent
+	// FullName:  GameManager::pollEvent
+	// Access:    public 
+	// Returns:   bool
+	// Qualifier:
+	// Parameter: MSG & msg
+	// Description: Polls windows events
+	//***********************************************************
 	bool pollEvent(MSG &msg);
 
-	/*- - - - - - - -<INFORMATION>- - - - - - - -
-	1. Updates the game depending on the current state.
-	2. Simply runs the 'StateManager'(class) 'update()' function.
-	*/
+	//***********************************************************
+	// Method:    update
+	// FullName:  GameManager::update
+	// Access:    public 
+	// Returns:   void
+	// Qualifier:
+	// Description: Updates the current state
+	//***********************************************************
 	void update();
 
-	/*- - - - - - - -<INFORMATION>- - - - - - - -
-	1. Renders the scene according to the current state.
-	2. Runs the 'StateManager'(class) 'render()' function.
-	*/
+	//***********************************************************
+	// Method:    render
+	// FullName:  GameManager::render
+	// Access:    public 
+	// Returns:   void
+	// Qualifier:
+	// Description: Renders the current state
+	//***********************************************************
 	void render();
 
-	/*- - - - - - - -<INFORMATION>- - - - - - - -
-	1. Clears, draws, and displays the current state.
-	*/
+	//***********************************************************
+	// Method:    display
+	// FullName:  GameManager::display
+	// Access:    public 
+	// Returns:   void
+	// Qualifier:
+	// Parameter: State * state
+	// Description: Displays the current state
+	//***********************************************************
 	void display(State* state);
 
-	/*- - - - - - - -<INFORMATION>- - - - - - - -
-	1. Returns the 'isRunning'(obj) boolean, to see if the game is currently running.
-	*/
+	//***********************************************************
+	// Method:    getIsRunning
+	// FullName:  GameManager::getIsRunning
+	// Access:    public 
+	// Returns:   bool
+	// Qualifier:
+	// Description: Returns true as long as the game is set to be runnning
+	//***********************************************************
 	bool getIsRunning();
 
-	/*- - - - - - - -<INFORMATION>- - - - - - - -
-	1. Sets the 'isRunning'(obj) boolean to false, closing the game.
-	*/
+	//***********************************************************
+	// Method:    quit
+	// FullName:  GameManager::quit
+	// Access:    public 
+	// Returns:   void
+	// Qualifier:
+	// Description: Sets isRunning to false and exits the game loop on the start of the next loop
+	//***********************************************************
 	void quit();
 };
 

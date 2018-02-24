@@ -7,6 +7,8 @@
 #include "ConfigHandler.h"
 #include "EventHandler.h"
 #include "GameObject.h"
+#include "MemoryManager.h"
+
 
 
 void GameManager::init(HINSTANCE hInstance, int nCmdShow)
@@ -15,14 +17,17 @@ void GameManager::init(HINSTANCE hInstance, int nCmdShow)
 
 	this->defRenderer.init();
 	
-	this->gameTime = new GameTime;
+	Locator::getMemoryManager(MEMORYTYPE::PERM)->requestMemory(this->gameTime, &GameTime(), sizeof(GameTime));
 	Locator::provide(this->gameTime);
 
-	this->configHandler = new ConfigHandler;
+	Locator::getMemoryManager(MEMORYTYPE::PERM)->requestMemory(this->configHandler, &ConfigHandler(), sizeof(ConfigHandler));
 	Locator::provide(this->configHandler);
 
-	this->eventHandler = new EventHandler;
+	Locator::getMemoryManager(MEMORYTYPE::PERM)->requestMemory(this->eventHandler, &EventHandler(), sizeof(EventHandler));
 	Locator::provide(this->eventHandler);
+
+	this->stateMemory = new MemoryManager(16, 100);
+	Locator::provide(this->stateMemory, MEMORYTYPE::STATE);
 
 	// Start the game timer
 	Locator::getGameTime()->StartTimer();
@@ -33,10 +38,9 @@ void GameManager::init(HINSTANCE hInstance, int nCmdShow)
 
 void GameManager::cleanup()
 {
-	delete this->gameTime;
-	delete this->configHandler;
-	delete this->eventHandler;
 	this->defRenderer.cleanup();
+	this->stateMemory->cleanup();
+	delete this->stateMemory;
 }
 
 void GameManager::changeState(State* state)

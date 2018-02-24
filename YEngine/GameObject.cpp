@@ -90,7 +90,7 @@ size_t GameObject::getComponentTypes()
 Component* GameObject::getComponent(size_t type)
 {
 	Component* component = nullptr;
-	if (this->componentTypes & type == type) {
+	if ((this->componentTypes & type) == type) {
 		component = this->componentMap[type];
 	}
 	return component;

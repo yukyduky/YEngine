@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "Locator.h"
 #include "ResourceManager.h"
+#include "MemoryManager.h"
 
 
 GamePlayState GamePlayState::sGamePlayState;
@@ -9,16 +10,14 @@ GamePlayState GamePlayState::sGamePlayState;
 
 void GamePlayState::init()
 {
-	ResourceManager rm;
-	rm.createResource("Resources\\Models\\3x3x3\\3x3x3.obj", RESOURCETYPE::OBJECT, 0);
-	rm.createResource("Resources\\Models\\3x3x3\\3x3x3.png", RESOURCETYPE::TEXTURE, 1);
-	rm.unloadResource(0);
-	rm.reloadResource(0);
-	rm.cleanup();
+	this->frameMemory = new MemoryManager(16, 10);
+	Locator::provide(this->frameMemory, MEMORYTYPE::FRAME);
 }
 
 void GamePlayState::cleanup()
 {
+	this->frameMemory->cleanup();
+	delete this->frameMemory;
 }
 
 void GamePlayState::pause()
