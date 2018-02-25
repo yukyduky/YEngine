@@ -27,7 +27,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	gm.init(hInstance, nCmdShow);
 
 	// Game loop
-	while (gm.getIsRunning()) {
+	while (gm.getIsRunning()) 
+	{
 		// Update delta time
 		Locator::getGameTime()->UpdateFrameTime();
 		// Handle events & update & render

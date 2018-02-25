@@ -33,7 +33,8 @@ void DeferredRenderer::bindTextureToRTVAndSRV(ID3D11Texture2D** gTexure, ID3D11R
 
 	// Create one texture per rendertarget
 	hr = Locator::getD3D()->GETgDevice()->CreateTexture2D(&texDesc, nullptr, gTexure);
-	if (FAILED(hr)) {
+	if (FAILED(hr))
+	{
 		MessageBox(0, "Create texture (RTV and SRV) - Failed", "Error", MB_OK);
 		_exit(0);
 	}
@@ -47,7 +48,8 @@ void DeferredRenderer::bindTextureToRTVAndSRV(ID3D11Texture2D** gTexure, ID3D11R
 
 	// Create one rtv per output from the pixel shader
 	hr = Locator::getD3D()->GETgDevice()->CreateRenderTargetView(*gTexure, &rtvDesc, gRTV);
-	if (FAILED(hr)) {
+	if (FAILED(hr))
+	{
 		MessageBox(0, "Create RTV (RTV and SRV) - Failed", "Error", MB_OK);
 		_exit(0);
 	}
@@ -62,7 +64,8 @@ void DeferredRenderer::bindTextureToRTVAndSRV(ID3D11Texture2D** gTexure, ID3D11R
 
 	// Create one srv per texture to be loaded into the next pixel shader
 	hr = Locator::getD3D()->GETgDevice()->CreateShaderResourceView(*gTexure, &srvDesc, gSRV);
-	if (FAILED(hr)) {
+	if (FAILED(hr))
+	{
 		MessageBox(0, "Create SRV (RTV and SRV) - Failed", "Error", MB_OK);
 		_exit(0);
 	}
@@ -83,7 +86,8 @@ void DeferredRenderer::initSampler(ID3D11SamplerState** gSampler, D3D11_FILTER f
 	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
 	hr = Locator::getD3D()->GETgDevice()->CreateSamplerState(&sampDesc, gSampler);
-	if (FAILED(hr)) {
+	if (FAILED(hr))
+	{
 		MessageBox(0, "Create Samplerstate - Failed", "Error", MB_OK);
 		_exit(0);
 	}
@@ -143,14 +147,16 @@ void DeferredRenderer::createBackBufferRTV()
 	// Create the BackBuffer
 	ID3D11Texture2D* BackBuffer;
 	hr = Locator::getD3D()->GETswapChain()->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&BackBuffer);
-	if (FAILED(hr)) {
+	if (FAILED(hr))
+	{
 		MessageBox(0, "Swapchain backbuffer - Failed", "Error", MB_OK);
 		_exit(0);
 	}
 
 	// Create the Render Target
 	hr = Locator::getD3D()->GETgDevice()->CreateRenderTargetView(BackBuffer, nullptr, &this->gFinalRTV);
-	if (FAILED(hr)) {
+	if (FAILED(hr))
+	{
 		MessageBox(0, "Create Render Target View - Failed", "Error", MB_OK);
 		_exit(0);
 	}
@@ -179,13 +185,15 @@ void DeferredRenderer::createDepthStencilView(int width, int height, ID3D11Depth
 
 	// Creates the Depth/Stencil View
 	hr = Locator::getD3D()->GETgDevice()->CreateTexture2D(&depthStencilDesc, nullptr, gDSB);
-	if (FAILED(hr)) {
+	if (FAILED(hr))
+	{
 		MessageBox(0, "Create Depth Texture - Failed", "Error", MB_OK);
 		_exit(0);
 	}
 
 	hr = Locator::getD3D()->GETgDevice()->CreateDepthStencilView(*gDSB, nullptr, gDSV);
-	if (FAILED(hr)) {
+	if (FAILED(hr))
+	{
 		MessageBox(0, "Create Depth Stencil - Failed", "Error", MB_OK);
 		_exit(0);
 	}
@@ -212,7 +220,8 @@ void DeferredRenderer::init()
 	this->initShaders();
 
 	// Bind the deferred RTVs and SRVs to eachother
-	for (int i = 0; i < NUM_DEFERRED_OUTPUTS; i++) {
+	for (int i = 0; i < NUM_DEFERRED_OUTPUTS; i++)
+	{
 		this->bindTextureToRTVAndSRV(&this->gDeferredTexs[i], &this->gRTVs[i], &this->gSRVs[i], Locator::getD3D()->GETwWidth(), Locator::getD3D()->GETwHeight(), DXGI_FORMAT_R32G32B32A32_FLOAT);
 	}
 
@@ -231,7 +240,8 @@ void DeferredRenderer::firstpass()
 	// Clear the final RenderTargetView
 	Locator::getD3D()->GETgDevCon()->ClearRenderTargetView(this->gFinalRTV, this->clearColor.data());
 	// Clear the deferred RenderTargetViews
-	for (auto &i : this->gRTVs) {
+	for (auto &i : this->gRTVs)
+	{
 		Locator::getD3D()->GETgDevCon()->ClearRenderTargetView(i, this->clearColor.data());
 	}
 	// Clear the DepthStencilView
@@ -276,13 +286,16 @@ void DeferredRenderer::secondpass()
 
 void DeferredRenderer::cleanup()
 {
-	for (auto &i : this->gRTVs) {
+	for (auto &i : this->gRTVs)
+	{
 		i->Release();
 	}
-	for (auto &i : this->gSRVs) {
+	for (auto &i : this->gSRVs)
+	{
 		i->Release();
 	}
-	for (auto &i : this->gDeferredTexs) {
+	for (auto &i : this->gDeferredTexs)
+	{
 		i->Release();
 	}
 

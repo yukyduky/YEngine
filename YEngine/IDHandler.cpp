@@ -16,8 +16,10 @@ void IDHandler::remove(const size_t id)
 	std::list<size_t>::const_iterator it = this->usedIDs.begin();
 	bool idRemoved = false;
 
-	while (!idRemoved && it != this->usedIDs.end()) {
-		if (*it == id) {
+	while (!idRemoved && it != this->usedIDs.end())
+	{
+		if (*it == id)
+		{
 			idRemoved = true;
 			this->usedIDs.erase(it);
 			this->availableIDs.push_back(id);
@@ -36,8 +38,10 @@ void IDHandler::remove(std::list<size_t>::const_iterator it)
 
 void IDHandler::resize(const size_t size)
 {
-	if (size > this->nrOfIDs) {
-		for (size_t i = this->nrOfIDs; i < size; i++) {
+	if (size > this->nrOfIDs)
+	{
+		for (size_t i = this->nrOfIDs; i < size; i++)
+		{
 			this->availableIDs.push_back(i);
 		}
 		this->nrOfIDs = size;
@@ -54,10 +58,13 @@ void IDHandler::clear()
 bool IDHandler::idInUse(const size_t id)
 {
 	bool idFound = false;
-	if (id < this->nrOfIDs) {
+	if (id < this->nrOfIDs)
+	{
 		std::list<size_t>::const_iterator it = this->usedIDs.begin();
-		while (!idFound && it != this->usedIDs.end()) {
-			if (*it == id) {
+		while (!idFound && it != this->usedIDs.end())
+		{
+			if (*it == id)
+			{
 				idFound = true;
 			}
 			it++;
@@ -74,7 +81,8 @@ bool IDHandler::empty()
 const size_t& IDHandler::peekNextID()
 {
 	size_t id = this->nrOfIDs;
-	if (!this->availableIDs.empty()) {
+	if (!this->availableIDs.empty())
+	{
 		id = this->availableIDs.front();
 	}
 	return id;
@@ -83,7 +91,8 @@ const size_t& IDHandler::peekNextID()
 const size_t IDHandler::getNewID()
 {
 	size_t id = -1;
-	if (!this->availableIDs.empty()) {
+	if (!this->availableIDs.empty())
+	{
 		this->usedIDs.push_back(this->availableIDs.front());
 		this->availableIDs.pop_front();
 		id = this->usedIDs.back();

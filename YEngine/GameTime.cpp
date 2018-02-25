@@ -43,7 +43,8 @@ void GameTime::UpdateFrameTime()
 	this->prevCurrentCount = currentCount.QuadPart;
 
 	// Should never happen
-	if (frameCount < 0.0f) {
+	if (frameCount < 0.0f)
+	{
 		frameCount = (__int64)0.0;
 	}
 

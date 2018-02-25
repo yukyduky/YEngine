@@ -6,7 +6,8 @@ bool EventHandler::pollEvent(Event & event)
 {
 	bool eventExists = false;
 
-	if (!this->eventQueue.empty()) {
+	if (!this->eventQueue.empty())
+	{
 		eventExists = true;
 		event = this->eventQueue.front();
 		this->eventQueue.pop_front();

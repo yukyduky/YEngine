@@ -21,7 +21,8 @@ void D3D::initializeWindow(HINSTANCE hInstance, int ShowWnd, int width, int heig
 	wc.lpszClassName = LPCTSTR("Project");			// Name of the windows class
 	wc.hIconSm = LoadIcon(nullptr, IDI_WINLOGO);	// Taskbar icon
 													// Error checking
-	if (!RegisterClassEx(&wc)) {
+	if (!RegisterClassEx(&wc))
+	{
 		MessageBox(nullptr, "Error registering class", "Error", MB_OK | MB_ICONERROR);
 		_exit(0);
 	}
@@ -41,7 +42,8 @@ void D3D::initializeWindow(HINSTANCE hInstance, int ShowWnd, int width, int heig
 	);
 
 	// Error checking
-	if (!this->hwnd) {
+	if (!this->hwnd)
+	{
 		MessageBox(nullptr, "Error creating window", "Error", MB_OK | MB_ICONERROR);
 		_exit(0);
 	}
@@ -70,7 +72,8 @@ void D3D::createSwapChain()
 
 	// Create the SwapChain
 	hr = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, D3D11_CREATE_DEVICE_DEBUG, nullptr, NULL, D3D11_SDK_VERSION, &swapChainDesc, &gSwapChain, &gDevice, nullptr, &gDevCon);
-	if (FAILED(hr)) {
+	if (FAILED(hr))
+	{
 		MessageBox(0, "Create Swapchain - Failed", "Error", MB_OK);
 		_exit(0);
 	}

@@ -92,7 +92,8 @@ inline void MemoryManager::requestMemory(T1*& dataPtr, T2* data, const size_t si
 	size_t nrOfBlocks = blockedSize / blockSize;
 	size_t blockNr = -1;
 
-	if (size <= this->totalMem - this->memInUse && this->findFreeMemoryBlock(nrOfBlocks, blockNr)) {
+	if (size <= this->totalMem - this->memInUse && this->findFreeMemoryBlock(nrOfBlocks, blockNr)) 
+	{
 		void* ptr = this->memHandle + blockNr * blockSize;
 		memcpy(ptr, data, size);
 		dataPtr = static_cast<T1*>(ptr);
@@ -100,7 +101,8 @@ inline void MemoryManager::requestMemory(T1*& dataPtr, T2* data, const size_t si
 		MemoryBlock* selectedBlock = &this->blocks[blockNr];
 		this->memInUse += blockedSize;
 
-		if (selectedBlock->nrOfBlocks != nrOfBlocks) {
+		if (selectedBlock->nrOfBlocks != nrOfBlocks) 
+		{
 			this->blocks[blockNr + nrOfBlocks].memHandle = this->memHandle + (blockNr + nrOfBlocks) * blockSize;
 			this->blocks[blockNr + nrOfBlocks].nrOfBlocks = selectedBlock->nrOfBlocks - nrOfBlocks;
 		}

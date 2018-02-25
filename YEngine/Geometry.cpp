@@ -30,7 +30,8 @@ bool Geometry::createVertexBuffer(ID3D11Buffer ** gVertexBuffer, void * v, int &
 	vertexData.pSysMem = v;
 
 	HRESULT hr = Locator::getD3D()->GETgDevice()->CreateBuffer(&vertexBufferDesc, &vertexData, gVertexBuffer);
-	if (FAILED(hr)) {
+	if (FAILED(hr)) 
+	{
 		assert(FAILED(hr) && "Resource - Failed to create vertex buffer");
 		success = false;
 	}
@@ -55,7 +56,8 @@ bool Geometry::createIndexBuffer(ID3D11Buffer ** gIndexBuffer, void * data, int 
 
 	indexData.pSysMem = data;
 	HRESULT hr = Locator::getD3D()->GETgDevice()->CreateBuffer(&indexBufferDesc, &indexData, gIndexBuffer);
-	if (FAILED(hr)) {
+	if (FAILED(hr)) 
+	{
 		assert(FAILED(hr) && "Resource - Failed to create index buffer");
 		success = false;
 	}
@@ -72,13 +74,16 @@ bool Geometry::createBuffers(ID3D11Buffer ** vBuffer, ID3D11Buffer ** iBuffer, v
 
 	iLoaded = this->createIndexBuffer(iBuffer, indices, numIndices);
 
-	if (vLoaded && iLoaded) {
+	if (vLoaded && iLoaded) 
+	{
 		allLoaded = true;
 	}
-	else if (vLoaded) {
+	else if (vLoaded) 
+	{
 		(*vBuffer)->Release();
 	}
-	else if (iLoaded) {
+	else if (iLoaded) 
+	{
 		(*iBuffer)->Release();
 	}
 
@@ -90,12 +95,16 @@ bool Geometry::loadVertexDataFromFile(const char* filename, VertexData& data)
 	bool success = false;
 	RawData rawData;
 	std::vector<std::vector<std::vector<int>>> parsedDataSets;
-	if (Locator::getConfigHandler()->loadRawData(rawData, filename)) {
-		for (auto &i : rawData.dataSets) {
+	if (Locator::getConfigHandler()->loadRawData(rawData, filename)) 
+	{
+		for (auto &i : rawData.dataSets) 
+		{
 			std::vector<std::vector<int>> parsedDataRows;
-			for (auto &k : i) {
+			for (auto &k : i) 
+			{
 				std::vector<int> parsedData;
-				for (auto &h : k) {
+				for (auto &h : k) 
+				{
 					parsedData.push_back(atoi(h.c_str()));
 				}
 				parsedDataRows.push_back(parsedData);
@@ -112,7 +121,8 @@ bool Geometry::loadVertexDataFromFile(const char* filename, VertexData& data)
 		int stride = static_cast<int>(parsedDataSets[0][0][0]);
 		int offset = static_cast<int>(parsedDataSets[0][1][0]);
 
-		if (this->createBuffers(&vBuffer, &iBuffer, vertices, indices, numVertices, numIndices, stride, offset)) {
+		if (this->createBuffers(&vBuffer, &iBuffer, vertices, indices, numVertices, numIndices, stride, offset))
+		{
 			success = true;
 
 			data.vBuffer = vBuffer;
@@ -132,12 +142,16 @@ bool Geometry::loadObjFile(const char* filename, VertexData& data)
 	bool success = false;
 	RawData rawData;
 	std::vector<std::vector<std::vector<int>>> parsedDataSets;
-	if (Locator::getConfigHandler()->loadRawData(rawData, filename)) {
-		for (auto &i : rawData.dataSets) {
+	if (Locator::getConfigHandler()->loadRawData(rawData, filename)) 
+	{
+		for (auto &i : rawData.dataSets) 
+		{
 			std::vector<std::vector<int>> parsedDataRows;
-			for (auto &k : i) {
+			for (auto &k : i) 
+			{
 				std::vector<int> parsedData;
-				for (auto &h : k) {
+				for (auto &h : k) 
+				{
 					parsedData.push_back(atoi(h.c_str()));
 				}
 				parsedDataRows.push_back(parsedData);
@@ -154,7 +168,8 @@ bool Geometry::loadObjFile(const char* filename, VertexData& data)
 		int stride = static_cast<int>(parsedDataSets[0][0][0]);
 		int offset = static_cast<int>(parsedDataSets[0][1][0]);
 
-		if (this->createBuffers(&vBuffer, &iBuffer, vertices, indices, numVertices, numIndices, stride, offset)) {
+		if (this->createBuffers(&vBuffer, &iBuffer, vertices, indices, numVertices, numIndices, stride, offset))
+		{
 			success = true;
 
 			data.vBuffer = vBuffer;
@@ -179,7 +194,8 @@ bool Geometry::load(std::string filename, RESOURCETYPE type)
 		aiProcess_Triangulate |
 		aiProcess_JoinIdenticalVertices |
 		aiProcess_SortByPType);
-	if (!scene) {
+	if (!scene) 
+	{
 		std::string errorStr = importer.GetErrorString();
 		assert(scene && "Resource (Model) - Failed to import model");
 		success = false;
@@ -188,10 +204,12 @@ bool Geometry::load(std::string filename, RESOURCETYPE type)
 		std::vector<Vertex> vertices;
 		std::vector<int> indices;
 
-		for (int i = 0; i < scene->mNumMeshes; i++) {
+		for (int i = 0; i < scene->mNumMeshes; i++) 
+		{
 			aiMesh* mesh = scene->mMeshes[i];
 
-			for (int k = 0; k < mesh->mNumVertices; k++) {
+			for (int k = 0; k < mesh->mNumVertices; k++) 
+			{
 				Vertex v;
 
 				v.position.x = mesh->mVertices[k].x;
@@ -202,7 +220,8 @@ bool Geometry::load(std::string filename, RESOURCETYPE type)
 				v.normal.y = mesh->mNormals[k].y;
 				v.normal.z = mesh->mNormals[k].z;
 
-				if (mesh->HasTextureCoords(0)) {
+				if (mesh->HasTextureCoords(0)) 
+				{
 					v.texCoords.x = mesh->mTextureCoords[0][k].x;
 					v.texCoords.y = mesh->mTextureCoords[0][k].y;
 				}
@@ -210,8 +229,10 @@ bool Geometry::load(std::string filename, RESOURCETYPE type)
 				vertices.push_back(v);
 			}
 			
-			for (int c = 0; c < mesh->mNumFaces; c++) {
-				for (int e = 0; e < mesh->mFaces[c].mNumIndices; e++) {
+			for (int c = 0; c < mesh->mNumFaces; c++) 
+			{
+				for (int e = 0; e < mesh->mFaces[c].mNumIndices; e++)
+				{
 					indices.push_back(mesh->mFaces[c].mIndices[e]);
 				}
 			}
@@ -220,7 +241,8 @@ bool Geometry::load(std::string filename, RESOURCETYPE type)
 		ID3D11Buffer* vBuffer = nullptr;
 		ID3D11Buffer* iBuffer = nullptr;
 
-		if (this->createBuffers(&vBuffer, &iBuffer, vertices.data(), indices.data(), vertices.size(), indices.size(), sizeof(Vertex), 0)) {
+		if (this->createBuffers(&vBuffer, &iBuffer, vertices.data(), indices.data(), vertices.size(), indices.size(), sizeof(Vertex), 0))
+		{
 			this->type = type;
 			this->filename = filename;
 			this->data = VertexData(vBuffer, iBuffer, vertices.size(), indices.size(), indices.size() / 3, sizeof(Vertex), 0);
@@ -235,17 +257,20 @@ Geometry::Geometry(std::string filename, RESOURCETYPE type)
 	this->loaded = false;
 	std::string ext = filename.substr(filename.find_last_of('.') + 1, filename.size() - filename.find_last_of('.'));
 
-	if (ext == "obj") {
+	if (ext == "obj")
+	{
 		this->loaded = this->load(filename, type);
 	}
-	else if (ext == "yk") {
+	else if (ext == "yk")
+	{
 
 	}
 }
 
 void Geometry::unload()
 {
-	if (this->loaded) {
+	if (this->loaded)
+	{
 		this->data.vBuffer->Release();
 		this->data.iBuffer->Release();
 		this->loaded = false;
@@ -254,7 +279,8 @@ void Geometry::unload()
 
 bool Geometry::reload()
 {
-	if (!this->loaded) {
+	if (!this->loaded)
+	{
 		this->loaded = this->load(this->filename, this->type);
 	}
 	return this->loaded;

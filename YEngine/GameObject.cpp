@@ -6,7 +6,8 @@
 void GameObject::send(Message msg)
 {
 	// Send the message to all the components that have been added to the object
-	for (auto &i : this->components) {
+	for (auto &i : this->components) 
+	{
 		i->receive(msg);
 	}
 }
@@ -22,14 +23,16 @@ void GameObject::addComponent(Component* component, size_t type)
 
 void GameObject::update()
 {
-	for (auto &i : this->components) {
+	for (auto &i : this->components) 
+	{
 		i->update();
 	}
 }
 
 void GameObject::cleanup()
 {
-	for (auto &i : this->components) {
+	for (auto &i : this->components) 
+	{
 		i->cleanup();
 	}
 }
@@ -72,7 +75,8 @@ Vector3 GameObject::getScale()
 void GameObject::setState(OBJECTSTATE state)
 {
 	this->state = state;
-	if (state == OBJECTSTATE::DEAD) {
+	if (state == OBJECTSTATE::DEAD) 
+	{
 		Locator::getEventHandler()->addEvent(Event(EVENT::OBJECTDIED, this->ID));
 	}
 }
@@ -90,7 +94,8 @@ size_t GameObject::getComponentTypes()
 Component* GameObject::getComponent(size_t type)
 {
 	Component* component = nullptr;
-	if ((this->componentTypes & type) == type) {
+	if ((this->componentTypes & type) == type) 
+	{
 		component = this->componentMap[type];
 	}
 	return component;

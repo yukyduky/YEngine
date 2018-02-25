@@ -8,7 +8,8 @@ bool Texture::loadTexture(ID3D11ShaderResourceView** SRV, ID3D11Resource** textu
 {
 	bool success = true;
 	HRESULT hr = DirectX::CreateWICTextureFromFile(Locator::getD3D()->GETgDevice(), filename.c_str(), texture, SRV);
-	if (FAILED(hr)) {
+	if (FAILED(hr)) 
+	{
 		success = false;
 		assert(FAILED(hr) && "Failed to create texture from file - Resource");
 	}
@@ -18,7 +19,8 @@ bool Texture::loadTexture(ID3D11ShaderResourceView** SRV, ID3D11Resource** textu
 bool Texture::load(std::wstring filename, RESOURCETYPE type)
 {
 	bool success = this->loadTexture(&this->data.SRV, &this->data.texture, filename);
-	if (success) {
+	if (success) 
+	{
 		this->type = type;
 		this->filename = filename;
 	}
@@ -32,7 +34,8 @@ Texture::Texture(std::wstring filename, RESOURCETYPE type)
 
 void Texture::unload()
 {
-	if (this->loaded) {
+	if (this->loaded) 
+	{
 		this->loaded = false;
 		this->data.SRV->Release();
 		this->data.texture->Release();
@@ -41,7 +44,8 @@ void Texture::unload()
 
 bool Texture::reload()
 {
-	if (!this->loaded) {
+	if (!this->loaded) 
+	{
 		this->loaded = this->loadTexture(&this->data.SRV, &this->data.texture, filename);
 	}
 	return this->loaded;

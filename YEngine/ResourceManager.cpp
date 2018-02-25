@@ -60,7 +60,8 @@ bool ResourceManager::isResourceLoaded(size_t ID)
 bool ResourceManager::getResourceData(VertexData & data, size_t ID)
 {
 	bool success = false;
-	if (this->resourceMap[ID]->getType() == RESOURCETYPE::OBJECT) {
+	if (this->resourceMap[ID]->getType() == RESOURCETYPE::OBJECT) 
+	{
 		success = true;
 		data = static_cast<Geometry*>(this->resourceMap[ID])->getData();
 	}
@@ -70,7 +71,8 @@ bool ResourceManager::getResourceData(VertexData & data, size_t ID)
 bool ResourceManager::getResourceData(TextureData & data, size_t ID)
 {
 	bool success = false;
-	if (this->resourceMap[ID]->getType() == RESOURCETYPE::TEXTURE) {
+	if (this->resourceMap[ID]->getType() == RESOURCETYPE::TEXTURE) 
+	{
 		success = true;
 		data = static_cast<Texture*>(this->resourceMap[ID])->getData();
 	}
@@ -79,7 +81,8 @@ bool ResourceManager::getResourceData(TextureData & data, size_t ID)
 
 void ResourceManager::cleanup()
 {
-	for (auto &i : this->resourceMap) {
+	for (auto &i : this->resourceMap) 
+	{
 		i.second->unload();
 		delete i.second;
 	}

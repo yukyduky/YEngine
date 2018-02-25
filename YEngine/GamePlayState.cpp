@@ -32,9 +32,11 @@ void GamePlayState::handleEvents(GameManager * gm)
 {
 	MSG msg;
 
-	while (gm->pollEvent(msg)) {
+	while (gm->pollEvent(msg))
+	{
 		// Exit the application when 'X' is pressed
-		if (msg.message == WM_QUIT) {
+		if (msg.message == WM_QUIT)
+		{
 			gm->quit();
 		}
 
@@ -44,11 +46,14 @@ void GamePlayState::handleEvents(GameManager * gm)
 
 	Event event;
 
-	while (Locator::getEventHandler()->pollEvent(event)) {
-		if (event.event == EVENT::GAMEOVER) {
+	while (Locator::getEventHandler()->pollEvent(event))
+	{
+		if (event.event == EVENT::GAMEOVER)
+		{
 			gm->quit();
 		}
-		else if (event.event == EVENT::OBJECTDIED) {
+		else if (event.event == EVENT::OBJECTDIED)
+		{
 			this->gameObjects[event.param]->cleanup();
 			delete this->gameObjects[event.param];
 		}
