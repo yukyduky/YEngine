@@ -1,26 +1,26 @@
 #include "Locator.h"
 
-IGameTime* Locator::sGT = nullptr;
-IConfigHandler* Locator::sCH = nullptr;
-IEventHandler* Locator::sEH = nullptr;
-MemoryManager* Locator::sPermMem = nullptr;
-MemoryManager* Locator::sStateMem = nullptr;
-MemoryManager* Locator::sFrameMem = nullptr;
-ID3D* Locator::sD3D = nullptr;
+IGameTime* Locator::ms_GT = nullptr;
+IConfigHandler* Locator::ms_CH = nullptr;
+IEventHandler* Locator::ms_EH = nullptr;
+MemoryManager* Locator::ms_PermMem = nullptr;
+MemoryManager* Locator::ms_StateMem = nullptr;
+MemoryManager* Locator::ms_FrameMem = nullptr;
+ID3D* Locator::ms_D3D = nullptr;
 
 void Locator::provide(IGameTime* gameTime)
 {
-	sGT = gameTime;
+	ms_GT = gameTime;
 }
 
 void Locator::provide(IConfigHandler* configHandler)
 {
-	sCH = configHandler;
+	ms_CH = configHandler;
 }
 
 void Locator::provide(IEventHandler* eventHandler)
 {
-	sEH = eventHandler;
+	ms_EH = eventHandler;
 }
 
 void Locator::provide(MemoryManager* mm, MEMORYTYPE type)
@@ -28,35 +28,35 @@ void Locator::provide(MemoryManager* mm, MEMORYTYPE type)
 	switch (type)
 	{
 	case MEMORYTYPE::PERM:
-		sPermMem = mm;
+		ms_PermMem = mm;
 		break;
 	case MEMORYTYPE::STATE:
-		sStateMem = mm;
+		ms_StateMem = mm;
 		break;
 	case MEMORYTYPE::FRAME:
-		sFrameMem = mm;
+		ms_FrameMem = mm;
 		break;
 	}
 }
 
 void Locator::provide(ID3D* d3d)
 {
-	sD3D = d3d;
+	ms_D3D = d3d;
 }
 
 IGameTime* Locator::getGameTime()
 {
-	return sGT;
+	return ms_GT;
 }
 
 IConfigHandler* Locator::getConfigHandler()
 {
-	return sCH;
+	return ms_CH;
 }
 
 IEventHandler* Locator::getEventHandler()
 {
-	return sEH;
+	return ms_EH;
 }
 
 MemoryManager* Locator::getMemoryManager(MEMORYTYPE type)
@@ -65,13 +65,13 @@ MemoryManager* Locator::getMemoryManager(MEMORYTYPE type)
 	switch (type)
 	{
 	case MEMORYTYPE::PERM:
-		mem = sPermMem;
+		mem = ms_PermMem;
 		break;
 	case MEMORYTYPE::STATE:
-		mem = sStateMem;
+		mem = ms_StateMem;
 		break;
 	case MEMORYTYPE::FRAME:
-		mem = sFrameMem;
+		mem = ms_FrameMem;
 		break;
 	}
 	return mem;
@@ -79,5 +79,5 @@ MemoryManager* Locator::getMemoryManager(MEMORYTYPE type)
 
 ID3D* Locator::getD3D()
 {
-	return sD3D;
+	return ms_D3D;
 }

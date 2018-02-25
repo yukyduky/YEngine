@@ -8,7 +8,7 @@
 class EventHandler : public IEventHandler
 {
 private:
-	std::deque<Event> eventQueue;
+	std::deque<Event> m_EventQueue;
 public:
 	virtual ~EventHandler() {}
 	bool pollEvent(Event& event) override;

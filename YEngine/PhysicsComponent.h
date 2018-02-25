@@ -7,9 +7,9 @@
 class PhysicsComponent : public Component
 {
 private:
-	Vector3 velocity;
-	Vector3 acceleration;
-	float weight;
+	Vector3 m_Velocity;
+	Vector3 m_Acceleration;
+	float m_Weight;
 public:
 	virtual void receive(Message msg);
 	virtual void init();

@@ -7,7 +7,8 @@
 
 enum class FILESORTSYSTEM { ORDERED, PREFIXED };
 
-struct RawData {
+struct RawData 
+{
 	std::vector<std::vector<std::vector<std::string>>> dataSets;
 };
 

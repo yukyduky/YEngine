@@ -243,9 +243,9 @@ bool Geometry::load(std::string filename, RESOURCETYPE type)
 
 		if (this->createBuffers(&vBuffer, &iBuffer, vertices.data(), indices.data(), vertices.size(), indices.size(), sizeof(Vertex), 0))
 		{
-			this->type = type;
-			this->filename = filename;
-			this->data = VertexData(vBuffer, iBuffer, vertices.size(), indices.size(), indices.size() / 3, sizeof(Vertex), 0);
+			m_Type = type;
+			m_Filename = filename;
+			m_Data = VertexData(vBuffer, iBuffer, vertices.size(), indices.size(), indices.size() / 3, sizeof(Vertex), 0);
 		}
 	}
 
@@ -254,12 +254,12 @@ bool Geometry::load(std::string filename, RESOURCETYPE type)
 
 Geometry::Geometry(std::string filename, RESOURCETYPE type)
 {
-	this->loaded = false;
+	m_Loaded = false;
 	std::string ext = filename.substr(filename.find_last_of('.') + 1, filename.size() - filename.find_last_of('.'));
 
 	if (ext == "obj")
 	{
-		this->loaded = this->load(filename, type);
+		m_Loaded = this->load(filename, type);
 	}
 	else if (ext == "yk")
 	{
@@ -269,24 +269,24 @@ Geometry::Geometry(std::string filename, RESOURCETYPE type)
 
 void Geometry::unload()
 {
-	if (this->loaded)
+	if (m_Loaded)
 	{
-		this->data.vBuffer->Release();
-		this->data.iBuffer->Release();
-		this->loaded = false;
+		m_Data.vBuffer->Release();
+		m_Data.iBuffer->Release();
+		m_Loaded = false;
 	}
 }
 
 bool Geometry::reload()
 {
-	if (!this->loaded)
+	if (!m_Loaded)
 	{
-		this->loaded = this->load(this->filename, this->type);
+		m_Loaded = this->load(m_Filename, m_Type);
 	}
-	return this->loaded;
+	return m_Loaded;
 }
 
 const VertexData& Geometry::getData() const
 {
-	return this->data;
+	return m_Data;
 }

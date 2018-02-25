@@ -5,10 +5,10 @@
 
 const size_t& MemoryManager::blockify(const size_t& size)
 {
-	size_t blockedSize = size + this->blockSize - (size % this->blockSize);
-	if (blockedSize - this->blockSize == size)
+	size_t blockedSize = size + m_BlockSize - (size % m_BlockSize);
+	if (blockedSize - m_BlockSize == size)
 	{
-		blockedSize -= this->blockSize;
+		blockedSize -= m_BlockSize;
 	}
 	return blockedSize;
 }
@@ -18,31 +18,31 @@ bool MemoryManager::findFreeMemoryBlock(const size_t& nrOfBlocks, size_t& blockN
 	bool blockFound = false;
 
 	size_t i = 0;
-	while (!blockFound && i < this->blocks.size())
+	while (!blockFound && i < m_Blocks.size())
 	{
-		if (nrOfBlocks <= this->blocks[i].nrOfBlocks && this->blocks[i].status == MEMORY::FREE)
+		if (nrOfBlocks <= m_Blocks[i].nrOfBlocks && m_Blocks[i].status == MEMORY::FREE)
 		{
 			blockFound = true;
 			blockNr = i;
 		}
-		else if (this->blocks[i].status == MEMORY::FREE)
+		else if (m_Blocks[i].status == MEMORY::FREE)
 		{
-			i += this->blocks[i].nrOfBlocks;
+			i += m_Blocks[i].nrOfBlocks;
 
-			if (i < this->blocks.size())
+			if (i < m_Blocks.size())
 			{
-				i += this->blocks[i].nrOfBlocks;
+				i += m_Blocks[i].nrOfBlocks;
 			}
 		}
 		else {
-			i += this->blocks[i].nrOfBlocks;
+			i += m_Blocks[i].nrOfBlocks;
 		}
 	}
 
 	return blockFound;
 }
 
-MemoryManager::MemoryManager(const size_t blockSize, const size_t nrOfBlocks) : memHandle(), totalMem(0), memInUse(0), blockSize(0)
+MemoryManager::MemoryManager(const size_t blockSize, const size_t nrOfBlocks) : m_MemHandle(), m_TotalMem(0), m_MemInUse(0), m_BlockSize(0)
 {
 	this->resizeMemory(blockSize, nrOfBlocks);
 }
@@ -51,9 +51,9 @@ void MemoryManager::releaseMemory(void* data)
 {
 	bool blockFound = false;
 	size_t i = 0;
-	MemoryBlock* prevBlock = &this->blocks[i];
-	MemoryBlock* currBlock = &this->blocks[i];
-	while (!blockFound && i < this->blocks.size())
+	MemoryBlock* prevBlock = &m_Blocks[i];
+	MemoryBlock* currBlock = &m_Blocks[i];
+	while (!blockFound && i < m_Blocks.size())
 	{
 		if (data == currBlock->memHandle)
 		{
@@ -64,21 +64,21 @@ void MemoryManager::releaseMemory(void* data)
 				prevBlock->nrOfBlocks += currBlock->nrOfBlocks;
 				currBlock->nrOfBlocks = 0;
 			}
-			else if (this->blocks[i + currBlock->nrOfBlocks].status == MEMORY::FREE)
+			else if (m_Blocks[i + currBlock->nrOfBlocks].status == MEMORY::FREE)
 			{
 				size_t nextNrOfBlocks = i + currBlock->nrOfBlocks;
-				currBlock->nrOfBlocks += this->blocks[nextNrOfBlocks].nrOfBlocks;
-				this->blocks[nextNrOfBlocks].nrOfBlocks = 0;
+				currBlock->nrOfBlocks += m_Blocks[nextNrOfBlocks].nrOfBlocks;
+				m_Blocks[nextNrOfBlocks].nrOfBlocks = 0;
 			}
 
 			currBlock->status = MEMORY::FREE;
 		}
 		else {
-			prevBlock = &this->blocks[i];
-			i += this->blocks[i].nrOfBlocks;
-			if (i < this->blocks.size())
+			prevBlock = &m_Blocks[i];
+			i += m_Blocks[i].nrOfBlocks;
+			if (i < m_Blocks.size())
 			{
-				currBlock = &this->blocks[i];
+				currBlock = &m_Blocks[i];
 			}
 		}
 	}
@@ -89,23 +89,23 @@ void MemoryManager::resizeMemory(const size_t blockSize, const size_t nrOfBlocks
 	this->cleanup();
 	if (nrOfBlocks != 0)
 	{
-		this->blockSize = blockSize;
+		m_BlockSize = blockSize;
 		size_t blockedSize = nrOfBlocks * blockSize;
-		this->memHandle = new char[blockedSize];
-		this->totalMem = blockedSize;
-		this->memInUse = 0;
-		this->blocks.resize(blockedSize / blockSize);
-		this->blocks.front().memHandle = this->memHandle;
-		this->blocks.front().nrOfBlocks = blockedSize / blockSize;
+		m_MemHandle = new char[blockedSize];
+		m_TotalMem = blockedSize;
+		m_MemInUse = 0;
+		m_Blocks.resize(blockedSize / blockSize);
+		m_Blocks.front().memHandle = m_MemHandle;
+		m_Blocks.front().nrOfBlocks = blockedSize / blockSize;
 	}
 }
 
 void MemoryManager::resetMemory()
 {
-	this->memInUse = 0;
+	m_MemInUse = 0;
 
-	MemoryBlock* currBlock = &this->blocks[0];
-	for (size_t i = 0; i < this->blocks.size(); i++)
+	MemoryBlock* currBlock = &m_Blocks[0];
+	for (size_t i = 0; i < m_Blocks.size(); i++)
 	{
 		i += currBlock->nrOfBlocks;
 		currBlock->nrOfBlocks = 0;
@@ -115,8 +115,8 @@ void MemoryManager::resetMemory()
 
 void MemoryManager::cleanup()
 {
-	if (this->totalMem != 0)
+	if (m_TotalMem != 0)
 	{
-		delete[] this->memHandle;
+		delete[] m_MemHandle;
 	}
 }

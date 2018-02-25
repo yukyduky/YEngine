@@ -8,8 +8,8 @@
 class Geometry : public Resource
 {
 private:
-	VertexData data;
-	std::string filename;
+	VertexData m_Data;
+	std::string m_Filename;
 	bool createVertexBuffer(ID3D11Buffer ** gVertexBuffer, void* v, int& stride, int& offset, int numVertices);
 	bool createIndexBuffer(ID3D11Buffer ** gIndexBuffer, void * data, int & numIndices);
 	bool createBuffers(ID3D11Buffer** vBuffer, ID3D11Buffer** iBuffer, void* vertices, void* indices, int numVertices, int numIndices, int stride, int offset);

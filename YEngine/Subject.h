@@ -10,7 +10,7 @@ class Observer;
 class Subject
 {
 private:
-	std::map<size_t, Observer*> observers;
+	std::map<size_t, Observer*> m_Observers;
 public:
 	void notify(const GameObject& obj, size_t eventID);
 	void addObserver(Observer* obs, size_t ID);

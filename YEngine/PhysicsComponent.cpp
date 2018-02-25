@@ -8,8 +8,8 @@ void PhysicsComponent::receive(Message msg)
 
 void PhysicsComponent::init()
 {
-	this->acceleration = Vector3(0.0f, 0.0f, 0.0f);
-	this->velocity = Vector3(0.0f, 0.0f, 0.0f);
+	m_Acceleration = Vector3(0.0f, 0.0f, 0.0f);
+	m_Velocity = Vector3(0.0f, 0.0f, 0.0f);
 }
 
 void PhysicsComponent::cleanup()
@@ -19,33 +19,33 @@ void PhysicsComponent::cleanup()
 void PhysicsComponent::update()
 {
 	float dt = static_cast<float>(Locator::getGameTime()->getDeltaTime());
-	this->velocity += this->acceleration * dt;
-	this->getHead()->move(this->velocity * dt);
+	m_Velocity += m_Acceleration * dt;
+	this->getHead()->move(m_Velocity * dt);
 }
 
 void PhysicsComponent::setup(float weight)
 {
-	this->weight = weight;
+	m_Weight = weight;
 
 	this->init();
 }
 
 void PhysicsComponent::setVeloctiy(Vector3 velocity)
 {
-	this->velocity = velocity;
+	m_Velocity = velocity;
 }
 
 Vector3 PhysicsComponent::getVelocity()
 {
-	return this->velocity;
+	return m_Velocity;
 }
 
 void PhysicsComponent::setAcceleration(Vector3 acceleration)
 {
-	this->acceleration = acceleration;
+	m_Acceleration = acceleration;
 }
 
 Vector3 PhysicsComponent::getAcceleration()
 {
-	return this->acceleration;
+	return m_Acceleration;
 }

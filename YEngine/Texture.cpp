@@ -18,40 +18,40 @@ bool Texture::loadTexture(ID3D11ShaderResourceView** SRV, ID3D11Resource** textu
 
 bool Texture::load(std::wstring filename, RESOURCETYPE type)
 {
-	bool success = this->loadTexture(&this->data.SRV, &this->data.texture, filename);
+	bool success = this->loadTexture(&m_Data.SRV, &m_Data.texture, filename);
 	if (success) 
 	{
-		this->type = type;
-		this->filename = filename;
+		m_Type = type;
+		m_Filename = filename;
 	}
 	return success;
 }
 
 Texture::Texture(std::wstring filename, RESOURCETYPE type)
 {
-	this->loaded = this->load(filename, type);
+	m_Loaded = this->load(filename, type);
 }
 
 void Texture::unload()
 {
-	if (this->loaded) 
+	if (m_Loaded) 
 	{
-		this->loaded = false;
-		this->data.SRV->Release();
-		this->data.texture->Release();
+		m_Loaded = false;
+		m_Data.SRV->Release();
+		m_Data.texture->Release();
 	}
 }
 
 bool Texture::reload()
 {
-	if (!this->loaded) 
+	if (!m_Loaded) 
 	{
-		this->loaded = this->loadTexture(&this->data.SRV, &this->data.texture, filename);
+		m_Loaded = this->loadTexture(&m_Data.SRV, &m_Data.texture, m_Filename);
 	}
-	return this->loaded;
+	return m_Loaded;
 }
 
 const TextureData& Texture::getData() const
 {
-	return this->data;
+	return m_Data;
 }

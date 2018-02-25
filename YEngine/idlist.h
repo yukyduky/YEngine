@@ -9,8 +9,8 @@ template<class T>
 class idlist
 {
 private:
-	IDHandler ids;
-	std::vector<typename T> container;
+	IDHandler m_IDs;
+	std::vector<typename T> m_Container;
 public:
 	idlist();
 	idlist(const size_t size);
@@ -36,16 +36,16 @@ public:
 template<class T>
 const size_t& idlist<T>::peekNextID()
 {
-	return this->ids.peekNextID();
+	return m_IDs.peekNextID();
 }
 
 template<class T>
-inline idlist<T>::idlist() : ids()
+inline idlist<T>::idlist() : m_IDs()
 {
 }
 
 template<class T>
-inline idlist<T>::idlist(const size_t size) : ids()
+inline idlist<T>::idlist(const size_t size) : m_IDs()
 {
 	this->resize(size);
 }
@@ -53,48 +53,48 @@ inline idlist<T>::idlist(const size_t size) : ids()
 template<class T>
 inline void idlist<T>::push(typename T element)
 {
-	size_t id = this->ids.getNewID();
+	size_t id = m_IDs.getNewID();
 
-	if (id == this->container.size()) {
-		this->container.push_back(element);
+	if (id == m_Container.size()) {
+		m_Container.push_back(element);
 	}
 	else {
-		this->container[id] = element;
+		m_Container[id] = element;
 	}
 }
 
 template<class T>
 inline void idlist<T>::remove(const size_t& id)
 {
-	this->ids.remove(id);
+	m_IDs.remove(id);
 }
 
 template<class T>
 inline void idlist<T>::remove(std::list<size_t>::const_iterator it)
 {
-	this->ids.remove(it);
+	m_IDs.remove(it);
 }
 
 template<class T>
 inline void idlist<T>::resize(const size_t size)
 {
-	if (size > this->container.size()) {
-		this->ids.resize(size);
-		this->container.resize(size);
+	if (size > m_Container.size()) {
+		m_IDs.resize(size);
+		m_Container.resize(size);
 	}
 }
 
 template<class T>
 inline const size_t & idlist<T>::capacity()
 {
-	return this->container.capacity();
+	return m_Container.capacity();
 }
 
 template<class T>
 inline void idlist<T>::clear()
 {
-	this->container.clear();
-	this->ids.clear();
+	m_Container.clear();
+	m_IDs.clear();
 }
 
 template<class T>
@@ -102,9 +102,9 @@ inline bool idlist<T>::getElement(const size_t& id, typename T& element)
 {
 	bool elementFound = false;
 	std::list<size_t>::const_iterator it;
-	if (ids.idInUse(id)) {
+	if (m_IDs.idInUse(id)) {
 		elementFound = true;
-		element = this->container[*it];
+		element = m_Container[*it];
 	}
 	return elementFound;
 }
@@ -112,19 +112,19 @@ inline bool idlist<T>::getElement(const size_t& id, typename T& element)
 template<class T>
 inline bool idlist<T>::empty()
 {
-	return this->ids.empty();
+	return m_IDs.empty();
 }
 
 template<class T>
 inline std::list<size_t>::const_iterator idlist<T>::begin() const
 {
-	return this->ids.begin();
+	return m_IDs.begin();
 }
 
 template<class T>
 inline std::list<size_t>::const_iterator idlist<T>::end() const
 {
-	return this->ids.end();
+	return m_IDs.end();
 }
 
 template<class T>
@@ -136,13 +136,13 @@ inline std::list<size_t>::const_reverse_iterator idlist<T>::rbegin() const
 template<class T>
 inline std::list<size_t>::const_reverse_iterator idlist<T>::rend() const
 {
-	return this->ids.rend();
+	return m_IDs.rend();
 }
 
 template<class T>
 inline T& idlist<T>::operator[](std::list<size_t>::const_iterator it)
 {
-	return this->container[*it];
+	return m_Container[*it];
 }
 
 #endif

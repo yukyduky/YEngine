@@ -15,11 +15,11 @@ class InputComponent;
 class GamePlayState : public State
 {
 private:
-	static GamePlayState sGamePlayState;
+	static GamePlayState ms_GamePlayState;
 
-	MemoryManager* frameMemory;
+	MemoryManager* m_FrameMemory;
 
-	std::vector<GameObject*> gameObjects;
+	std::vector<GameObject*> m_GameObjects;
 
 public:
 	virtual void init();

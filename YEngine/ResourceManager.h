@@ -8,7 +8,7 @@
 class ResourceManager
 {
 private:
-	std::unordered_map<size_t, Resource*> resourceMap;
+	std::unordered_map<size_t, Resource*> m_ResourceMap;
 
 	std::wstring convertStrToWStr(std::string str);
 	bool createObject(std::string filename, RESOURCETYPE type, size_t ID);

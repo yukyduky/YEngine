@@ -5,11 +5,11 @@
 
 void DeferredRenderer::initShaders()
 {
-	this->geoTexShaders.CreateShaders(Locator::getD3D()->GETgDevice(), this->fileNameGeoTexVertex, this->fileNameGeoTexPixel, this->geoTexInputDesc, GEOTEX_INPUT_DESC_SIZE);
+	m_GeoTexShaders.CreateShaders(Locator::getD3D()->GETgDevice(), m_FileNameGeoTexVertex, m_FileNameGeoTexPixel, m_GeoTexInputDesc, GEOTEX_INPUT_DESC_SIZE);
 
-	this->geoColorShaders.CreateShaders(Locator::getD3D()->GETgDevice(), this->fileNameGeoColorVertex, this->fileNameGeoColorPixel, this->geoColorInputDesc, GEOCOLOR_INPUT_DESC_SIZE);
+	m_GeoColorShaders.CreateShaders(Locator::getD3D()->GETgDevice(), m_FileNameGeoColorVertex, m_FileNameGeoColorPixel, m_GeoColorInputDesc, GEOCOLOR_INPUT_DESC_SIZE);
 
-	this->lightShaders.CreateShaders(Locator::getD3D()->GETgDevice(), this->fileNameLightVertex, this->fileNameLightPixel, this->lightInputDesc, LIGHT_INPUT_DESC_SIZE);
+	m_LightShaders.CreateShaders(Locator::getD3D()->GETgDevice(), m_FileNameLightVertex, m_FileNameLightPixel, m_LightInputDesc, LIGHT_INPUT_DESC_SIZE);
 }
 
 void DeferredRenderer::bindTextureToRTVAndSRV(ID3D11Texture2D** gTexure, ID3D11RenderTargetView** gRTV, ID3D11ShaderResourceView** gSRV, int width, int height, DXGI_FORMAT format)
@@ -109,23 +109,23 @@ void DeferredRenderer::createQuad()
 		1.0f, -1.0f, 0.0f, 1.0f,
 	};
 	// Stride and offset
-	this->vertBufferStride = sizeof(Vertex);
-	this->vertBufferOffset = 0;
+	m_VertBufferStride = sizeof(Vertex);
+	m_VertBufferOffset = 0;
 
 	// Create the vertex buffer
-	Locator::getD3D()->createVertexBuffer(&this->gQuadVertexBuffer, &v, this->vertBufferStride, this->vertBufferOffset, 4);
+	Locator::getD3D()->createVertexBuffer(&m_QuadVertexBuffer, &v, m_VertBufferStride, m_VertBufferOffset, 4);
 }
 
 void DeferredRenderer::createViewport()
 {
-	memset(&this->viewport, 0, sizeof(D3D11_VIEWPORT));
+	memset(&m_Viewport, 0, sizeof(D3D11_VIEWPORT));
 
-	this->viewport.TopLeftX = 0;
-	this->viewport.TopLeftY = 0;
-	this->viewport.Width = static_cast<FLOAT>(Locator::getD3D()->GETwWidth());
-	this->viewport.Height = static_cast<FLOAT>(Locator::getD3D()->GETwHeight());
-	this->viewport.MinDepth = 0.0f;
-	this->viewport.MaxDepth = 1.0f;
+	m_Viewport.TopLeftX = 0;
+	m_Viewport.TopLeftY = 0;
+	m_Viewport.Width = static_cast<FLOAT>(Locator::getD3D()->GETwWidth());
+	m_Viewport.Height = static_cast<FLOAT>(Locator::getD3D()->GETwHeight());
+	m_Viewport.MinDepth = 0.0f;
+	m_Viewport.MaxDepth = 1.0f;
 }
 
 void DeferredRenderer::createBackBufferRTV()
@@ -154,7 +154,7 @@ void DeferredRenderer::createBackBufferRTV()
 	}
 
 	// Create the Render Target
-	hr = Locator::getD3D()->GETgDevice()->CreateRenderTargetView(BackBuffer, nullptr, &this->gFinalRTV);
+	hr = Locator::getD3D()->GETgDevice()->CreateRenderTargetView(BackBuffer, nullptr, &m_FinalRTV);
 	if (FAILED(hr))
 	{
 		MessageBox(0, "Create Render Target View - Failed", "Error", MB_OK);
@@ -202,10 +202,10 @@ void DeferredRenderer::createDepthStencilView(int width, int height, ID3D11Depth
 void DeferredRenderer::init()
 {
 	// Set the clear color
-	this->clearColor[0] = 255.0f;
-	this->clearColor[1] = 0.0f;
-	this->clearColor[2] = 255.0f;
-	this->clearColor[3] = 255.0f;
+	m_ClearColor[0] = 255.0f;
+	m_ClearColor[1] = 0.0f;
+	m_ClearColor[2] = 255.0f;
+	m_ClearColor[3] = 255.0f;
 
 	// Set current shaders to handle color objects
 	this->setShaderType(SHADERTYPE::COLOR);
@@ -214,7 +214,7 @@ void DeferredRenderer::init()
 	this->createBackBufferRTV();
 
 	// Create the DepthStencilView
-	this->createDepthStencilView(Locator::getD3D()->GETwWidth(), Locator::getD3D()->GETwHeight(), &this->gDSV, &this->gDSB);
+	this->createDepthStencilView(Locator::getD3D()->GETwWidth(), Locator::getD3D()->GETwHeight(), &m_DSV, &m_DSB);
 
 	// Initialize all shaders
 	this->initShaders();
@@ -222,14 +222,14 @@ void DeferredRenderer::init()
 	// Bind the deferred RTVs and SRVs to eachother
 	for (int i = 0; i < NUM_DEFERRED_OUTPUTS; i++)
 	{
-		this->bindTextureToRTVAndSRV(&this->gDeferredTexs[i], &this->gRTVs[i], &this->gSRVs[i], Locator::getD3D()->GETwWidth(), Locator::getD3D()->GETwHeight(), DXGI_FORMAT_R32G32B32A32_FLOAT);
+		this->bindTextureToRTVAndSRV(&m_DeferredTexs[i], &m_RTVs[i], &m_SRVs[i], Locator::getD3D()->GETwWidth(), Locator::getD3D()->GETwHeight(), DXGI_FORMAT_R32G32B32A32_FLOAT);
 	}
 
 	// Create the quad to draw on
 	this->createQuad();
 
 	// Initialize the sampler
-	this->initSampler(&this->gSampler, D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_CLAMP, D3D11_TEXTURE_ADDRESS_CLAMP, D3D11_TEXTURE_ADDRESS_CLAMP, D3D11_COMPARISON_ALWAYS);
+	this->initSampler(&m_Sampler, D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_CLAMP, D3D11_TEXTURE_ADDRESS_CLAMP, D3D11_TEXTURE_ADDRESS_CLAMP, D3D11_COMPARISON_ALWAYS);
 
 	// Create the viewport
 	this->createViewport();
@@ -238,30 +238,30 @@ void DeferredRenderer::init()
 void DeferredRenderer::firstpass()
 {
 	// Clear the final RenderTargetView
-	Locator::getD3D()->GETgDevCon()->ClearRenderTargetView(this->gFinalRTV, this->clearColor.data());
+	Locator::getD3D()->GETgDevCon()->ClearRenderTargetView(m_FinalRTV, m_ClearColor.data());
 	// Clear the deferred RenderTargetViews
-	for (auto &i : this->gRTVs)
+	for (auto &i : m_RTVs)
 	{
-		Locator::getD3D()->GETgDevCon()->ClearRenderTargetView(i, this->clearColor.data());
+		Locator::getD3D()->GETgDevCon()->ClearRenderTargetView(i, m_ClearColor.data());
 	}
 	// Clear the DepthStencilView
-	Locator::getD3D()->GETgDevCon()->ClearDepthStencilView(this->gDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	Locator::getD3D()->GETgDevCon()->ClearDepthStencilView(m_DSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 	// Set the geo shaders to the current shaders
-	this->currentGeoShaders->SetShaders(Locator::getD3D()->GETgDevCon());
-	Locator::getD3D()->GETgDevCon()->RSSetViewports(1, &this->viewport);
+	m_CurrentGeoShaders->SetShaders(Locator::getD3D()->GETgDevCon());
+	Locator::getD3D()->GETgDevCon()->RSSetViewports(1, &m_Viewport);
 
 	// Set the rendertarget to the deferred RenderTargetViews
-	Locator::getD3D()->GETgDevCon()->OMSetRenderTargets(NUM_DEFERRED_OUTPUTS, this->gRTVs.data(), this->gDSV);
+	Locator::getD3D()->GETgDevCon()->OMSetRenderTargets(NUM_DEFERRED_OUTPUTS, m_RTVs.data(), m_DSV);
 }
 
 void DeferredRenderer::secondpass()
 {
 	// Set the light shaders as the current shaders
-	this->lightShaders.SetShaders(Locator::getD3D()->GETgDevCon());
+	m_LightShaders.SetShaders(Locator::getD3D()->GETgDevCon());
 
 	// Set the vertexbuffer to the quad vertices
-	Locator::getD3D()->GETgDevCon()->IASetVertexBuffers(0, 1, &this->gQuadVertexBuffer, &vertBufferStride, &vertBufferOffset);
+	Locator::getD3D()->GETgDevCon()->IASetVertexBuffers(0, 1, &m_QuadVertexBuffer, &m_VertBufferStride, &m_VertBufferOffset);
 	Locator::getD3D()->GETgDevCon()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
 	// Unbind the RenderTargetViews
@@ -269,10 +269,10 @@ void DeferredRenderer::secondpass()
 	Locator::getD3D()->GETgDevCon()->OMSetRenderTargets(NUM_DEFERRED_OUTPUTS, gNullRTV, nullptr);
 
 	// Bind the ShaderResourceVies
-	Locator::getD3D()->GETgDevCon()->PSSetShaderResources(0, NUM_DEFERRED_OUTPUTS, this->gSRVs.data());
+	Locator::getD3D()->GETgDevCon()->PSSetShaderResources(0, NUM_DEFERRED_OUTPUTS, m_SRVs.data());
 
 	// Set the rendertarget to the final rendertarget
-	Locator::getD3D()->GETgDevCon()->OMSetRenderTargets(1, &this->gFinalRTV, nullptr);
+	Locator::getD3D()->GETgDevCon()->OMSetRenderTargets(1, &m_FinalRTV, nullptr);
 
 	// Draw the final texture over the whole screen
 	Locator::getD3D()->GETgDevCon()->Draw(4, 0);
@@ -286,27 +286,27 @@ void DeferredRenderer::secondpass()
 
 void DeferredRenderer::cleanup()
 {
-	for (auto &i : this->gRTVs)
+	for (auto &i : m_RTVs)
 	{
 		i->Release();
 	}
-	for (auto &i : this->gSRVs)
+	for (auto &i : m_SRVs)
 	{
 		i->Release();
 	}
-	for (auto &i : this->gDeferredTexs)
+	for (auto &i : m_DeferredTexs)
 	{
 		i->Release();
 	}
 
-	this->gFinalRTV->Release();
-	this->gDSV->Release();
-	this->gDSB->Release();
-	this->gSampler->Release();
-	this->gQuadVertexBuffer->Release();
-	this->geoTexShaders.cleanup();
-	this->geoColorShaders.cleanup();
-	this->lightShaders.cleanup();
+	m_FinalRTV->Release();
+	m_DSV->Release();
+	m_DSB->Release();
+	m_Sampler->Release();
+	m_QuadVertexBuffer->Release();
+	m_GeoTexShaders.cleanup();
+	m_GeoColorShaders.cleanup();
+	m_LightShaders.cleanup();
 }
 
 void DeferredRenderer::setShaderType(SHADERTYPE type)
@@ -314,10 +314,10 @@ void DeferredRenderer::setShaderType(SHADERTYPE type)
 	switch (type)
 	{
 	case SHADERTYPE::COLOR:
-		this->currentGeoShaders = &this->geoColorShaders;
+		m_CurrentGeoShaders = &m_GeoColorShaders;
 		break;
 	case SHADERTYPE::TEXTURE:
-		this->currentGeoShaders = &this->geoTexShaders;
+		m_CurrentGeoShaders = &m_GeoTexShaders;
 		break;
 	}
 }

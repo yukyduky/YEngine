@@ -19,11 +19,11 @@ private:
 		MemoryBlock() : memHandle(), nrOfBlocks(0), status(MEMORY::FREE) {}
 	};
 
-	char* memHandle;
-	size_t totalMem;
-	size_t memInUse;
-	size_t blockSize;
-	std::vector<MemoryBlock> blocks;
+	char* m_MemHandle;
+	size_t m_TotalMem;
+	size_t m_MemInUse;
+	size_t m_BlockSize;
+	std::vector<MemoryBlock> m_Blocks;
 
 	const size_t& blockify(const size_t& size);
 	bool findFreeMemoryBlock(const size_t& nrOfBlocks, size_t& blockNr);
@@ -89,28 +89,29 @@ inline void MemoryManager::requestMemory(T1*& dataPtr, T2* data, const size_t si
 {
 	dataPtr = nullptr;
 	size_t blockedSize = this->blockify(size);
-	size_t nrOfBlocks = blockedSize / blockSize;
+	size_t nrOfBlocks = blockedSize / m_BlockSize;
 	size_t blockNr = -1;
 
-	if (size <= this->totalMem - this->memInUse && this->findFreeMemoryBlock(nrOfBlocks, blockNr)) 
+	if (size <= m_TotalMem - m_MemInUse && this->findFreeMemoryBlock(nrOfBlocks, blockNr)) 
 	{
-		void* ptr = this->memHandle + blockNr * blockSize;
+		void* ptr = m_MemHandle + blockNr * m_BlockSize;
 		memcpy(ptr, data, size);
 		dataPtr = static_cast<T1*>(ptr);
 
-		MemoryBlock* selectedBlock = &this->blocks[blockNr];
-		this->memInUse += blockedSize;
+		MemoryBlock* selectedBlock = &m_Blocks[blockNr];
+		m_MemInUse += blockedSize;
 
 		if (selectedBlock->nrOfBlocks != nrOfBlocks) 
 		{
-			this->blocks[blockNr + nrOfBlocks].memHandle = this->memHandle + (blockNr + nrOfBlocks) * blockSize;
-			this->blocks[blockNr + nrOfBlocks].nrOfBlocks = selectedBlock->nrOfBlocks - nrOfBlocks;
+			m_Blocks[blockNr + nrOfBlocks].memHandle = m_MemHandle + (blockNr + nrOfBlocks) * m_BlockSize;
+			m_Blocks[blockNr + nrOfBlocks].nrOfBlocks = selectedBlock->nrOfBlocks - nrOfBlocks;
 		}
-		selectedBlock->memHandle = this->memHandle + blockNr * blockSize;
+		selectedBlock->memHandle = m_MemHandle + blockNr * m_BlockSize;
 		selectedBlock->nrOfBlocks = nrOfBlocks;
 		selectedBlock->status = MEMORY::USED;
 	}
-	else {
+	else 
+	{
 		assert(dataPtr != nullptr && "MemoryManager ran out of memory - Allocate more memory");
 	}
 }

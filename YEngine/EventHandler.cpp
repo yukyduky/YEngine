@@ -6,11 +6,11 @@ bool EventHandler::pollEvent(Event & event)
 {
 	bool eventExists = false;
 
-	if (!this->eventQueue.empty())
+	if (!m_EventQueue.empty())
 	{
 		eventExists = true;
-		event = this->eventQueue.front();
-		this->eventQueue.pop_front();
+		event = m_EventQueue.front();
+		m_EventQueue.pop_front();
 	}
 
 	return eventExists;
@@ -18,5 +18,5 @@ bool EventHandler::pollEvent(Event & event)
 
 void EventHandler::addEvent(Event event)
 {
-	this->eventQueue.push_back(event);
+	m_EventQueue.push_back(event);
 }

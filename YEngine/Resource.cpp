@@ -4,10 +4,10 @@
 
 bool Resource::isLoaded()
 {
-	return this->loaded;
+	return m_Loaded;
 }
 
 RESOURCETYPE Resource::getType()
 {
-	return this->type;
+	return m_Type;
 }

@@ -9,8 +9,8 @@ class PhysicsComponent;
 class CollisionComponent : public Component
 {
 protected:
-	PhysicsComponent* physics_;
-	BoundingBox bBox;
+	PhysicsComponent* m_Physics;
+	BoundingBox m_BBox;
 public:
 	virtual void receive(Message msg);
 	virtual void init();

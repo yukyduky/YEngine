@@ -5,19 +5,19 @@
 #include "MemoryManager.h"
 
 
-GamePlayState GamePlayState::sGamePlayState;
+GamePlayState GamePlayState::ms_GamePlayState;
 
 
 void GamePlayState::init()
 {
-	this->frameMemory = new MemoryManager(16, 100);
-	Locator::provide(this->frameMemory, MEMORYTYPE::FRAME);
+	m_FrameMemory = new MemoryManager(16, 100);
+	Locator::provide(m_FrameMemory, MEMORYTYPE::FRAME);
 }
 
 void GamePlayState::cleanup()
 {
-	this->frameMemory->cleanup();
-	delete this->frameMemory;
+	m_FrameMemory->cleanup();
+	delete m_FrameMemory;
 }
 
 void GamePlayState::pause()
@@ -54,8 +54,8 @@ void GamePlayState::handleEvents(GameManager * gm)
 		}
 		else if (event.event == EVENT::OBJECTDIED)
 		{
-			this->gameObjects[event.param]->cleanup();
-			delete this->gameObjects[event.param];
+			m_GameObjects[event.param]->cleanup();
+			delete m_GameObjects[event.param];
 		}
 	}
 }
@@ -71,5 +71,5 @@ void GamePlayState::render(GameManager * gm)
 
 GamePlayState* GamePlayState::getInstance()
 {
-	return &sGamePlayState;
+	return &ms_GamePlayState;
 }

@@ -3,8 +3,8 @@ LRESULT CALLBACK wndProc(HWND hwnd, size_t msg, WPARAM wParam, LPARAM lParam);
 
 void D3D::initializeWindow(HINSTANCE hInstance, int ShowWnd, int width, int height, bool windowed)
 {
-	this->wWidth = width;
-	this->wHeight = height;
+	m_WinWidth = width;
+	m_WinHeight = height;
 
 	WNDCLASSEX wc;
 
@@ -27,7 +27,7 @@ void D3D::initializeWindow(HINSTANCE hInstance, int ShowWnd, int width, int heig
 		_exit(0);
 	}
 
-	this->hwnd = CreateWindowEx(
+	m_Hwnd = CreateWindowEx(
 		NULL,							// Extended style
 		wc.lpszClassName,					// Name of windows class
 		"Technique Project",				// Titlebar text
@@ -42,15 +42,15 @@ void D3D::initializeWindow(HINSTANCE hInstance, int ShowWnd, int width, int heig
 	);
 
 	// Error checking
-	if (!this->hwnd)
+	if (!m_Hwnd)
 	{
 		MessageBox(nullptr, "Error creating window", "Error", MB_OK | MB_ICONERROR);
 		_exit(0);
 	}
 
 	// Display and update the window
-	ShowWindow(this->hwnd, ShowWnd);
-	UpdateWindow(this->hwnd);
+	ShowWindow(m_Hwnd, ShowWnd);
+	UpdateWindow(m_Hwnd);
 }
 
 void D3D::createSwapChain()
@@ -64,14 +64,14 @@ void D3D::createSwapChain()
 	swapChainDesc.BufferCount = 1;                                  // one back buffer
 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;   // use 32-bit color
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;    // how swap chain is to be used
-	swapChainDesc.OutputWindow = this->hwnd;						// the window to be used
+	swapChainDesc.OutputWindow = m_Hwnd;						// the window to be used
 	swapChainDesc.SampleDesc.Count = 1;                             // how many multisamples
 	swapChainDesc.SampleDesc.Quality = 0;
 	swapChainDesc.Windowed = TRUE;
 	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 
 	// Create the SwapChain
-	hr = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, D3D11_CREATE_DEVICE_DEBUG, nullptr, NULL, D3D11_SDK_VERSION, &swapChainDesc, &gSwapChain, &gDevice, nullptr, &gDevCon);
+	hr = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, D3D11_CREATE_DEVICE_DEBUG, nullptr, NULL, D3D11_SDK_VERSION, &swapChainDesc, &m_SwapChain, &m_Device, nullptr, &m_DevCon);
 	if (FAILED(hr))
 	{
 		MessageBox(0, "Create Swapchain - Failed", "Error", MB_OK);
@@ -95,7 +95,7 @@ void D3D::createVertexBuffer(ID3D11Buffer ** gVertexBuffer, void* v, size_t& str
 	memset(&vertexData, 0, sizeof(vertexData));
 	vertexData.pSysMem = v;
 
-	HRESULT hr = gDevice->CreateBuffer(&vertexBufferDesc, &vertexData, gVertexBuffer);
+	HRESULT hr = m_Device->CreateBuffer(&vertexBufferDesc, &vertexData, gVertexBuffer);
 	if (FAILED(hr))
 	{
 		MessageBox(0, "Create Vertex buffer - Failed", "Error", MB_OK);
@@ -119,7 +119,7 @@ void D3D::createIndexBuffer(ID3D11Buffer ** gIndexBuffer, void* data, int& numIn
 	D3D11_SUBRESOURCE_DATA indexData;
 
 	indexData.pSysMem = data;
-	HRESULT hr = gDevice->CreateBuffer(&indexBufferDesc, &indexData, gIndexBuffer);
+	HRESULT hr = m_Device->CreateBuffer(&indexBufferDesc, &indexData, gIndexBuffer);
 	if (FAILED(hr))
 	{
 		MessageBox(0, "Box Index Buffer - Failed", "Error", MB_OK);
@@ -129,12 +129,12 @@ void D3D::createIndexBuffer(ID3D11Buffer ** gIndexBuffer, void* data, int& numIn
 
 void D3D::setVertexBuffer(ID3D11Buffer ** gVertexBuffer, size_t& stride, size_t& offset)
 {
-	this->gDevCon->IASetVertexBuffers(0, 1, gVertexBuffer, &stride, &offset);
+	m_DevCon->IASetVertexBuffers(0, 1, gVertexBuffer, &stride, &offset);
 }
 
 void D3D::setIndexBuffer(ID3D11Buffer * gIndexBuffer, int offset)
 {
-	this->gDevCon->IASetIndexBuffer(gIndexBuffer, DXGI_FORMAT_R32_UINT, offset);
+	m_DevCon->IASetIndexBuffer(gIndexBuffer, DXGI_FORMAT_R32_UINT, offset);
 }
 
 void D3D::createConstantBuffer(ID3D11Buffer ** gBuffer, int bufferSize)
@@ -149,7 +149,7 @@ void D3D::createConstantBuffer(ID3D11Buffer ** gBuffer, int bufferSize)
 	cbBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	cbBufferDesc.MiscFlags = 0;
 
-	HRESULT hr = gDevice->CreateBuffer(&cbBufferDesc, nullptr, gBuffer);
+	HRESULT hr = m_Device->CreateBuffer(&cbBufferDesc, nullptr, gBuffer);
 	if (FAILED(hr))
 	{
 		MessageBox(0, "Create Constant Buffer - Failed", "Error", MB_OK);
@@ -161,7 +161,7 @@ void D3D::mapBuffer(ID3D11Buffer ** gBuffer, void * cbPtr, int structSize)
 {
 	// Map constant buffer so that we can write to it.
 	D3D11_MAPPED_SUBRESOURCE dataPtr;
-	HRESULT hr = this->gDevCon->Map(*gBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &dataPtr);
+	HRESULT hr = m_DevCon->Map(*gBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &dataPtr);
 	if (FAILED(hr))
 	{
 		MessageBox(0, "Buffer mapping - Failed", "Error", MB_OK);
@@ -170,44 +170,44 @@ void D3D::mapBuffer(ID3D11Buffer ** gBuffer, void * cbPtr, int structSize)
 	// copy memory from CPU to GPU the entire struct
 	memcpy(dataPtr.pData, cbPtr, structSize);
 	// UnMap constant buffer so that we can use it again in the GPU
-	this->gDevCon->Unmap(*gBuffer, 0);
+	m_DevCon->Unmap(*gBuffer, 0);
 }
 
 void D3D::cleanup()
 {
-	this->gDevice->Release();
-	this->gDevCon->Release();
-	this->gSwapChain->Release();
+	m_Device->Release();
+	m_DevCon->Release();
+	m_SwapChain->Release();
 }
 
 int & D3D::GETwWidth()
 {
-	return this->wWidth;
+	return m_WinWidth;
 }
 
 int & D3D::GETwHeight()
 {
-	return this->wHeight;
+	return m_WinHeight;
 }
 
 HWND & D3D::GEThwnd()
 {
-	return this->hwnd;
+	return m_Hwnd;
 }
 
 ID3D11Device *& D3D::GETgDevice()
 {
-	return this->gDevice;
+	return m_Device;
 }
 
 ID3D11DeviceContext *& D3D::GETgDevCon()
 {
-	return this->gDevCon;
+	return m_DevCon;
 }
 
 IDXGISwapChain *& D3D::GETswapChain()
 {
-	return this->gSwapChain;
+	return m_SwapChain;
 }
 
 LRESULT CALLBACK wndProc(HWND hwnd, size_t msg, WPARAM wParam, LPARAM lParam)

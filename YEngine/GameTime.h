@@ -8,10 +8,10 @@ class GameTime : public IGameTime
 {
 private:
 	// Variables
-	double frequency;
-	__int64 CounterStart;
-	__int64 prevCurrentCount;
-	double deltaTime;
+	double m_Frequency;
+	__int64 m_CounterStart;
+	__int64 m_PrevCount;
+	double m_DeltaTime;
 
 public:
 	GameTime();

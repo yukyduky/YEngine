@@ -7,7 +7,7 @@ void GraphicsComponent::receive(Message msg)
 
 void GraphicsComponent::init()
 {
-	this->world = Matrix::CreateWorld(this->getHead()->getPosition(), Vector3(0.0f, 0.0f, 1.0f), Vector3(0.0f, 1.0f, 0.0f));
+	m_World = Matrix::CreateWorld(this->getHead()->getPosition(), Vector3(0.0f, 0.0f, 1.0f), Vector3(0.0f, 1.0f, 0.0f));
 }
 
 void GraphicsComponent::cleanup()
@@ -16,7 +16,7 @@ void GraphicsComponent::cleanup()
 
 void GraphicsComponent::update()
 {
-	this->world.Translation(this->getHead()->getPosition());
+	m_World.Translation(this->getHead()->getPosition());
 	Vector3 rot = this->getHead()->getPosition();
-	this->world *= Matrix::CreateFromYawPitchRoll(rot.x, rot.y, rot.z) * Matrix::CreateScale(this->getHead()->getScale());
+	m_World *= Matrix::CreateFromYawPitchRoll(rot.x, rot.y, rot.z) * Matrix::CreateScale(this->getHead()->getScale());
 }

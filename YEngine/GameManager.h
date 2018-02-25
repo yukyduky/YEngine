@@ -17,14 +17,14 @@ class State;
 class GameManager
 {
 private:
-	bool isRunning;
-	IGameTime* gameTime = nullptr;
-	IConfigHandler* configHandler = nullptr;
-	IEventHandler* eventHandler = nullptr;
-	MemoryManager* stateMemory = nullptr;
-	DeferredRenderer defRenderer;
+	bool m_IsRunning;
+	IGameTime* m_GameTime = nullptr;
+	IConfigHandler* m_ConfigHandler = nullptr;
+	IEventHandler* m_EventHandler = nullptr;
+	MemoryManager* m_StateMemory = nullptr;
+	DeferredRenderer m_DefRenderer;
 
-	idlist<GameObject*> gameObjects;
+	idlist<GameObject*> m_GameObjects;
 
 public:
 	//***********************************************************

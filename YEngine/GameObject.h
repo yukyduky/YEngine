@@ -23,8 +23,8 @@ struct Message
 class GameObject
 {
 public:
-	GameObject(size_t ID) : ID(ID), pos(Vector3(0.0f, 0.0f, 0.0f)), state(OBJECTSTATE::IDLE), componentTypes(0), parent() {}
-	GameObject(size_t ID, Vector3 pos) : ID(ID), pos(pos), state(OBJECTSTATE::IDLE), componentTypes(0), parent() {}
+	GameObject(size_t ID);
+	GameObject(size_t ID, Vector3 pos);
 
 	/*- - - - - - - -<INFORMATION>- - - - - - - -
 	1. Send the parameter 'msg'(obj) to all components that have been added to the object.
@@ -51,15 +51,15 @@ public:
 	size_t getComponentTypes();
 	Component* getComponent(size_t type);
 private:
-	std::list<Component*> components;
-	std::unordered_map<size_t, Component*> componentMap;
-	GameObject* parent;
-	Vector3 pos;
-	Vector3 rot;
-	Vector3 scale;
-	OBJECTSTATE state;
-	size_t componentTypes;
-	const size_t ID;
+	std::list<Component*> m_Components;
+	std::unordered_map<size_t, Component*> m_ComponentMap;
+	GameObject* m_Parent;
+	Vector3 m_Pos;
+	Vector3 m_Rot;
+	Vector3 m_Scale;
+	OBJECTSTATE m_State;
+	size_t m_ComponentTypes;
+	const size_t m_ID;
 };
 
 #endif // !GAMEOBJECT_H

@@ -57,8 +57,8 @@ class Resource
 private:
 	
 protected:
-	bool loaded;
-	RESOURCETYPE type;
+	bool m_Loaded;
+	RESOURCETYPE m_Type;
 
 public:
 	virtual ~Resource() {}

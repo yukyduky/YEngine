@@ -13,21 +13,21 @@
 
 void GameManager::init(HINSTANCE hInstance, int nCmdShow)
 {
-	this->isRunning = true;
+	m_IsRunning = true;
 
-	this->defRenderer.init();
+	m_DefRenderer.init();
 	
-	Locator::getMemoryManager(MEMORYTYPE::PERM)->requestMemory(this->gameTime, &GameTime(), sizeof(GameTime));
-	Locator::provide(this->gameTime);
+	Locator::getMemoryManager(MEMORYTYPE::PERM)->requestMemory(m_GameTime, &GameTime(), sizeof(GameTime));
+	Locator::provide(m_GameTime);
 
-	Locator::getMemoryManager(MEMORYTYPE::PERM)->requestMemory(this->configHandler, &ConfigHandler(), sizeof(ConfigHandler));
-	Locator::provide(this->configHandler);
+	Locator::getMemoryManager(MEMORYTYPE::PERM)->requestMemory(m_ConfigHandler, &ConfigHandler(), sizeof(ConfigHandler));
+	Locator::provide(m_ConfigHandler);
 
-	Locator::getMemoryManager(MEMORYTYPE::PERM)->requestMemory(this->eventHandler, &EventHandler(), sizeof(EventHandler));
-	Locator::provide(this->eventHandler);
+	Locator::getMemoryManager(MEMORYTYPE::PERM)->requestMemory(m_EventHandler, &EventHandler(), sizeof(EventHandler));
+	Locator::provide(m_EventHandler);
 
-	this->stateMemory = new MemoryManager(16, 100);
-	Locator::provide(this->stateMemory, MEMORYTYPE::STATE);
+	m_StateMemory = new MemoryManager(16, 100);
+	Locator::provide(m_StateMemory, MEMORYTYPE::STATE);
 
 	Locator::getGameTime()->StartTimer();
 
@@ -36,9 +36,9 @@ void GameManager::init(HINSTANCE hInstance, int nCmdShow)
 
 void GameManager::cleanup()
 {
-	this->defRenderer.cleanup();
-	this->stateMemory->cleanup();
-	delete this->stateMemory;
+	m_DefRenderer.cleanup();
+	m_StateMemory->cleanup();
+	delete m_StateMemory;
 }
 
 void GameManager::changeState(State* state)
@@ -63,22 +63,22 @@ void GameManager::update()
 
 void GameManager::render()
 {
-	this->defRenderer.firstpass();
+	m_DefRenderer.firstpass();
 	StateManager::render(this);
 }
 
 void GameManager::display(State* state)
 {
-	this->defRenderer.secondpass();
+	m_DefRenderer.secondpass();
 }
 
 bool GameManager::getIsRunning()
 {
-	return this->isRunning;
+	return m_IsRunning;
 }
 
 void GameManager::quit()
 {
-	this->isRunning = false;
+	m_IsRunning = false;
 	StateManager::cleanup();
 }

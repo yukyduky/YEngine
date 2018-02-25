@@ -16,25 +16,25 @@ constexpr int LIGHT_INPUT_DESC_SIZE = 1;
 class DeferredRenderer
 {
 private:
-	std::array<ID3D11RenderTargetView*, NUM_DEFERRED_OUTPUTS> gRTVs = {};
-	std::array<ID3D11ShaderResourceView*, NUM_DEFERRED_OUTPUTS> gSRVs = {};
-	std::array<ID3D11Texture2D*, NUM_DEFERRED_OUTPUTS> gDeferredTexs = {};
-	ID3D11RenderTargetView* gFinalRTV = nullptr;
-	ID3D11DepthStencilView* gDSV = nullptr;
-	ID3D11Texture2D* gDSB = nullptr;
-	ID3D11SamplerState* gSampler = nullptr;
-	ID3D11Buffer* gQuadVertexBuffer = nullptr;
-	D3D11_VIEWPORT viewport;
+	std::array<ID3D11RenderTargetView*, NUM_DEFERRED_OUTPUTS> m_RTVs = {};
+	std::array<ID3D11ShaderResourceView*, NUM_DEFERRED_OUTPUTS> m_SRVs = {};
+	std::array<ID3D11Texture2D*, NUM_DEFERRED_OUTPUTS> m_DeferredTexs = {};
+	ID3D11RenderTargetView* m_FinalRTV = nullptr;
+	ID3D11DepthStencilView* m_DSV = nullptr;
+	ID3D11Texture2D* m_DSB = nullptr;
+	ID3D11SamplerState* m_Sampler = nullptr;
+	ID3D11Buffer* m_QuadVertexBuffer = nullptr;
+	D3D11_VIEWPORT m_Viewport;
 
-	size_t vertBufferStride;
-	size_t vertBufferOffset;
+	size_t m_VertBufferStride;
+	size_t m_VertBufferOffset;
 
-	Shader* currentGeoShaders = nullptr;
-	Shader geoColorShaders;
-	Shader geoTexShaders;
-	Shader lightShaders;
+	Shader* m_CurrentGeoShaders = nullptr;
+	Shader m_GeoColorShaders;
+	Shader m_GeoTexShaders;
+	Shader m_LightShaders;
 
-	std::array<float, 4> clearColor;
+	std::array<float, 4> m_ClearColor;
 
 	void initShaders();
 	void bindTextureToRTVAndSRV(ID3D11Texture2D ** gTexure, ID3D11RenderTargetView ** gRTV, ID3D11ShaderResourceView ** gSRV, int width, int height, DXGI_FORMAT format);
@@ -50,33 +50,33 @@ public:
 	void cleanup();
 	void setShaderType(SHADERTYPE type);
 private:
-	const D3D11_INPUT_ELEMENT_DESC geoTexInputDesc[GEOTEX_INPUT_DESC_SIZE] =
+	const D3D11_INPUT_ELEMENT_DESC m_GeoTexInputDesc[GEOTEX_INPUT_DESC_SIZE] =
 	{
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
 
-	const D3D11_INPUT_ELEMENT_DESC geoColorInputDesc[GEOCOLOR_INPUT_DESC_SIZE] =
+	const D3D11_INPUT_ELEMENT_DESC m_GeoColorInputDesc[GEOCOLOR_INPUT_DESC_SIZE] =
 	{
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 		{ "COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
 
-	const D3D11_INPUT_ELEMENT_DESC lightInputDesc[LIGHT_INPUT_DESC_SIZE] =
+	const D3D11_INPUT_ELEMENT_DESC m_LightInputDesc[LIGHT_INPUT_DESC_SIZE] =
 	{
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
 
-	const wchar_t* fileNameLightVertex = L"lightVertex.hlsl";
-	const wchar_t* fileNameLightPixel = L"lightPixel.hlsl";
+	const wchar_t* m_FileNameLightVertex = L"lightVertex.hlsl";
+	const wchar_t* m_FileNameLightPixel = L"lightPixel.hlsl";
 
-	const wchar_t* fileNameGeoColorVertex = L"geoVertexColor.hlsl";
-	const wchar_t* fileNameGeoColorPixel = L"geoPixelColor.hlsl";
+	const wchar_t* m_FileNameGeoColorVertex = L"geoVertexColor.hlsl";
+	const wchar_t* m_FileNameGeoColorPixel = L"geoPixelColor.hlsl";
 
-	const wchar_t* fileNameGeoTexVertex = L"geoVertexTexture.hlsl";
-	const wchar_t* fileNameGeoTexPixel = L"geoPixelTexture.hlsl";
+	const wchar_t* m_FileNameGeoTexVertex = L"geoVertexTexture.hlsl";
+	const wchar_t* m_FileNameGeoTexPixel = L"geoPixelTexture.hlsl";
 };
 
 #endif // !DEFERREDRENDERER_H

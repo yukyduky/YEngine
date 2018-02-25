@@ -10,7 +10,7 @@ class GameManager;
 class StateManager
 {
 private:
-	static std::vector<State*> sStates;
+	static std::vector<State*> ms_States;
 
 public:
 	/*- - - - - - - -<INFORMATION>- - - - - - - -

@@ -7,8 +7,8 @@
 class Texture : public Resource
 {
 private:
-	TextureData data;
-	std::wstring filename;
+	TextureData m_Data;
+	std::wstring m_Filename;
 	bool loadTexture(ID3D11ShaderResourceView** SRV, ID3D11Resource** texture, std::wstring filename);
 	bool load(std::wstring filename, RESOURCETYPE type);
 public:

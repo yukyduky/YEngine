@@ -7,7 +7,7 @@
 class GraphicsComponent : public Component
 {
 protected:
-	Matrix world;
+	Matrix m_World;
 public:
 	virtual void receive(Message msg);
 	virtual void init();

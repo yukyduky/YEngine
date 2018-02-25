@@ -23,10 +23,10 @@ class Component
 {
 	friend class GameObject;
 private:
-	GameObject* head;
-	size_t type;
+	GameObject* m_Head;
+	size_t m_Type;
 public:
-	Component(size_t type) : type(type) {}
+	Component(size_t type) : m_Type(type) {}
 	/*- - - - - - - -<INFORMATION>- - - - - - - -
 	1. Receives a message sent by another component that is connected to the same entity
 	*/
@@ -43,8 +43,8 @@ public:
 	1. Updates the component
 	*/
 	virtual void update() = 0;
-	GameObject* getHead() { return this->head; }
-	size_t getType() { return this->type; }
+	GameObject* getHead() { return m_Head; }
+	size_t getType() { return m_Type; }
 };
 
 #endif // !COMPONENT_H
