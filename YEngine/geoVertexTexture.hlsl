@@ -1,10 +1,12 @@
-struct VS_IN {
+struct VS_IN
+{
 	float3 pos_M		: POSITION;
 	float3 normal		: NORMAL;
 	float2 texCoord		: TEXCOORD;
 };
 
-struct VS_OUT {
+struct VS_OUT
+{
 	float4 pos_S		: SV_POSITION;
 	float4 pos_W		: POSITION;
 	float3 normal		: NORMAL;

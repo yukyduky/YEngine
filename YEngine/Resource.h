@@ -10,7 +10,8 @@ using namespace DirectX::SimpleMath;
 
 enum class RESOURCETYPE { TEXTURE, OBJECT, FONT, SOUND };
 
-struct ObjectData {
+struct ObjectData 
+{
 	void* vertices;
 	void* indices;
 	int numVertices;
@@ -24,7 +25,8 @@ struct ObjectData {
 		vertices(vertices), indices(indices), numFaces(numFaces), stride(stride), offset(offset) {}
 };
 
-struct VertexData {
+struct VertexData 
+{
 	ID3D11Buffer* vBuffer;
 	ID3D11Buffer* iBuffer;
 	int numVertices;
@@ -40,12 +42,14 @@ struct VertexData {
 		vBuffer(vBuffer), iBuffer(iBuffer), numVertices(numVertices), numIndices(numIndices), numFaces(numFaces), stride(stride), offset(offset) {}
 };
 
-struct TextureData {
+struct TextureData 
+{
 	ID3D11ShaderResourceView* SRV;
 	ID3D11Resource* texture;
 };
 
-struct RenderData {
+struct RenderData 
+{
 	VertexData vData;
 	TextureData texData;
 	RenderData() {}
