@@ -29,10 +29,8 @@ void GameManager::init(HINSTANCE hInstance, int nCmdShow)
 	this->stateMemory = new MemoryManager(16, 100);
 	Locator::provide(this->stateMemory, MEMORYTYPE::STATE);
 
-	// Start the game timer
 	Locator::getGameTime()->StartTimer();
 
-	// Set the first state of the game
 	StateManager::changeState(GamePlayState::getInstance());
 }
 

@@ -16,9 +16,8 @@ private:
 		size_t nrOfBlocks;
 		MEMORY status;
 
-		MemoryBlock() : memHandle(nullptr), nrOfBlocks(0), status(MEMORY::FREE) {}
+		MemoryBlock() : memHandle(), nrOfBlocks(0), status(MEMORY::FREE) {}
 	};
-
 
 	char* memHandle;
 	size_t totalMem;

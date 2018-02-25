@@ -10,7 +10,7 @@ GamePlayState GamePlayState::sGamePlayState;
 
 void GamePlayState::init()
 {
-	this->frameMemory = new MemoryManager(16, 10);
+	this->frameMemory = new MemoryManager(16, 100);
 	Locator::provide(this->frameMemory, MEMORYTYPE::FRAME);
 }
 

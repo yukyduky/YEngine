@@ -140,7 +140,6 @@
     <ClInclude Include="Locator.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="MemoryManager.h" />
-    <ClInclude Include="MemoryManagerTemplate.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="RenderOptimizer.h" />
