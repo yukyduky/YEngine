@@ -20,7 +20,7 @@ public:
 	void clear();
 	bool idInUse(const size_t id);
 	bool empty();
-	const size_t& peekNextID();
+	const size_t peekNextID();
 
 	const size_t getNewID();
 	const size_t getNrOfIDs();

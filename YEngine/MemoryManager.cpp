@@ -3,7 +3,7 @@
 #include <cassert>
 
 
-const size_t& MemoryManager::blockify(const size_t& size)
+const size_t MemoryManager::blockify(const size_t& size)
 {
 	size_t blockedSize = size + m_BlockSize - (size % m_BlockSize);
 	if (blockedSize - m_BlockSize == size)

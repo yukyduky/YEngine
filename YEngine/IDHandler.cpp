@@ -78,7 +78,7 @@ bool IDHandler::empty()
 	return this->usedIDs.empty();
 }
 
-const size_t& IDHandler::peekNextID()
+const size_t IDHandler::peekNextID()
 {
 	size_t id = this->nrOfIDs;
 	if (!this->availableIDs.empty())

@@ -204,11 +204,11 @@ bool Geometry::load(std::string filename, RESOURCETYPE type)
 		std::vector<Vertex> vertices;
 		std::vector<int> indices;
 
-		for (int i = 0; i < scene->mNumMeshes; i++) 
+		for (size_t i = 0; i < scene->mNumMeshes; i++) 
 		{
 			aiMesh* mesh = scene->mMeshes[i];
 
-			for (int k = 0; k < mesh->mNumVertices; k++) 
+			for (size_t k = 0; k < mesh->mNumVertices; k++)
 			{
 				Vertex v;
 
@@ -229,9 +229,9 @@ bool Geometry::load(std::string filename, RESOURCETYPE type)
 				vertices.push_back(v);
 			}
 			
-			for (int c = 0; c < mesh->mNumFaces; c++) 
+			for (size_t c = 0; c < mesh->mNumFaces; c++)
 			{
-				for (int e = 0; e < mesh->mFaces[c].mNumIndices; e++)
+				for (size_t e = 0; e < mesh->mFaces[c].mNumIndices; e++)
 				{
 					indices.push_back(mesh->mFaces[c].mIndices[e]);
 				}

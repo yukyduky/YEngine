@@ -25,7 +25,7 @@ private:
 	size_t m_BlockSize;
 	std::vector<MemoryBlock> m_Blocks;
 
-	const size_t& blockify(const size_t& size);
+	const size_t blockify(const size_t& size);
 	bool findFreeMemoryBlock(const size_t& nrOfBlocks, size_t& blockNr);
 public:
 	MemoryManager(const size_t blockSize, const size_t nrOfBlocks);
