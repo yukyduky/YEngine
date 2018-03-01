@@ -2,6 +2,8 @@
 #ifndef YUTILITY_H
 #define YUTILITY_H
 
+typedef char Byte;
+
 namespace yUtility
 {
 	

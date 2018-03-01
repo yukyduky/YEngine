@@ -121,6 +121,7 @@
   <ItemGroup>
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="ComponentManager.h" />
     <ClInclude Include="ConfigHandler.h" />
     <ClInclude Include="D3D.h" />
     <ClInclude Include="DeferredRenderer.h" />
@@ -146,9 +147,10 @@
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="YUtility.h" />
+    <ClInclude Include="YUtilityTypes.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ComponentManager.cpp" />
     <ClCompile Include="ConfigHandler.cpp" />
     <ClCompile Include="D3D.cpp" />
     <ClCompile Include="DeferredRenderer.cpp" />
@@ -168,7 +170,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="YUtility.cpp" />
+    <ClCompile Include="YUtilityTypes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
