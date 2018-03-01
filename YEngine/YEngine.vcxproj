@@ -119,7 +119,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ConfigHandler.h" />
@@ -127,7 +126,6 @@
     <ClInclude Include="DeferredRenderer.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="GameObject.h" />
     <ClInclude Include="GamePlayState.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="GraphicsComponent.h" />
@@ -140,28 +138,22 @@
     <ClInclude Include="Locator.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="MemoryManager.h" />
-    <ClInclude Include="Observer.h" />
-    <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="RenderOptimizer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
-    <ClInclude Include="Subject.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="UIComponent.h" />
     <ClInclude Include="YUtility.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="ConfigHandler.cpp" />
     <ClCompile Include="D3D.cpp" />
     <ClCompile Include="DeferredRenderer.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GamePlayState.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="GraphicsComponent.cpp" />
@@ -170,15 +162,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
-    <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="RenderOptimizer.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="StateManager.cpp" />
-    <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="YUtility.cpp" />
   </ItemGroup>
   <ItemGroup>

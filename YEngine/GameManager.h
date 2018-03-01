@@ -11,7 +11,6 @@
 #include "MemoryManager.h"
 #include "idlist.h"
 
-class GameObject;
 class State;
 
 class GameManager
@@ -23,8 +22,6 @@ private:
 	IEventHandler* m_EventHandler = nullptr;
 	MemoryManager* m_StateMemory = nullptr;
 	DeferredRenderer m_DefRenderer;
-
-	idlist<GameObject*> m_GameObjects;
 
 public:
 	//***********************************************************

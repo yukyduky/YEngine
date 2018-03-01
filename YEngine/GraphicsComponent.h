@@ -9,7 +9,6 @@ class GraphicsComponent : public Component
 protected:
 	Matrix m_World;
 public:
-	virtual void receive(Message msg);
 	virtual void init();
 	virtual void cleanup();
 	virtual void update();

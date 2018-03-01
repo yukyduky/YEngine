@@ -10,14 +10,10 @@ GamePlayState GamePlayState::ms_GamePlayState;
 
 void GamePlayState::init()
 {
-	m_FrameMemory = new MemoryManager(16, 100);
-	Locator::provide(m_FrameMemory, MEMORYTYPE::FRAME);
 }
 
 void GamePlayState::cleanup()
 {
-	m_FrameMemory->cleanup();
-	delete m_FrameMemory;
 }
 
 void GamePlayState::pause()
@@ -51,11 +47,6 @@ void GamePlayState::handleEvents(GameManager * gm)
 		if (event.event == EVENT::GAMEOVER)
 		{
 			gm->quit();
-		}
-		else if (event.event == EVENT::OBJECTDIED)
-		{
-			m_GameObjects[event.param]->cleanup();
-			delete m_GameObjects[event.param];
 		}
 	}
 }
