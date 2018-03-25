@@ -11,7 +11,7 @@ class InputComponent;
 class GamePlayState : public State
 {
 private:
-	static GamePlayState ms_GamePlayState;
+	static GamePlayState m_sGamePlayState;
 
 	MemoryManager* m_FrameMemory;
 public:

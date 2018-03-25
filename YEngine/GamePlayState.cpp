@@ -5,7 +5,7 @@
 #include "MemoryManager.h"
 
 
-GamePlayState GamePlayState::ms_GamePlayState;
+GamePlayState GamePlayState::m_sGamePlayState;
 
 
 void GamePlayState::init()
@@ -62,5 +62,5 @@ void GamePlayState::render(GameManager * gm)
 
 GamePlayState* GamePlayState::getInstance()
 {
-	return &ms_GamePlayState;
+	return &m_sGamePlayState;
 }

@@ -15,13 +15,13 @@ enum class MEMORYTYPE { PERM, STATE, FRAME };
 class Locator
 {
 private:
-	static IGameTime* ms_GT;
-	static IConfigHandler* ms_CH;
-	static IEventHandler* ms_EH;
-	static MemoryManager* ms_PermMem;
-	static MemoryManager* ms_StateMem;
-	static MemoryManager* ms_FrameMem;
-	static ID3D* ms_D3D;
+	static IGameTime* m_sGT;
+	static IConfigHandler* m_sCH;
+	static IEventHandler* m_sEH;
+	static MemoryManager* m_sPermMem;
+	static MemoryManager* m_sStateMem;
+	static MemoryManager* m_sFrameMem;
+	static ID3D* m_sD3D;
 
 public:
 	/*- - - - - - - -<INFORMATION>- - - - - - - -
