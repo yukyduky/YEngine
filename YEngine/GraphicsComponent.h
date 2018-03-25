@@ -3,6 +3,10 @@
 #define GRAPHICSCOMPONENT_H
 
 #include "Component.h"
+#include <d3d11.h>
+#include <SimpleMath.h>
+
+using namespace DirectX::SimpleMath;
 
 class GraphicsComponent : public Component
 {
