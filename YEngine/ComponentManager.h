@@ -34,8 +34,8 @@ public:
 
 	size_t addEntity(std::bitset<BITMASK_SIZE> componentBitmask);
 	void removeEntity(const size_t entityID);
-	void addComponentsToEntity(const size_t entityID, std::bitset<BITMASK_SIZE> componentBitmask);
-	void removeComponentFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask);
+	void addComponentsToEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask);
+	void removeComponentsFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask);
 	void registerComponentType(Component& templateInstance, size_t byteSize, const char* name, size_t maxCapacity, std::bitset<BITMASK_SIZE> componentBitmask);
 	void unregisterComponentType(std::bitset<BITMASK_SIZE> componentBitmask);
 
