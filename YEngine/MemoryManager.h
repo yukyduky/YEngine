@@ -19,7 +19,7 @@ private:
 		MemoryBlock() : memHandle(), nrOfBlocks(0), status(MEMORY::FREE) {}
 	};
 
-	char* m_MemHandle;
+	char* m_MemHandleFront;
 	size_t m_TotalMem;
 	size_t m_MemInUse;
 	size_t m_BlockSize;
@@ -74,6 +74,15 @@ public:
 	//***********************************************************
 	void resetMemory();
 	//***********************************************************
+	// Method:    defrag
+	// FullName:  MemoryManager::defrag
+	// Access:    public 
+	// Returns:   void
+	// Qualifier:
+	// Description: Fills gaps of free blocks with used blocks starting from the back
+	//***********************************************************
+	void defrag();
+	//***********************************************************
 	// Method:    cleanup
 	// FullName:  MemoryManager::cleanup
 	// Access:    public 
@@ -94,7 +103,7 @@ inline void MemoryManager::requestMemory(T1*& dataPtr, T2* data, const size_t si
 
 	if (size <= m_TotalMem - m_MemInUse && this->findFreeMemoryBlock(nrOfBlocks, blockNr)) 
 	{
-		void* ptr = m_MemHandle + blockNr * m_BlockSize;
+		void* ptr = m_MemHandleFront + blockNr * m_BlockSize;
 		memcpy(ptr, data, size);
 		dataPtr = static_cast<T1*>(ptr);
 
@@ -103,10 +112,10 @@ inline void MemoryManager::requestMemory(T1*& dataPtr, T2* data, const size_t si
 
 		if (selectedBlock->nrOfBlocks != nrOfBlocks) 
 		{
-			m_Blocks[blockNr + nrOfBlocks].memHandle = m_MemHandle + (blockNr + nrOfBlocks) * m_BlockSize;
+			m_Blocks[blockNr + nrOfBlocks].memHandle = m_MemHandleFront + (blockNr + nrOfBlocks) * m_BlockSize;
 			m_Blocks[blockNr + nrOfBlocks].nrOfBlocks = selectedBlock->nrOfBlocks - nrOfBlocks;
 		}
-		selectedBlock->memHandle = m_MemHandle + blockNr * m_BlockSize;
+		selectedBlock->memHandle = m_MemHandleFront + blockNr * m_BlockSize;
 		selectedBlock->nrOfBlocks = nrOfBlocks;
 		selectedBlock->status = MEMORY::USED;
 	}

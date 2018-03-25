@@ -42,7 +42,7 @@ bool MemoryManager::findFreeMemoryBlock(const size_t& nrOfBlocks, size_t& blockN
 	return blockFound;
 }
 
-MemoryManager::MemoryManager(const size_t blockSize, const size_t nrOfBlocks) : m_MemHandle(), m_TotalMem(0), m_MemInUse(0), m_BlockSize(0)
+MemoryManager::MemoryManager(const size_t blockSize, const size_t nrOfBlocks) : m_MemHandleFront(), m_TotalMem(0), m_MemInUse(0), m_BlockSize(0)
 {
 	this->resizeMemory(blockSize, nrOfBlocks);
 }
@@ -91,11 +91,11 @@ void MemoryManager::resizeMemory(const size_t blockSize, const size_t nrOfBlocks
 	{
 		m_BlockSize = blockSize;
 		size_t blockedSize = nrOfBlocks * blockSize;
-		m_MemHandle = new char[blockedSize];
+		m_MemHandleFront = new char[blockedSize];
 		m_TotalMem = blockedSize;
 		m_MemInUse = 0;
 		m_Blocks.resize(blockedSize / blockSize);
-		m_Blocks.front().memHandle = m_MemHandle;
+		m_Blocks.front().memHandle = m_MemHandleFront;
 		m_Blocks.front().nrOfBlocks = blockedSize / blockSize;
 	}
 }
@@ -113,10 +113,48 @@ void MemoryManager::resetMemory()
 	}
 }
 
+void MemoryManager::defrag()
+{
+	size_t nrOfBlocks = m_Blocks.size();
+	size_t blockSize = m_BlockSize;
+
+	for (size_t i = 0; i < nrOfBlocks; i += m_Blocks[i].nrOfBlocks)
+	{
+		if (m_Blocks[i].status == MEMORY::FREE)
+		{
+			bool filled = false;
+			size_t k = nrOfBlocks;
+
+			while (!filled && k < nrOfBlocks)
+			{
+				if (m_Blocks[k].status == MEMORY::USED && m_Blocks[k].nrOfBlocks <= m_Blocks[i].nrOfBlocks)
+				{
+					filled = true;
+					this->requestMemory(m_Blocks[i].memHandle, m_Blocks[k].memHandle, m_Blocks[k].nrOfBlocks * blockSize);
+					this->releaseMemory(m_Blocks[k].memHandle);
+				}
+
+				k--;
+			}
+
+			if (!filled)
+			{
+				filled = true;
+				k = i + m_Blocks[i].nrOfBlocks;
+				if (k < nrOfBlocks)
+				{
+					this->requestMemory(m_Blocks[i].memHandle, m_Blocks[k].memHandle, m_Blocks[k].nrOfBlocks * blockSize);
+					this->releaseMemory(m_Blocks[k].memHandle);
+				}
+			}
+		}
+	}
+}
+
 void MemoryManager::cleanup()
 {
 	if (m_TotalMem != 0)
 	{
-		delete[] m_MemHandle;
+		delete[] m_MemHandleFront;
 	}
 }
