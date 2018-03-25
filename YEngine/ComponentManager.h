@@ -41,6 +41,8 @@ public:
 
 	template<typename Derived>
 	void getComponentFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask, Derived*& component);
+	template<typename Derived>
+	void getAllComponentOfType(const std::bitset<BITMASK_SIZE> componentBitmask, idlist<Derived*>& components);
 
 	void cleanup();
 };
@@ -51,4 +53,17 @@ template<typename Derived>
 inline void ComponentManager::getComponentFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask, Derived*& component)
 {
 	component = static_cast<Derived*>(m_Components.at(componentBitmask).components[entityID]);
+}
+
+template<typename Derived>
+inline void ComponentManager::getAllComponentOfType(const std::bitset<BITMASK_SIZE> componentBitmask, idlist<Derived*>& derivedComponents)
+{
+	idlist<Component*>& components = m_Components.at(componentBitmask).components;
+	size_t numberOfComponents = components.size();
+
+	derivedComponents.reserve(numberOfComponents);
+	for (size_t i = 0; i < numberOfComponents; i++)
+	{
+		derivedComponents.push(static_cast<Derived*>(components[i]));
+	}
 }
