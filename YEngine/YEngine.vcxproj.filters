@@ -197,6 +197,9 @@
     <ClInclude Include="BoxCollisionComponent.h">
       <Filter>Header Files\Components\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>Header Files\Components\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -274,6 +277,9 @@
     </ClCompile>
     <ClCompile Include="BoxCollisionComponent.cpp">
       <Filter>Source Files\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>Source Files\Components\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

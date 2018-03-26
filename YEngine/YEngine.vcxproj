@@ -147,6 +147,7 @@
     <ClInclude Include="Locator.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="MemoryManager.h" />
+    <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="PositionalComponent.h" />
     <ClInclude Include="RenderOptimizer.h" />
     <ClInclude Include="Resource.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="MemoryManager.cpp" />
+    <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="PositionalComponent.cpp" />
     <ClCompile Include="RenderOptimizer.cpp" />
     <ClCompile Include="Resource.cpp" />
