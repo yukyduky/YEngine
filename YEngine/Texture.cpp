@@ -16,7 +16,7 @@ bool Texture::loadTexture(ID3D11ShaderResourceView** SRV, ID3D11Resource** textu
 	return success;
 }
 
-bool Texture::load(std::wstring filename, RESOURCETYPE type)
+bool Texture::load(std::wstring filename, RESOURCETYPE::TYPE type)
 {
 	bool success = this->loadTexture(&m_Data.SRV, &m_Data.texture, filename);
 	if (success) 
@@ -27,7 +27,7 @@ bool Texture::load(std::wstring filename, RESOURCETYPE type)
 	return success;
 }
 
-Texture::Texture(std::wstring filename, RESOURCETYPE type)
+Texture::Texture(std::wstring filename, RESOURCETYPE::TYPE type)
 {
 	m_Loaded = this->load(filename, type);
 }

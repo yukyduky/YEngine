@@ -183,13 +183,12 @@
     <ClInclude Include="MemoryManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="test.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="YUtilityTypes.h">
+      <Filter>Header Files\General</Filter>
     </ClInclude>
     <ClInclude Include="ComponentManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\General</Filter>
     </ClInclude>
-    <ClInclude Include="YUtilityTypes.h">
       <Filter>Header Files\General</Filter>
     </ClInclude>
     <ClInclude Include="PositionalComponent.h">
@@ -253,11 +252,12 @@
     </ClCompile>
     <ClCompile Include="MemoryManager.cpp">
       <Filter>Source Files</Filter>
+    <ClCompile Include="YUtilityTypes.cpp">
+      <Filter>Source Files\General</Filter>
     </ClCompile>
     <ClCompile Include="ComponentManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\General</Filter>
     </ClCompile>
-    <ClCompile Include="YUtilityTypes.cpp">
       <Filter>Source Files\General</Filter>
     </ClCompile>
     <ClCompile Include="PositionalComponent.cpp">

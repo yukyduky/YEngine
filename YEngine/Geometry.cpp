@@ -184,7 +184,7 @@ bool Geometry::loadObjFile(const char* filename, VertexData& data)
 	return success;
 }
 
-bool Geometry::load(std::string filename, RESOURCETYPE type)
+bool Geometry::load(std::string filename, RESOURCETYPE::TYPE type)
 {
 	bool success = true;
 
@@ -252,7 +252,7 @@ bool Geometry::load(std::string filename, RESOURCETYPE type)
 	return success;
 }
 
-Geometry::Geometry(std::string filename, RESOURCETYPE type)
+Geometry::Geometry(std::string filename, RESOURCETYPE::TYPE type)
 {
 	m_Loaded = false;
 	std::string ext = filename.substr(filename.find_last_of('.') + 1, filename.size() - filename.find_last_of('.'));

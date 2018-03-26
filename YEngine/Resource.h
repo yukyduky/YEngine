@@ -8,7 +8,9 @@
 
 using namespace DirectX::SimpleMath;
 
-enum class RESOURCETYPE { TEXTURE, OBJECT, FONT, SOUND };
+namespace RESOURCETYPE {
+	enum TYPE { TEXTURE, OBJECT, FONT, SOUND, SIZE };
+}
 
 struct ObjectData 
 {
@@ -62,7 +64,7 @@ private:
 	
 protected:
 	bool m_Loaded;
-	RESOURCETYPE m_Type;
+	RESOURCETYPE::TYPE m_Type;
 
 public:
 	virtual ~Resource() {}
@@ -70,7 +72,7 @@ public:
 	virtual bool reload() = 0;
 	bool isLoaded();
 
-	virtual RESOURCETYPE getType();
+	virtual RESOURCETYPE::TYPE getType();
 };
 
 #endif // RESOURCE_H

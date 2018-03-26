@@ -10,20 +10,20 @@ std::wstring ResourceManager::convertStrToWStr(std::string str)
 	return wstr;
 }
 
-bool ResourceManager::createObject(std::string filename, RESOURCETYPE type, size_t ID)
+bool ResourceManager::createObject(std::string filename, RESOURCETYPE::TYPE type, size_t ID)
 {
 	m_ResourceMap.insert(m_ResourceMap.end(), std::pair<size_t, Resource*>(ID, new Geometry(filename, type)));
 	return m_ResourceMap[ID]->isLoaded();
 }
 
-bool ResourceManager::createTexture(std::string filename, RESOURCETYPE type, size_t ID)
+bool ResourceManager::createTexture(std::string filename, RESOURCETYPE::TYPE type, size_t ID)
 {
 	std::wstring wfilename = this->convertStrToWStr(filename);
 	m_ResourceMap.insert(m_ResourceMap.end(), std::pair<size_t, Resource*>(ID, new Texture(wfilename, type)));
 	return m_ResourceMap[ID]->isLoaded();
 }
 
-bool ResourceManager::createResource(std::string filename, RESOURCETYPE type, size_t ID)
+bool ResourceManager::createResource(std::string filename, RESOURCETYPE::TYPE type, size_t ID)
 {
 	bool loaded = false;
 	switch (type)
