@@ -7,7 +7,7 @@ void GraphicsComponent::init()
 	m_ResourceBitmask = 1 << 0;
 }
 
-void GraphicsComponent::update()
+void GraphicsComponent::update(float dt)
 {
 }
 

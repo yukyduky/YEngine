@@ -14,7 +14,7 @@ public:
 	virtual ~BoxCollisionComponent() {}
 
 	void init() override;
-	void update() override;
+	void update(float dt) override;
 	void cleanup() override;
 
 	bool collideWith(CollisionComponent* collision_, BoundingBox& intersectionBox) override;

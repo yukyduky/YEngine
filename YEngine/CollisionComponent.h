@@ -19,7 +19,7 @@ public:
 	virtual ~CollisionComponent() {}
 
 	virtual void init() = 0;
-	virtual void update() = 0;
+	virtual void update(float dt) = 0;
 	virtual void cleanup() = 0;
 
 	virtual bool collideWith(CollisionComponent* collision_, BoundingBox& intersectionBox) = 0;

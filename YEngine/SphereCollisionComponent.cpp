@@ -8,7 +8,7 @@ void SphereCollisionComponent::init()
 	m_BSphere.Radius = 1.0f;
 }
 
-void SphereCollisionComponent::update()
+void SphereCollisionComponent::update(float dt)
 {
 }
 

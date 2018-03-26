@@ -8,7 +8,7 @@ void BoxCollisionComponent::init()
 	m_BBox.Extents = Vector3(1.0f, 1.0f, 1.0f);
 }
 
-void BoxCollisionComponent::update()
+void BoxCollisionComponent::update(float dt)
 {
 }
 

@@ -7,7 +7,7 @@ void PositionalComponent::init()
 	setPosition(Vector3(0.0f, 0.0f, 0.0f));
 }
 
-void PositionalComponent::update()
+void PositionalComponent::update(float dt)
 {
 
 }

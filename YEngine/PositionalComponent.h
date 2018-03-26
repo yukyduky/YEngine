@@ -16,7 +16,7 @@ public:
 	virtual ~PositionalComponent() {}
 
 	virtual void init() override;
-	virtual void update() override;
+	virtual void update(float dt) override;
 	virtual void cleanup() override;
 
 	Vector3 getPosition() const;

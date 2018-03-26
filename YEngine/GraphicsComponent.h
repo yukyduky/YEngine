@@ -19,7 +19,7 @@ protected:
 	std::unordered_map<std::bitset<RESOURCETYPE::SIZE>, size_t> m_ResourceIDs;
 public:
 	virtual void init() override;
-	virtual void update() override;
+	virtual void update(float dt) override;
 	virtual void cleanup() override;
 
 	void setResource(std::bitset<RESOURCETYPE::SIZE> resourceBitmask, size_t resourceID);
