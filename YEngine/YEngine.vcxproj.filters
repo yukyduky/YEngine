@@ -97,6 +97,12 @@
     <Filter Include="Header Files\General\ResourceManager">
       <UniqueIdentifier>{46ef5f24-10ea-41c5-8cb9-031d84857d6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Positional">
+      <UniqueIdentifier>{f326bca8-b169-48a2-90c5-e54288831656}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Positional">
+      <UniqueIdentifier>{9dfbd279-3174-4b69-ada7-8d5af52fca1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h">
@@ -186,6 +192,9 @@
     <ClInclude Include="YUtilityTypes.h">
       <Filter>Header Files\General</Filter>
     </ClInclude>
+    <ClInclude Include="PositionalComponent.h">
+      <Filter>Header Files\Components\Positional</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -250,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="YUtilityTypes.cpp">
       <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="PositionalComponent.cpp">
+      <Filter>Source Files\Components\Positional</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
