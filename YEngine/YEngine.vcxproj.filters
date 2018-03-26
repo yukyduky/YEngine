@@ -55,12 +55,6 @@
     <Filter Include="Source Files\Components\Graphics">
       <UniqueIdentifier>{1fa82346-adde-45fd-b398-f50aa223e201}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Components\Objects">
-      <UniqueIdentifier>{f8c92c45-8460-4120-acd9-7366f23b52c3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Components\Objects">
-      <UniqueIdentifier>{43c40b49-2939-415e-889b-bb1255fa5aaf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Renderers">
       <UniqueIdentifier>{47bfe1eb-3382-4fde-90a0-9f510aaa6cea}</UniqueIdentifier>
     </Filter>
@@ -194,6 +188,15 @@
     <ClInclude Include="PositionalComponent.h">
       <Filter>Header Files\Components\Positional</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionComponent.h">
+      <Filter>Header Files\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollisionComponent.h">
+      <Filter>Header Files\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollisionComponent.h">
+      <Filter>Header Files\Components\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -262,6 +265,15 @@
     </ClCompile>
     <ClCompile Include="PositionalComponent.cpp">
       <Filter>Source Files\Components\Positional</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionComponent.cpp">
+      <Filter>Source Files\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollisionComponent.cpp">
+      <Filter>Source Files\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollisionComponent.cpp">
+      <Filter>Source Files\Components\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

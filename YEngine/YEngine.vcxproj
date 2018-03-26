@@ -119,6 +119,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BoxCollisionComponent.h" />
+    <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -150,12 +152,15 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="SphereCollisionComponent.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="YUtilityTypes.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoxCollisionComponent.cpp" />
+    <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="ComponentManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -179,6 +184,7 @@
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SphereCollisionComponent.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="YUtilityTypes.cpp" />
