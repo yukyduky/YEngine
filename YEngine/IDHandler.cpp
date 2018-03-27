@@ -6,9 +6,9 @@ IDHandler::IDHandler() : nrOfIDs(0)
 {
 }
 
-IDHandler::IDHandler(const size_t size) : nrOfIDs(0)
+IDHandler::IDHandler(const size_t size, const size_t startID) : nrOfIDs(0)
 {
-	this->resize(size);
+	this->resize(size, startID);
 }
 
 void IDHandler::remove(const size_t id)
@@ -36,16 +36,15 @@ void IDHandler::remove(std::list<size_t>::const_iterator it)
 	this->usedIDs.erase(it);
 }
 
-void IDHandler::resize(const size_t size)
+void IDHandler::resize(const size_t size, const size_t startID)
 {
-	if (size > this->nrOfIDs)
+	this->clear();
+
+	for (size_t i = this->nrOfIDs; i < size; i++)
 	{
-		for (size_t i = this->nrOfIDs; i < size; i++)
-		{
-			this->availableIDs.push_back(i);
-		}
-		this->nrOfIDs = size;
+		this->availableIDs.push_back(startID + i);
 	}
+	this->nrOfIDs = size;
 }
 
 void IDHandler::clear()

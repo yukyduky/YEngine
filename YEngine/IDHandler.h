@@ -12,11 +12,11 @@ private:
 	std::list<size_t> availableIDs;
 public:
 	IDHandler();
-	IDHandler(const size_t size);
+	IDHandler(const size_t size, const size_t startID);
 
 	void remove(const size_t id);
 	void remove(std::list<size_t>::const_iterator it);
-	void resize(const size_t size);
+	void resize(const size_t size, const size_t startID);
 	void clear();
 	bool idInUse(const size_t id);
 	bool empty();

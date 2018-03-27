@@ -174,15 +174,13 @@
     <ClInclude Include="idlist.h">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="MemoryManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="YUtilityTypes.h">
       <Filter>Header Files\General</Filter>
     </ClInclude>
     <ClInclude Include="ComponentManager.h">
       <Filter>Header Files\General</Filter>
     </ClInclude>
+    <ClInclude Include="MemoryManager.h">
       <Filter>Header Files\General</Filter>
     </ClInclude>
     <ClInclude Include="PositionalComponent.h">
@@ -256,14 +254,13 @@
     <ClCompile Include="IDHandler.cpp">
       <Filter>Source Files\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="MemoryManager.cpp">
-      <Filter>Source Files</Filter>
     <ClCompile Include="YUtilityTypes.cpp">
       <Filter>Source Files\General</Filter>
     </ClCompile>
     <ClCompile Include="ComponentManager.cpp">
       <Filter>Source Files\General</Filter>
     </ClCompile>
+    <ClCompile Include="MemoryManager.cpp">
       <Filter>Source Files\General</Filter>
     </ClCompile>
     <ClCompile Include="PositionalComponent.cpp">
