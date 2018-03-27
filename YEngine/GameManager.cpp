@@ -9,7 +9,6 @@
 #include "MemoryManager.h"
 
 
-
 void GameManager::init(HINSTANCE hInstance, int nCmdShow)
 {
 	m_IsRunning = true;

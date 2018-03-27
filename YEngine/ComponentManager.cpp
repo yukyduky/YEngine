@@ -1,8 +1,10 @@
 #include "ComponentManager.h"
+#include <intrin.h>
 
 
 void ComponentManager::init()
 {
+	m_BitmaskIDs.resize(BITMASK_SIZE, 0);
 }
 
 size_t ComponentManager::addEntity(std::bitset<BITMASK_SIZE> componentBitmask)
@@ -69,15 +71,22 @@ void ComponentManager::removeComponentsFromEntity(const size_t entityID, const s
 	}
 }
 
-void ComponentManager::registerComponentType(Component& templateInstance, size_t byteSize, const char* name, size_t maxCapacity, std::bitset<BITMASK_SIZE> componentBitmask)
+std::bitset<BITMASK_SIZE> ComponentManager::registerComponentType(Component& templateInstance, size_t byteSize, const char* name, size_t maxCapacity)
 {
+	size_t id = m_BitmaskIDs.getNewID();
+	std::bitset<BITMASK_SIZE> componentBitmask(1ULL << id);
 	m_Components.insert(m_Components.end(), std::pair<std::bitset<BITMASK_SIZE>, ComponentData>(componentBitmask, ComponentData(templateInstance, name, byteSize, maxCapacity)));
+	return componentBitmask;
 }
 
 void ComponentManager::unregisterComponentType(std::bitset<BITMASK_SIZE> componentBitmask)
 {
 	m_Components.at(componentBitmask).mm.cleanup();
 	m_Components.erase(componentBitmask);
+
+	unsigned long id;
+	_BitScanForward(&id, componentBitmask.to_ulong()); // TODO::YE: Make compatible with other compilers)
+	m_BitmaskIDs.remove(id);
 }
 
 void ComponentManager::cleanup()

@@ -8,6 +8,7 @@
 #include "Component.h"
 #include "MemoryManager.h"
 #include "idlist.h"
+#include "IDHandler.h"
 
 #define BITMASK_SIZE 32
 
@@ -29,6 +30,7 @@ class ComponentManager
 private:
 	idlist<std::bitset<BITMASK_SIZE>> m_Entities;
 	std::unordered_map<std::bitset<BITMASK_SIZE>, ComponentData> m_Components;
+	IDHandler m_BitmaskIDs;
 public:
 	void init();
 
@@ -36,7 +38,7 @@ public:
 	void removeEntity(const size_t entityID);
 	void addComponentsToEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask);
 	void removeComponentsFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask);
-	void registerComponentType(Component& templateInstance, size_t byteSize, const char* name, size_t maxCapacity, std::bitset<BITMASK_SIZE> componentBitmask);
+	std::bitset<BITMASK_SIZE> registerComponentType(Component& templateInstance, size_t byteSize, const char* name, size_t maxCapacity);
 	void unregisterComponentType(std::bitset<BITMASK_SIZE> componentBitmask);
 
 	template<typename Derived>
