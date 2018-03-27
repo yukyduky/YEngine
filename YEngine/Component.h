@@ -2,6 +2,11 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
+#include <d3d11.h>
+#include <SimpleMath.h>
+
+using namespace DirectX::SimpleMath;
+
 class Component
 {
 public:

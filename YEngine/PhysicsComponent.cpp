@@ -1,9 +1,13 @@
 #include "PhysicsComponent.h"
 
-void PhysicsComponent::init()
+PhysicsComponent::PhysicsComponent()
 {
 	m_Velocity = Vector3(0.0f, 0.0f, 0.0f);
 	m_Acceleration = Vector3(0.0f, 0.0f, 0.0f);
+}
+
+void PhysicsComponent::init()
+{
 }
 
 void PhysicsComponent::update(float dt)

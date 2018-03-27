@@ -11,6 +11,7 @@ class SphereCollisionComponent : public CollisionComponent
 private:
 	BoundingSphere m_BSphere;
 public:
+	SphereCollisionComponent();
 	virtual ~SphereCollisionComponent() {}
 
 	void init() override;

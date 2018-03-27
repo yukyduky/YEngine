@@ -3,10 +3,6 @@
 #define LIGHTCOMPONENT_H
 
 #include "Component.h"
-#include <d3d11.h>
-#include <SimpleMath.h>
-
-using namespace DirectX::SimpleMath;
 
 enum class LIGHT {
 	POINT, SPOT, DIRECTIONAL
@@ -31,6 +27,7 @@ protected:
 	bool m_IsPoweredOn;
 	float m_Dimmer;
 public:
+	LightComponent();
 	virtual ~LightComponent() {}
 
 	virtual void init() override;

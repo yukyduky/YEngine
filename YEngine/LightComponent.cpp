@@ -2,10 +2,14 @@
 
 
 
-void LightComponent::init()
+LightComponent::LightComponent()
 {
 	m_IsPoweredOn = true;
 	m_Dimmer = 0.0f;
+}
+
+void LightComponent::init()
+{
 }
 
 void LightComponent::update(float dt)

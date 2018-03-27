@@ -11,6 +11,7 @@ class BoxCollisionComponent : public CollisionComponent
 private:
 	BoundingBox m_BBox;
 public:
+	BoxCollisionComponent();
 	virtual ~BoxCollisionComponent() {}
 
 	void init() override;

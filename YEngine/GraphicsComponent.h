@@ -3,13 +3,9 @@
 #define GRAPHICSCOMPONENT_H
 
 #include "Component.h"
-#include <d3d11.h>
-#include <SimpleMath.h>
 #include <unordered_map>
 #include <bitset>
 #include "Resource.h"
-
-using namespace DirectX::SimpleMath;
 
 class GraphicsComponent : public Component
 {
@@ -18,6 +14,9 @@ protected:
 	std::bitset<RESOURCETYPE::SIZE> m_ResourceBitmask;
 	std::unordered_map<std::bitset<RESOURCETYPE::SIZE>, size_t> m_ResourceIDs;
 public:
+	GraphicsComponent();
+	virtual ~GraphicsComponent() {}
+
 	virtual void init() override;
 	virtual void update(float dt) override;
 	virtual void cleanup() override;

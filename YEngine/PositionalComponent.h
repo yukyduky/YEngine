@@ -3,16 +3,13 @@
 #define POSITIONALCOMPONENT_H
 
 #include "Component.h"
-#include <d3d11.h>
-#include <SimpleMath.h>
-
-using namespace DirectX::SimpleMath;
 
 class PositionalComponent : public Component
 {
 private:
 	Vector3 m_Position;
 public:
+	PositionalComponent();
 	virtual ~PositionalComponent() {}
 
 	virtual void init() override;

@@ -2,9 +2,13 @@
 
 
 
-void GraphicsComponent::init()
+GraphicsComponent::GraphicsComponent()
 {
 	m_ResourceBitmask = 1 << 0;
+}
+
+void GraphicsComponent::init()
+{
 }
 
 void GraphicsComponent::update(float dt)
@@ -65,7 +69,7 @@ std::bitset<RESOURCETYPE::SIZE> GraphicsComponent::getResourceBitmask() const
 	return m_ResourceBitmask;
 }
 
-DirectX::SimpleMath::Matrix& GraphicsComponent::getWorld()
+Matrix& GraphicsComponent::getWorld()
 {
 	return m_World;
 }

@@ -2,10 +2,14 @@
 #include "SphereCollisionComponent.h"
 
 
-void BoxCollisionComponent::init()
+BoxCollisionComponent::BoxCollisionComponent()
 {
 	m_BBox.Center = Vector3(0.0f, 0.0f, 0.0f);
 	m_BBox.Extents = Vector3(1.0f, 1.0f, 1.0f);
+}
+
+void BoxCollisionComponent::init()
+{
 }
 
 void BoxCollisionComponent::update(float dt)

@@ -2,9 +2,13 @@
 
 
 
-void PositionalComponent::init()
+PositionalComponent::PositionalComponent()
 {
 	setPosition(Vector3(0.0f, 0.0f, 0.0f));
+}
+
+void PositionalComponent::init()
+{
 }
 
 void PositionalComponent::update(float dt)

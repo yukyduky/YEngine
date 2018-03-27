@@ -3,12 +3,9 @@
 #define COLLISIONCOMPONENT_H
 
 #include "Component.h"
-#include <d3d11.h>
-#include <SimpleMath.h>
 #include <DirectXCollision.h>
 
 using namespace DirectX;
-using namespace DirectX::SimpleMath;
 
 class SphereCollisionComponent;
 class BoxCollisionComponent;
