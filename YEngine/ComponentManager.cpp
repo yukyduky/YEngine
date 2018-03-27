@@ -1,5 +1,6 @@
 #include "ComponentManager.h"
 #include <intrin.h>
+#include <cassert>
 
 
 void ComponentManager::init()
@@ -73,9 +74,12 @@ void ComponentManager::removeComponentsFromEntity(const size_t entityID, const s
 
 std::bitset<BITMASK_SIZE> ComponentManager::registerComponentType(Component& templateInstance, size_t byteSize, const char* name, size_t maxCapacity)
 {
+	assert(m_BitmaskIDs.peekNextID() != BITMASK_SIZE && "Tried to register one too many component types");
 	size_t id = m_BitmaskIDs.getNewID();
 	std::bitset<BITMASK_SIZE> componentBitmask(1ULL << id);
+
 	m_Components.insert(m_Components.end(), std::pair<std::bitset<BITMASK_SIZE>, ComponentData>(componentBitmask, ComponentData(templateInstance, name, byteSize, maxCapacity)));
+
 	return componentBitmask;
 }
 
