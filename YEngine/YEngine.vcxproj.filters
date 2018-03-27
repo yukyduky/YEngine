@@ -97,6 +97,12 @@
     <Filter Include="Source Files\Components\Positional">
       <UniqueIdentifier>{9dfbd279-3174-4b69-ada7-8d5af52fca1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Graphics\Light">
+      <UniqueIdentifier>{eb9f8148-69ba-4891-8f4d-9294ef6c6452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Graphics\Light">
+      <UniqueIdentifier>{e2dc6bcf-400b-41a4-b75e-e650c7c597aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h">
@@ -198,6 +204,9 @@
     <ClInclude Include="PhysicsComponent.h">
       <Filter>Header Files\Components\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="LightComponent.h">
+      <Filter>Header Files\Components\Graphics\Light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -277,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="PhysicsComponent.cpp">
       <Filter>Source Files\Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="LightComponent.cpp">
+      <Filter>Source Files\Components\Graphics\Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

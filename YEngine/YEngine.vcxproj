@@ -144,6 +144,7 @@
     <ClInclude Include="idlist.h" />
     <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="IGameTime.h" />
+    <ClInclude Include="LightComponent.h" />
     <ClInclude Include="Locator.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="MemoryManager.h" />
@@ -176,6 +177,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="IDHandler.cpp" />
+    <ClCompile Include="LightComponent.cpp" />
     <ClCompile Include="Locator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Geometry.cpp" />
