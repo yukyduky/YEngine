@@ -24,20 +24,21 @@ bool SphereCollisionComponent::collideWith(CollisionComponent * collision_, Boun
 bool SphereCollisionComponent::collideWith(SphereCollisionComponent * sphere_, BoundingBox & intersectionBox)
 {
 	bool areColliding = false;
+	BoundingSphere bSphere = sphere_->getBSphere();
 
-	if (m_BSphere.Intersects(sphere_->getBSphere()))
+	if (m_BSphere.Intersects(bSphere))
 	{
 		areColliding = true;
 
-		float combinedRadius = sphere_->getBSphere().Radius + m_BSphere.Radius;
-		float xDelta = combinedRadius - abs(sphere_->getBSphere().Center.x - m_BSphere.Center.x);
-		float yDelta = combinedRadius - abs(sphere_->getBSphere().Center.y - m_BSphere.Center.y);
-		float zDelta = combinedRadius - abs(sphere_->getBSphere().Center.z - m_BSphere.Center.z);
+		float combinedRadius = bSphere.Radius + m_BSphere.Radius;
+		float xDelta = combinedRadius - abs(bSphere.Center.x - m_BSphere.Center.x);
+		float yDelta = combinedRadius - abs(bSphere.Center.y - m_BSphere.Center.y);
+		float zDelta = combinedRadius - abs(bSphere.Center.z - m_BSphere.Center.z);
 		intersectionBox.Extents = Vector3(xDelta, yDelta, zDelta);
 
-		intersectionBox.Center.x = abs(sphere_->getBSphere().Center.x) < abs(m_BSphere.Center.x) ? sphere_->getBSphere().Center.x : m_BSphere.Center.x;
-		intersectionBox.Center.y = abs(sphere_->getBSphere().Center.y) < abs(m_BSphere.Center.y) ? sphere_->getBSphere().Center.y : m_BSphere.Center.y;
-		intersectionBox.Center.z = abs(sphere_->getBSphere().Center.z) < abs(m_BSphere.Center.z) ? sphere_->getBSphere().Center.z : m_BSphere.Center.z;
+		intersectionBox.Center.x = abs(bSphere.Center.x) < abs(m_BSphere.Center.x) ? bSphere.Center.x : m_BSphere.Center.x;
+		intersectionBox.Center.y = abs(bSphere.Center.y) < abs(m_BSphere.Center.y) ? bSphere.Center.y : m_BSphere.Center.y;
+		intersectionBox.Center.z = abs(bSphere.Center.z) < abs(m_BSphere.Center.z) ? bSphere.Center.z : m_BSphere.Center.z;
 
 		intersectionBox.Center.x += xDelta / 2;
 		intersectionBox.Center.y += yDelta / 2;
@@ -49,16 +50,7 @@ bool SphereCollisionComponent::collideWith(SphereCollisionComponent * sphere_, B
 
 bool SphereCollisionComponent::collideWith(BoxCollisionComponent * box_, BoundingBox & intersectionBox)
 {
-	bool areColliding = false;
-
-	if (m_BSphere.Intersects(box_->getBBox()))
-	{
-		areColliding = true;
-
-
-	}
-
-	return areColliding;
+	return box_->collideWith(this, intersectionBox);
 }
 
 void SphereCollisionComponent::setPosition(Vector3 val)
