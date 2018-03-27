@@ -103,6 +103,12 @@
     <Filter Include="Source Files\Components\Graphics\Light">
       <UniqueIdentifier>{e2dc6bcf-400b-41a4-b75e-e650c7c597aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\Camera">
+      <UniqueIdentifier>{33d9e9aa-e20d-4380-9042-c49801e528e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Camera">
+      <UniqueIdentifier>{4b16daa4-1820-48d3-a093-43d97f32cf6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h">
@@ -207,6 +213,9 @@
     <ClInclude Include="LightComponent.h">
       <Filter>Header Files\Components\Graphics\Light</Filter>
     </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Header Files\Components\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -289,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="LightComponent.cpp">
       <Filter>Source Files\Components\Graphics\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Source Files\Components\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
