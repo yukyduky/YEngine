@@ -12,6 +12,8 @@ namespace RESOURCETYPE {
 	enum TYPE { TEXTURE, OBJECT, FONT, SOUND, SIZE };
 }
 
+class Renderer;
+
 struct ObjectData 
 {
 	void* vertices;
@@ -69,7 +71,7 @@ protected:
 public:
 	virtual ~Resource() {}
 	virtual void unload() = 0;
-	virtual bool reload() = 0;
+	virtual bool reload(Renderer* renderer) = 0;
 	bool isLoaded();
 
 	virtual RESOURCETYPE::TYPE getType();

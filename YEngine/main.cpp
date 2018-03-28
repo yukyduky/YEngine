@@ -2,8 +2,8 @@
 #include "GameManager.h"
 #include "Locator.h"
 #include <crtdbg.h>
-#include "D3D.h"
 #include "MemoryManager.h"
+#include "YEngine.h"
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
@@ -15,16 +15,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	MemoryManager* permMemory = new MemoryManager(16, 100);
 	Locator::provide(permMemory, MEMORYTYPE::PERM);
 
-	ID3D* d3d = nullptr;
-	Locator::getMemoryManager(MEMORYTYPE::PERM)->requestMemory(d3d, &D3D(), sizeof(D3D));
-
-	Locator::provide(d3d);
-
-	Locator::getD3D()->initializeWindow(hInstance, true, 800, 600, true);
-	Locator::getD3D()->createSwapChain();
+	YEngine::init(RENDERER::DEFERRED, hInstance, nCmdShow, 800, 600, true);
 
 	// Initialize the game
-	gm.init(hInstance, nCmdShow);
+	gm.init();
 
 	// Game loop
 	while (gm.getIsRunning()) 
@@ -38,7 +32,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	}
 
 	gm.cleanup();
-	d3d->cleanup();
 	permMemory->cleanup();
 	delete permMemory;
 

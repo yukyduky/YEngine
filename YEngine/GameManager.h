@@ -4,8 +4,8 @@
 
 #include <Windows.h>
 #include <d3d11.h>
+#include "Renderer.h"
 #include "IGameTime.h"
-#include "DeferredRenderer.h"
 #include "IConfigHandler.h"
 #include "IEventHandler.h"
 #include "MemoryManager.h"
@@ -17,13 +17,16 @@ class GameManager
 {
 private:
 	bool m_IsRunning;
-	IGameTime* m_GameTime = nullptr;
-	IConfigHandler* m_ConfigHandler = nullptr;
-	IEventHandler* m_EventHandler = nullptr;
-	MemoryManager* m_StateMemory = nullptr;
-	DeferredRenderer m_DefRenderer;
+
+	Renderer* m_Renderer;
+
+	IGameTime* m_GameTime;
+	IConfigHandler* m_ConfigHandler;
+	IEventHandler* m_EventHandler;
+	MemoryManager* m_StateMemory;
 
 public:
+	GameManager();
 	//***********************************************************
 	// Method:    init
 	// FullName:  GameManager::init
@@ -34,7 +37,7 @@ public:
 	// Parameter: int nCmdShow
 	// Description: Creates and initiates all the tools and sets the first state
 	//***********************************************************
-	void init(HINSTANCE hInstance, int nCmdShow);
+	void init();
 
 	//***********************************************************
 	// Method:    cleanup

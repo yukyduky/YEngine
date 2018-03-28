@@ -12,15 +12,25 @@ std::wstring ResourceManager::convertStrToWStr(std::string str)
 
 bool ResourceManager::createObject(std::string filename, RESOURCETYPE::TYPE type, size_t ID)
 {
-	m_ResourceMap.insert(m_ResourceMap.end(), std::pair<size_t, Resource*>(ID, new Geometry(filename, type)));
+	m_ResourceMap.insert(m_ResourceMap.end(), std::pair<size_t, Resource*>(ID, new Geometry(m_Renderer, filename, type)));
 	return m_ResourceMap[ID]->isLoaded();
 }
 
 bool ResourceManager::createTexture(std::string filename, RESOURCETYPE::TYPE type, size_t ID)
 {
 	std::wstring wfilename = this->convertStrToWStr(filename);
-	m_ResourceMap.insert(m_ResourceMap.end(), std::pair<size_t, Resource*>(ID, new Texture(wfilename, type)));
+	m_ResourceMap.insert(m_ResourceMap.end(), std::pair<size_t, Resource*>(ID, new Texture(m_Renderer, wfilename, type)));
 	return m_ResourceMap[ID]->isLoaded();
+}
+
+ResourceManager::ResourceManager()
+{
+	m_Renderer = nullptr;
+}
+
+void ResourceManager::init(Renderer*& renderer)
+{
+	m_Renderer = renderer;
 }
 
 bool ResourceManager::createResource(std::string filename, RESOURCETYPE::TYPE type, size_t ID)
@@ -44,7 +54,7 @@ bool ResourceManager::createResource(std::string filename, RESOURCETYPE::TYPE ty
 
 bool ResourceManager::reloadResource(size_t ID)
 {
-	return m_ResourceMap[ID]->reload();
+	return m_ResourceMap[ID]->reload(m_Renderer);
 }
 
 void ResourceManager::unloadResource(size_t ID)

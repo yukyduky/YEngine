@@ -9,13 +9,13 @@ class Texture : public Resource
 private:
 	TextureData m_Data;
 	std::wstring m_Filename;
-	bool loadTexture(ID3D11ShaderResourceView** SRV, ID3D11Resource** texture, std::wstring filename);
-	bool load(std::wstring filename, RESOURCETYPE::TYPE type);
+	bool loadTexture(Renderer* renderer, ID3D11ShaderResourceView** SRV, ID3D11Resource** texture, std::wstring filename);
+	bool load(Renderer* renderer, std::wstring filename, RESOURCETYPE::TYPE type);
 public:
-	Texture(std::wstring filename, RESOURCETYPE::TYPE type);
+	Texture(Renderer* renderer, std::wstring filename, RESOURCETYPE::TYPE type);
 	virtual ~Texture() {}
 	virtual void unload() override;
-	virtual bool reload() override;
+	virtual bool reload(Renderer* renderer) override;
 	const TextureData& getData() const;
 };
 

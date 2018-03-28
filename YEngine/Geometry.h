@@ -10,18 +10,18 @@ class Geometry : public Resource
 private:
 	VertexData m_Data;
 	std::string m_Filename;
-	bool createVertexBuffer(ID3D11Buffer ** gVertexBuffer, void* v, int& stride, int& offset, int numVertices);
-	bool createIndexBuffer(ID3D11Buffer ** gIndexBuffer, void * data, int & numIndices);
-	bool createBuffers(ID3D11Buffer** vBuffer, ID3D11Buffer** iBuffer, void* vertices, void* indices, int numVertices, int numIndices, int stride, int offset);
-	bool loadVertexDataFromFile(const char* filename, VertexData& data);
-	bool loadObjFile(const char* filename, VertexData& data);
+	bool createVertexBuffer(Renderer* renderer, ID3D11Buffer ** buffer, void* data, size_t& stride, size_t& offset, size_t numVertices);
+	bool createIndexBuffer(Renderer* renderer, ID3D11Buffer** buffer, void * data, size_t& numIndices);
+	bool createBuffers(Renderer* renderer, ID3D11Buffer** vBuffer, ID3D11Buffer** iBuffer, void* vertices, void* indices, size_t numVertices, size_t numIndices, size_t stride, size_t offset);
+	bool loadVertexDataFromFile(Renderer* renderer, const char* filename, VertexData& data);
+	bool loadObjFile(Renderer* renderer, const char* filename, VertexData& data);
 
-	bool load(std::string filename, RESOURCETYPE::TYPE type);
+	bool load(Renderer* renderer, std::string filename, RESOURCETYPE::TYPE type);
 public:
-	Geometry(std::string filename, RESOURCETYPE::TYPE type);
+	Geometry(Renderer* renderer, std::string filename, RESOURCETYPE::TYPE type);
 	virtual ~Geometry() {}
 	void unload() override;
-	bool reload() override;
+	bool reload(Renderer* renderer) override;
 	const VertexData& getData() const;
 };
 

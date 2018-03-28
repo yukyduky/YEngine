@@ -7,14 +7,18 @@
 #include "ConfigHandler.h"
 #include "EventHandler.h"
 #include "MemoryManager.h"
+#include "YEngine.h"
 
 
-void GameManager::init(HINSTANCE hInstance, int nCmdShow)
+GameManager::GameManager()
 {
 	m_IsRunning = true;
+}
 
-	m_DefRenderer.init();
+void GameManager::init()
+{
 	
+
 	Locator::getMemoryManager(MEMORYTYPE::PERM)->requestMemory(m_GameTime, &GameTime(), sizeof(GameTime));
 	Locator::provide(m_GameTime);
 
@@ -34,7 +38,6 @@ void GameManager::init(HINSTANCE hInstance, int nCmdShow)
 
 void GameManager::cleanup()
 {
-	m_DefRenderer.cleanup();
 	m_StateMemory->cleanup();
 	delete m_StateMemory;
 }
@@ -61,13 +64,12 @@ void GameManager::update()
 
 void GameManager::render()
 {
-	m_DefRenderer.firstpass();
 	StateManager::render(this);
 }
 
 void GameManager::display(State* state)
 {
-	m_DefRenderer.secondpass();
+	YEngine::render();
 }
 
 bool GameManager::getIsRunning()

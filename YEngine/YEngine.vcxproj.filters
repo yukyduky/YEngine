@@ -109,6 +109,12 @@
     <Filter Include="Header Files\Components\Camera">
       <UniqueIdentifier>{4b16daa4-1820-48d3-a093-43d97f32cf6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\API">
+      <UniqueIdentifier>{729e716b-57b4-4b77-adb0-6bb4ca0d1229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API">
+      <UniqueIdentifier>{228b6bb6-0505-4c9f-89d9-358c62b40020}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h">
@@ -117,9 +123,6 @@
     <ClInclude Include="Component.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="D3D.h">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Header Files\General</Filter>
     </ClInclude>
@@ -127,9 +130,6 @@
       <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="GameTime.h">
-      <Filter>Header Files\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="ID3D.h">
       <Filter>Header Files\Tools</Filter>
     </ClInclude>
     <ClInclude Include="IGameTime.h">
@@ -213,16 +213,22 @@
     <ClInclude Include="LightComponent.h">
       <Filter>Header Files\Components\Graphics\Light</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files\Renderers</Filter>
+    </ClInclude>
     <ClInclude Include="CameraComponent.h">
       <Filter>Header Files\Components\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="YEngine.h">
+      <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="IResourceManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files\General</Filter>
-    </ClCompile>
-    <ClCompile Include="D3D.cpp">
-      <Filter>Source Files\Tools</Filter>
     </ClCompile>
     <ClCompile Include="GamePlayState.cpp">
       <Filter>Source Files\States</Filter>
@@ -302,6 +308,9 @@
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Source Files\Components\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="YEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
@@ -309,22 +318,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="geoVertexTexture.hlsl">
-      <Filter>Resource Files\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="geoVertexColor.hlsl">
-      <Filter>Resource Files\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="geoPixelColor.hlsl">
-      <Filter>Resource Files\Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="geoPixelTexture.hlsl">
-      <Filter>Resource Files\Shaders</Filter>
-    </FxCompile>
     <FxCompile Include="lightVertex.hlsl">
       <Filter>Resource Files\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="lightPixel.hlsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="geoVertex.hlsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="geoPixel.hlsl">
       <Filter>Resource Files\Shaders</Filter>
     </FxCompile>
   </ItemGroup>

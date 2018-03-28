@@ -6,7 +6,6 @@
 #include "IConfigHandler.h"
 #include "IEventHandler.h"
 #include "MemoryManager.h"
-#include "ID3D.h"
 
 enum class MEMORYTYPE { PERM, STATE, FRAME };
 
@@ -21,7 +20,6 @@ private:
 	static MemoryManager* m_sPermMem;
 	static MemoryManager* m_sStateMem;
 	static MemoryManager* m_sFrameMem;
-	static ID3D* m_sD3D;
 
 public:
 	/*- - - - - - - -<INFORMATION>- - - - - - - -
@@ -32,7 +30,6 @@ public:
 	static void provide(IConfigHandler* configHandler);
 	static void provide(IEventHandler* eventHandler);
 	static void provide(MemoryManager* mm, MEMORYTYPE type);
-	static void provide(ID3D* d3d);
 	
 	/*- - - - - - - -<INFORMATION>- - - - - - - -
 	1. Returns the 'sGT'(ptr).
@@ -42,7 +39,6 @@ public:
 	static IConfigHandler* getConfigHandler();
 	static IEventHandler* getEventHandler();
 	static MemoryManager* getMemoryManager(MEMORYTYPE type);
-	static ID3D* getD3D();
 };
 
 #endif

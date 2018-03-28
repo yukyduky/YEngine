@@ -3,6 +3,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <vector>
+#include "Renderer.h"
 #include "Locator.h"
 
 struct Vertex
@@ -12,67 +13,25 @@ struct Vertex
 	Vector2 texCoords;
 };
 
-bool Geometry::createVertexBuffer(ID3D11Buffer ** gVertexBuffer, void * v, int & stride, int & offset, int numVertices)
+bool Geometry::createVertexBuffer(Renderer* renderer, ID3D11Buffer** buffer, void* data, size_t& stride, size_t& offset, size_t numVertices)
 {
-	bool success = true;
-	// Describe the vertex buffer
-	D3D11_BUFFER_DESC vertexBufferDesc;
-	memset(&vertexBufferDesc, 0, sizeof(D3D11_BUFFER_DESC));
-	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	vertexBufferDesc.ByteWidth = stride * numVertices;
-	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	vertexBufferDesc.CPUAccessFlags = 0;
-	vertexBufferDesc.MiscFlags = 0;
-
-	// Set the vertex buffer data
-	D3D11_SUBRESOURCE_DATA vertexData;
-	memset(&vertexData, 0, sizeof(vertexData));
-	vertexData.pSysMem = v;
-
-	HRESULT hr = Locator::getD3D()->GETgDevice()->CreateBuffer(&vertexBufferDesc, &vertexData, gVertexBuffer);
-	if (FAILED(hr)) 
-	{
-		assert(FAILED(hr) && "Resource - Failed to create vertex buffer");
-		success = false;
-	}
-	return success;
+	return renderer->createResource(buffer, data, stride, offset, numVertices);
 }
 
-bool Geometry::createIndexBuffer(ID3D11Buffer ** gIndexBuffer, void * data, int & numIndices)
+bool Geometry::createIndexBuffer(Renderer* renderer, ID3D11Buffer** buffer, void * data, size_t& numIndices)
 {
-	bool success = true;
-	// Describe the index buffer
-	D3D11_BUFFER_DESC indexBufferDesc;
-	memset(&indexBufferDesc, 0, sizeof(indexBufferDesc));
-
-	indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	indexBufferDesc.ByteWidth = sizeof(int) * numIndices;
-	indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	indexBufferDesc.CPUAccessFlags = 0;
-	indexBufferDesc.MiscFlags = 0;
-
-	// Set the index buffer data
-	D3D11_SUBRESOURCE_DATA indexData;
-
-	indexData.pSysMem = data;
-	HRESULT hr = Locator::getD3D()->GETgDevice()->CreateBuffer(&indexBufferDesc, &indexData, gIndexBuffer);
-	if (FAILED(hr)) 
-	{
-		assert(FAILED(hr) && "Resource - Failed to create index buffer");
-		success = false;
-	}
-	return success;
+	return renderer->createResource(buffer, data, numIndices);
 }
 
-bool Geometry::createBuffers(ID3D11Buffer ** vBuffer, ID3D11Buffer ** iBuffer, void * vertices, void * indices, int numVertices, int numIndices, int stride, int offset)
+bool Geometry::createBuffers(Renderer* renderer, ID3D11Buffer** vBuffer, ID3D11Buffer** iBuffer, void* vertices, void* indices, size_t numVertices, size_t numIndices, size_t stride, size_t offset)
 {
 	bool allLoaded = false;
 	bool vLoaded = false;
 	bool iLoaded = false;
 
-	vLoaded = this->createVertexBuffer(vBuffer, vertices, stride, offset, numVertices);
+	vLoaded = this->createVertexBuffer(renderer, vBuffer, vertices, stride, offset, numVertices);
 
-	iLoaded = this->createIndexBuffer(iBuffer, indices, numIndices);
+	iLoaded = this->createIndexBuffer(renderer, iBuffer, indices, numIndices);
 
 	if (vLoaded && iLoaded) 
 	{
@@ -90,7 +49,54 @@ bool Geometry::createBuffers(ID3D11Buffer ** vBuffer, ID3D11Buffer ** iBuffer, v
 	return allLoaded;
 }
 
-bool Geometry::loadVertexDataFromFile(const char* filename, VertexData& data)
+bool Geometry::loadVertexDataFromFile(Renderer* renderer, const char* filename, VertexData& data)
+{
+	bool success = false;
+	RawData rawData;
+	std::vector<std::vector<std::vector<int>>> parsedDataSets;
+	if (Locator::getConfigHandler()->loadRawData(rawData, filename))
+	{
+		for (auto &i : rawData.dataSets) 
+		{
+			std::vector<std::vector<int>> parsedDataRows;
+			for (auto &k : i) 
+			{
+				std::vector<int> parsedData;
+				for (auto &h : k) 
+				{
+					parsedData.push_back(atoi(h.c_str()));
+				}
+				parsedDataRows.push_back(parsedData);
+			}
+			parsedDataSets.push_back(parsedDataRows);
+		}
+
+		ID3D11Buffer* vBuffer;
+		ID3D11Buffer* iBuffer;
+		void* vertices = parsedDataSets[1].data();
+		void* indices = parsedDataSets[2].data();
+		int numVertices = parsedDataSets[1].size();
+		int numIndices = parsedDataSets[2].size();
+		int stride = static_cast<int>(parsedDataSets[0][0][0]);
+		int offset = static_cast<int>(parsedDataSets[0][1][0]);
+
+		if (this->createBuffers(renderer, &vBuffer, &iBuffer, vertices, indices, numVertices, numIndices, stride, offset))
+		{
+			success = true;
+
+			data.vBuffer = vBuffer;
+			data.iBuffer = iBuffer;
+			data.numVertices = numVertices;
+			data.numIndices = numIndices;
+			data.numFaces = numIndices / 3;
+			data.stride = stride;
+			data.offset = offset;
+		}
+	}
+	return success;
+}
+
+bool Geometry::loadObjFile(Renderer* renderer, const char* filename, VertexData& data)
 {
 	bool success = false;
 	RawData rawData;
@@ -121,7 +127,7 @@ bool Geometry::loadVertexDataFromFile(const char* filename, VertexData& data)
 		int stride = static_cast<int>(parsedDataSets[0][0][0]);
 		int offset = static_cast<int>(parsedDataSets[0][1][0]);
 
-		if (this->createBuffers(&vBuffer, &iBuffer, vertices, indices, numVertices, numIndices, stride, offset))
+		if (this->createBuffers(renderer, &vBuffer, &iBuffer, vertices, indices, numVertices, numIndices, stride, offset))
 		{
 			success = true;
 
@@ -137,54 +143,7 @@ bool Geometry::loadVertexDataFromFile(const char* filename, VertexData& data)
 	return success;
 }
 
-bool Geometry::loadObjFile(const char* filename, VertexData& data)
-{
-	bool success = false;
-	RawData rawData;
-	std::vector<std::vector<std::vector<int>>> parsedDataSets;
-	if (Locator::getConfigHandler()->loadRawData(rawData, filename)) 
-	{
-		for (auto &i : rawData.dataSets) 
-		{
-			std::vector<std::vector<int>> parsedDataRows;
-			for (auto &k : i) 
-			{
-				std::vector<int> parsedData;
-				for (auto &h : k) 
-				{
-					parsedData.push_back(atoi(h.c_str()));
-				}
-				parsedDataRows.push_back(parsedData);
-			}
-			parsedDataSets.push_back(parsedDataRows);
-		}
-
-		ID3D11Buffer* vBuffer;
-		ID3D11Buffer* iBuffer;
-		void* vertices = parsedDataSets[1].data();
-		void* indices = parsedDataSets[2].data();
-		int numVertices = parsedDataSets[1].size();
-		int numIndices = parsedDataSets[2].size();
-		int stride = static_cast<int>(parsedDataSets[0][0][0]);
-		int offset = static_cast<int>(parsedDataSets[0][1][0]);
-
-		if (this->createBuffers(&vBuffer, &iBuffer, vertices, indices, numVertices, numIndices, stride, offset))
-		{
-			success = true;
-
-			data.vBuffer = vBuffer;
-			data.iBuffer = iBuffer;
-			data.numVertices = numVertices;
-			data.numIndices = numIndices;
-			data.numFaces = numIndices / 3;
-			data.stride = stride;
-			data.offset = offset;
-		}
-	}
-	return success;
-}
-
-bool Geometry::load(std::string filename, RESOURCETYPE::TYPE type)
+bool Geometry::load(Renderer* renderer, std::string filename, RESOURCETYPE::TYPE type)
 {
 	bool success = true;
 
@@ -241,7 +200,7 @@ bool Geometry::load(std::string filename, RESOURCETYPE::TYPE type)
 		ID3D11Buffer* vBuffer = nullptr;
 		ID3D11Buffer* iBuffer = nullptr;
 
-		if (this->createBuffers(&vBuffer, &iBuffer, vertices.data(), indices.data(), vertices.size(), indices.size(), sizeof(Vertex), 0))
+		if (this->createBuffers(renderer, &vBuffer, &iBuffer, vertices.data(), indices.data(), vertices.size(), indices.size(), sizeof(Vertex), 0))
 		{
 			m_Type = type;
 			m_Filename = filename;
@@ -252,14 +211,14 @@ bool Geometry::load(std::string filename, RESOURCETYPE::TYPE type)
 	return success;
 }
 
-Geometry::Geometry(std::string filename, RESOURCETYPE::TYPE type)
+Geometry::Geometry(Renderer* renderer, std::string filename, RESOURCETYPE::TYPE type)
 {
 	m_Loaded = false;
 	std::string ext = filename.substr(filename.find_last_of('.') + 1, filename.size() - filename.find_last_of('.'));
 
 	if (ext == "obj")
 	{
-		m_Loaded = this->load(filename, type);
+		m_Loaded = this->load(renderer, filename, type);
 	}
 	else if (ext == "yk")
 	{
@@ -277,11 +236,11 @@ void Geometry::unload()
 	}
 }
 
-bool Geometry::reload()
+bool Geometry::reload(Renderer* renderer)
 {
 	if (!m_Loaded)
 	{
-		m_Loaded = this->load(m_Filename, m_Type);
+		m_Loaded = this->load(renderer, m_Filename, m_Type);
 	}
 	return m_Loaded;
 }

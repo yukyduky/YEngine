@@ -6,7 +6,6 @@ IEventHandler* Locator::m_sEH = nullptr;
 MemoryManager* Locator::m_sPermMem = nullptr;
 MemoryManager* Locator::m_sStateMem = nullptr;
 MemoryManager* Locator::m_sFrameMem = nullptr;
-ID3D* Locator::m_sD3D = nullptr;
 
 void Locator::provide(IGameTime* gameTime)
 {
@@ -37,11 +36,6 @@ void Locator::provide(MemoryManager* mm, MEMORYTYPE type)
 		m_sFrameMem = mm;
 		break;
 	}
-}
-
-void Locator::provide(ID3D* d3d)
-{
-	m_sD3D = d3d;
 }
 
 IGameTime* Locator::getGameTime()
@@ -75,9 +69,4 @@ MemoryManager* Locator::getMemoryManager(MEMORYTYPE type)
 		break;
 	}
 	return mem;
-}
-
-ID3D* Locator::getD3D()
-{
-	return m_sD3D;
 }
