@@ -31,6 +31,8 @@ void YEngine::render()
 
 void YEngine::cleanup()
 {
+	delete m_Renderer;
+	m_RM.cleanup();
 }
 
 IResourceManager* YEngine::getResourceManager()
