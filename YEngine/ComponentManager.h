@@ -2,70 +2,43 @@
 #ifndef COMPONENTMANAGER_H
 #define COMPONENTMANAGER_H
 
+#include "IComponentManager.h"
 #include <map>
 #include <unordered_map>
-#include <bitset>
-#include "Component.h"
 #include "MemoryManager.h"
-#include "idlist.h"
 #include "IDHandler.h"
 
-#define BITMASK_SIZE 32
-
-struct ComponentData
-{
-	MemoryManager mm;
-	idlist<Component*> components;
-
-	Component& templateInstance;
-	const char* name;
-	size_t byteSize;
-
-	ComponentData(Component& templateInstance, const char* name, size_t byteSize, size_t maxCapacity) :
-		templateInstance(templateInstance), name(name), byteSize(byteSize), mm(byteSize, maxCapacity), components(maxCapacity) {}
-};
-
-class ComponentManager
+class ComponentManager : public IComponentManager
 {
 private:
+	struct ComponentData
+	{
+		MemoryManager mm;
+		idlist<Component*> components;
+
+		Component& templateInstance;
+		const char* name;
+		size_t byteSize;
+
+		ComponentData(Component& templateInstance, const char* name, size_t byteSize, size_t maxCapacity) :
+			templateInstance(templateInstance), name(name), byteSize(byteSize), mm(byteSize, maxCapacity), components(maxCapacity) {}
+	};
+
 	idlist<std::bitset<BITMASK_SIZE>> m_Entities;
 	std::unordered_map<std::bitset<BITMASK_SIZE>, ComponentData> m_Components;
 	IDHandler m_BitmaskIDs;
 public:
-	void init();
+	void init() override;
+	size_t addEntity(std::bitset<BITMASK_SIZE> componentBitmask) override;
+	void removeEntity(const size_t entityID) override;
+	void addComponentsToEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask) override;
+	void removeComponentsFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask) override;
+	std::bitset<BITMASK_SIZE> registerComponentType(Component& templateInstance, size_t byteSize, const char* name, size_t maxCapacity) override;
+	void unregisterComponentType(std::bitset<BITMASK_SIZE> componentBitmask) override;
+	void cleanup() override;
 
-	size_t addEntity(std::bitset<BITMASK_SIZE> componentBitmask);
-	void removeEntity(const size_t entityID);
-	void addComponentsToEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask);
-	void removeComponentsFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask);
-	std::bitset<BITMASK_SIZE> registerComponentType(Component& templateInstance, size_t byteSize, const char* name, size_t maxCapacity);
-	void unregisterComponentType(std::bitset<BITMASK_SIZE> componentBitmask);
-
-	template<typename Derived>
-	void getComponentFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask, Derived*& component);
-	template<typename Derived>
-	void getAllComponentOfType(const std::bitset<BITMASK_SIZE> componentBitmask, idlist<Derived*>& components);
-
-	void cleanup();
+	void getComponentFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask, Component*& component) override;
+	void getAllComponentOfType(const std::bitset<BITMASK_SIZE> componentBitmask, idlist<Component*>& components) override;
 };
 
 #endif // COMPONENTMANAGER_H
-
-template<typename Derived>
-inline void ComponentManager::getComponentFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask, Derived*& component)
-{
-	component = static_cast<Derived*>(m_Components.at(componentBitmask).components[entityID]);
-}
-
-template<typename Derived>
-inline void ComponentManager::getAllComponentOfType(const std::bitset<BITMASK_SIZE> componentBitmask, idlist<Derived*>& derivedComponents)
-{
-	idlist<Component*>& components = m_Components.at(componentBitmask).components;
-	size_t numberOfComponents = components.size();
-
-	derivedComponents.reserve(numberOfComponents);
-	for (size_t i = 0; i < numberOfComponents; i++)
-	{
-		derivedComponents.push(static_cast<Derived*>(components[i]));
-	}
-}

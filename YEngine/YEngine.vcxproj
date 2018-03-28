@@ -119,6 +119,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="IComponentManager.h" />
     <ClInclude Include="IResourceManager.h" />
     <ClInclude Include="YEngine.h" />
     <ClInclude Include="BoxCollisionComponent.h" />

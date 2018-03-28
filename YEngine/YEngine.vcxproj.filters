@@ -223,7 +223,10 @@
       <Filter>Header Files\API</Filter>
     </ClInclude>
     <ClInclude Include="IResourceManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponentManager.h">
+      <Filter>Header Files\API</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -309,7 +312,7 @@
       <Filter>Source Files\Components\Camera</Filter>
     </ClCompile>
     <ClCompile Include="YEngine.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\API</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

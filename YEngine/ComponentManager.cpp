@@ -101,3 +101,13 @@ void ComponentManager::cleanup()
 	}
 	m_Components.clear();
 }
+
+void ComponentManager::getComponentFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask, Component*& component)
+{
+	component = m_Components.at(componentBitmask).components[entityID];
+}
+
+void ComponentManager::getAllComponentOfType(const std::bitset<BITMASK_SIZE> componentBitmask, idlist<Component*>& components)
+{
+	components = m_Components.at(componentBitmask).components;
+}
