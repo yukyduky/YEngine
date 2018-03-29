@@ -8,14 +8,7 @@
 
 using namespace DirectX::SimpleMath;
 
-namespace RESOURCETYPE {
-	enum TYPE { TEXTURE, OBJECT, FONT, SOUND, SIZE };
-}
-
-#define RESOURCE_TEXTURE   1
-#define RESOURCE_OBJECT    2
-#define RESOURCE_FONT      4
-#define RESOURCE_SOUND     8
+enum class RESOURCE { TEXTURE, OBJECT, FONT, SOUND };
 
 class Renderer;
 
@@ -23,14 +16,14 @@ struct ObjectData
 {
 	void* vertices;
 	void* indices;
-	int numVertices;
-	int numIndices;
-	int numFaces;
-	int stride;
-	int offset;
+	size_t numVertices;
+	size_t numIndices;
+	size_t numFaces;
+	size_t stride;
+	size_t offset;
 
 	ObjectData() {}
-	ObjectData(void* vertices, void* indices, int numVertices, int numIndices, int numFaces, int stride, int offset) :
+	ObjectData(void* vertices, void* indices, size_t numVertices, size_t numIndices, size_t numFaces, size_t stride, size_t offset) :
 		vertices(vertices), indices(indices), numFaces(numFaces), stride(stride), offset(offset) {}
 };
 
@@ -38,16 +31,16 @@ struct VertexData
 {
 	ID3D11Buffer* vBuffer;
 	ID3D11Buffer* iBuffer;
-	int numVertices;
-	int numIndices;
-	int numFaces;
-	int stride;
-	int offset;
+	size_t numVertices;
+	size_t numIndices;
+	size_t numFaces;
+	size_t stride;
+	size_t offset;
 
 	VertexData() {}
 	VertexData(ID3D11Buffer* vBuffer, ID3D11Buffer* iBuffer, ObjectData data) :
 		vBuffer(vBuffer), iBuffer(iBuffer), numVertices(data.numVertices), numIndices(data.numIndices), numFaces(data.numFaces), stride(data.stride), offset(data.offset) {}
-	VertexData(ID3D11Buffer* vBuffer, ID3D11Buffer* iBuffer, int numVertices, int numIndices, int numFaces, int stride, int offset) :
+	VertexData(ID3D11Buffer* vBuffer, ID3D11Buffer* iBuffer, size_t numVertices, size_t numIndices, size_t numFaces, size_t stride, size_t offset) :
 		vBuffer(vBuffer), iBuffer(iBuffer), numVertices(numVertices), numIndices(numIndices), numFaces(numFaces), stride(stride), offset(offset) {}
 };
 
@@ -71,7 +64,7 @@ private:
 	
 protected:
 	bool m_Loaded;
-	RESOURCETYPE::TYPE m_Type;
+	RESOURCE m_Type;
 
 public:
 	virtual ~Resource() {}
@@ -79,7 +72,7 @@ public:
 	virtual bool reload(Renderer* renderer) = 0;
 	bool isLoaded();
 
-	virtual RESOURCETYPE::TYPE getType();
+	virtual RESOURCE getType();
 };
 
 #endif // RESOURCE_H

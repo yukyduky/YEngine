@@ -16,9 +16,9 @@ private:
 	bool loadVertexDataFromFile(Renderer* renderer, const char* filename, VertexData& data);
 	bool loadObjFile(Renderer* renderer, const char* filename, VertexData& data);
 
-	bool load(Renderer* renderer, std::string filename, RESOURCETYPE::TYPE type);
+	bool load(Renderer* renderer, std::string filename, RESOURCE type);
 public:
-	Geometry(Renderer* renderer, std::string filename, RESOURCETYPE::TYPE type);
+	Geometry(Renderer* renderer, std::string filename, RESOURCE type);
 	virtual ~Geometry() {}
 	void unload() override;
 	bool reload(Renderer* renderer) override;

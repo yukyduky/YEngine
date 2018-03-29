@@ -12,14 +12,14 @@ namespace YEngine
 		return wstr;
 	}
 	
-	bool ResourceManager::createObject(std::string filename, RESOURCETYPE::TYPE type, size_t& ID)
+	bool ResourceManager::createObject(std::string filename, RESOURCE type, size_t& ID)
 	{
 		ID = m_ResourceIDs.getNewID();
 		m_ResourceMap.insert(m_ResourceMap.end(), std::pair<size_t, Resource*>(ID, new Geometry(m_Renderer, filename, type)));
 		return m_ResourceMap[ID]->isLoaded();
 	}
 	
-	bool ResourceManager::createTexture(std::string filename, RESOURCETYPE::TYPE type, size_t& ID)
+	bool ResourceManager::createTexture(std::string filename, RESOURCE type, size_t& ID)
 	{
 		std::wstring wfilename = this->convertStrToWStr(filename);
 		ID = m_ResourceIDs.getNewID();
@@ -37,20 +37,20 @@ namespace YEngine
 		m_Renderer = renderer;
 	}
 	
-	bool ResourceManager::createResource(std::string filename, RESOURCETYPE::TYPE type, size_t& ID)
+	bool ResourceManager::createResource(std::string filename, RESOURCE type, size_t& ID)
 	{
 		bool loaded = false;
 		switch (type)
 		{
-		case RESOURCETYPE::TEXTURE:
+		case RESOURCE::TEXTURE:
 			loaded = this->createTexture(filename, type, ID);
 			break;
-		case RESOURCETYPE::OBJECT:
+		case RESOURCE::OBJECT:
 			loaded = this->createObject(filename, type, ID);
 			break;
-		case RESOURCETYPE::FONT:
+		case RESOURCE::FONT:
 			break;
-		case RESOURCETYPE::SOUND:
+		case RESOURCE::SOUND:
 			break;
 		}
 		return loaded;
@@ -80,28 +80,6 @@ namespace YEngine
 		return m_ResourceMap[ID]->isLoaded();
 	}
 	
-	bool ResourceManager::getResourceData(VertexData & data, size_t ID)
-	{
-		bool success = false;
-		if (m_ResourceMap[ID]->getType() == RESOURCETYPE::OBJECT) 
-		{
-			success = true;
-			data = static_cast<Geometry*>(m_ResourceMap[ID])->getData();
-		}
-		return success;
-	}
-	
-	bool ResourceManager::getResourceData(TextureData & data, size_t ID)
-	{
-		bool success = false;
-		if (m_ResourceMap[ID]->getType() == RESOURCETYPE::TEXTURE) 
-		{
-			success = true;
-			data = static_cast<Texture*>(m_ResourceMap[ID])->getData();
-		}
-		return success;
-	}
-	
 	void ResourceManager::cleanup()
 	{
 		for (auto &i : m_ResourceMap) 
@@ -110,5 +88,27 @@ namespace YEngine
 			delete i.second;
 		}
 		m_ResourceIDs.clear();
+	}
+
+	bool ResourceManager::getResourceData(VertexData & data, size_t ID)
+	{
+		bool success = false;
+		if (m_ResourceMap[ID]->getType() == RESOURCE::OBJECT)
+		{
+			success = true;
+			data = static_cast<Geometry*>(m_ResourceMap[ID])->getData();
+		}
+		return success;
+	}
+
+	bool ResourceManager::getResourceData(TextureData & data, size_t ID)
+	{
+		bool success = false;
+		if (m_ResourceMap[ID]->getType() == RESOURCE::TEXTURE)
+		{
+			success = true;
+			data = static_cast<Texture*>(m_ResourceMap[ID])->getData();
+		}
+		return success;
 	}
 }

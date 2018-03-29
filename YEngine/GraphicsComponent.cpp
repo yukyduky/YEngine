@@ -28,21 +28,20 @@ void GraphicsComponent::cleanup()
 	m_ResourceIDs.clear();
 }
 
-void GraphicsComponent::setResource(std::bitset<RESOURCETYPE::SIZE> resourceBitmask, size_t resourceID)
+void GraphicsComponent::addResource(RENDERRESOURCE::TYPE type, size_t id)
 {
-	if (resourceBitmask.count() == 1)
-	{
-		//m_ResourceIDs[resourceBitmask]; = resourceID;
-		m_ResourceIDs.insert(m_ResourceIDs.end(), std::pair<std::bitset<RESOURCETYPE::SIZE>, size_t>(resourceBitmask, resourceID));
+	size_t bitmaskPower = type;
+	std::bitset<RENDERRESOURCE::SIZE> resourceBitmask(1ULL << type);
 
-		m_ResourceBitmask |= resourceBitmask;
-	}
+	m_ResourceIDs.insert(m_ResourceIDs.end(), std::pair<std::bitset<RENDERRESOURCE::SIZE>, size_t>(resourceBitmask, id));
+
+	m_ResourceBitmask |= resourceBitmask;
 }
 
-void GraphicsComponent::removeResources(std::bitset<RESOURCETYPE::SIZE> resourceBitmask)
+void GraphicsComponent::removeResources(std::bitset<RENDERRESOURCE::SIZE> resourceBitmask)
 {
 	size_t resourcesRemoved = 0;
-	std::unordered_map<std::bitset<RESOURCETYPE::SIZE>, size_t>::iterator it = m_ResourceIDs.begin();
+	std::unordered_map<std::bitset<RENDERRESOURCE::SIZE>, size_t>::iterator it = m_ResourceIDs.begin();
 
 	while (it != m_ResourceIDs.end() && resourcesRemoved < resourceBitmask.count())
 	{
@@ -52,7 +51,7 @@ void GraphicsComponent::removeResources(std::bitset<RESOURCETYPE::SIZE> resource
 
 			(*it).second = -1;
 
-			std::bitset<RESOURCETYPE::SIZE> removedBitmask = ~(*it).first;
+			std::bitset<RENDERRESOURCE::SIZE> removedBitmask = ~(*it).first;
 			m_ResourceBitmask &= removedBitmask;
 		}
 
@@ -60,11 +59,12 @@ void GraphicsComponent::removeResources(std::bitset<RESOURCETYPE::SIZE> resource
 	}
 }
 
-size_t GraphicsComponent::getResourceID(std::bitset<RESOURCETYPE::SIZE> resourceBitmask)
+size_t GraphicsComponent::getResourceID(RENDERRESOURCE::TYPE type)
 {
+	std::bitset<RENDERRESOURCE::SIZE> resourceBitmask(1ULL << type);
 	size_t id = -1;
 
-	if (resourceBitmask.count() == 1 && (resourceBitmask & m_ResourceBitmask) == resourceBitmask)
+	if ((resourceBitmask & m_ResourceBitmask) == resourceBitmask)
 	{
 		id = m_ResourceIDs[resourceBitmask];
 	}
@@ -72,7 +72,7 @@ size_t GraphicsComponent::getResourceID(std::bitset<RESOURCETYPE::SIZE> resource
 	return id;
 }
 
-std::bitset<RESOURCETYPE::SIZE> GraphicsComponent::getResourceBitmask() const
+std::bitset<RENDERRESOURCE::SIZE> GraphicsComponent::getResourceBitmask() const
 {
 	return m_ResourceBitmask;
 }

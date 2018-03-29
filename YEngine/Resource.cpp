@@ -7,7 +7,7 @@ bool Resource::isLoaded()
 	return m_Loaded;
 }
 
-RESOURCETYPE::TYPE Resource::getType()
+RESOURCE Resource::getType()
 {
 	return m_Type;
 }

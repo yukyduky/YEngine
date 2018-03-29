@@ -20,7 +20,7 @@ namespace YEngine
 		// Parameter: size_t ID
 		// Description: Factory that creates the desired resource type. The resource can be retrieved using the ID.
 		//***********************************************************
-		virtual bool createResource(std::string filename, RESOURCETYPE::TYPE type, size_t& ID) = 0;
+		virtual bool createResource(std::string filename, RESOURCE type, size_t& ID) = 0;
 		//***********************************************************
 		// Method:    reloadResource
 		// FullName:  ResourceManager::reloadResource
@@ -54,6 +54,9 @@ namespace YEngine
 		virtual void removeResource(size_t ID) = 0;
 		virtual bool isResourceLoaded(size_t ID) = 0;
 		virtual void cleanup() = 0;
+
+		virtual bool getResourceData(VertexData& data, size_t ID) = 0;
+		virtual bool getResourceData(TextureData& data, size_t ID) = 0;
 	};
 }
 
