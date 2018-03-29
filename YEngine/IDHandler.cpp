@@ -11,10 +11,10 @@ IDHandler::IDHandler(const size_t size, const size_t startID) : nrOfIDs(0)
 	this->resize(size, startID);
 }
 
-void IDHandler::remove(const size_t id)
+bool IDHandler::remove(const size_t id)
 {
-	std::list<size_t>::const_iterator it = this->usedIDs.begin();
 	bool idRemoved = false;
+	std::list<size_t>::const_iterator it = this->usedIDs.begin();
 
 	while (!idRemoved && it != this->usedIDs.end())
 	{
@@ -28,6 +28,8 @@ void IDHandler::remove(const size_t id)
 			it++;
 		}
 	}
+
+	return idRemoved;
 }
 
 void IDHandler::remove(std::list<size_t>::const_iterator it)
