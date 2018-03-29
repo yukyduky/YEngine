@@ -34,6 +34,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	gm.cleanup();
 	permMemory->cleanup();
 	delete permMemory;
+	YEngine::cleanup();
 
 	return 0;
 }

@@ -47,8 +47,10 @@ namespace YEngine
 	
 	void cleanup()
 	{
+		m_Renderer->cleanup();
 		delete m_Renderer;
 		m_RM.cleanup();
+		m_CM.cleanup();
 	}
 	
 	IResourceManager* getResourceManager()

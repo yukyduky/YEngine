@@ -398,6 +398,10 @@ void DeferredRenderer::render()
 
 void DeferredRenderer::cleanup()
 {
+	m_SwapChain->Release();
+	m_Device->Release();
+	m_DevCon->Release();
+
 	for (auto &i : m_RTVs)
 	{
 		i->Release();
