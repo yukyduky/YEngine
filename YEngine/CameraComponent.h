@@ -4,7 +4,7 @@
 
 #include "Component.h"
 
-class CameraComponent :	public Component
+class CameraComponent :	public YEngine::DerivedComponent<CameraComponent>
 {
 protected:
 	Matrix m_View;

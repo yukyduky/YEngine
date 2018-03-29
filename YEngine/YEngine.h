@@ -16,7 +16,7 @@ namespace YEngine
 	void cleanup();
 
 	template<typename Derived>
-	void getComponentFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask, Derived*& component);
+	void getComponentFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask, Derived*&  derivedComponent);
 	template<typename Derived>
 	void getAllComponentOfType(const std::bitset<BITMASK_SIZE> componentBitmask, idlist<Derived*>& components);
 
@@ -24,14 +24,16 @@ namespace YEngine
 	IComponentManager* getComponentManager();
 
 	template<typename Derived>
-	void getComponentFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask, Derived*& component)
+	void getComponentFromEntity(const size_t entityID, const std::bitset<BITMASK_SIZE> componentBitmask, Derived*&  derivedComponent)
 	{
-		component = static_cast<Derived*>(getComponentManager()->getComponentFromEntity(entityID, componentBitmask, component));
+		Component* component = nullptr;
+		getComponentManager()->getComponentFromEntity(entityID, componentBitmask, component);
+		derivedComponent = static_cast<Derived*>(component);
 	}
 	template<typename Derived>
 	void getAllComponentOfType(const std::bitset<BITMASK_SIZE> componentBitmask, idlist<Derived*>& derivedComponents)
 	{
-		idlist<Components*> components;
+		idlist<YEngine::Component*> components;
 		getComponentManager()->getAllComponentOfType(componentBitmask, components);
 
 		size_t numberOfComponents = components.size();

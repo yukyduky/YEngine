@@ -4,7 +4,7 @@
 
 #include "Component.h"
 
-class PhysicsComponent : public Component
+class PhysicsComponent : public YEngine::DerivedComponent<PhysicsComponent>
 {
 private:
 	Vector3 m_Velocity;

@@ -4,7 +4,7 @@
 
 #include "Component.h"
 
-class PositionalComponent : public Component
+class PositionalComponent : public YEngine::DerivedComponent<PositionalComponent>
 {
 private:
 	Vector3 m_Position;

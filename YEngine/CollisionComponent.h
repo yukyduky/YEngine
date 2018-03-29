@@ -10,7 +10,7 @@ using namespace DirectX;
 class SphereCollisionComponent;
 class BoxCollisionComponent;
 
-class CollisionComponent : public Component
+class CollisionComponent : public YEngine::DerivedComponent<CollisionComponent>
 {
 public:
 	virtual ~CollisionComponent() {}

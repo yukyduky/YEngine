@@ -19,7 +19,7 @@ struct LightData
 	LightData(Vector3 position, Vector3 diffuse, Vector3 ambient, float specPower) : position(position), diffuse(diffuse), ambient(ambient), specPower(specPower) {}
 };
 
-class LightComponent : public Component
+class LightComponent : public YEngine::DerivedComponent<LightComponent>
 {
 protected:
 	LIGHT m_Type;

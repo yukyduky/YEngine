@@ -8,6 +8,7 @@
 #include "Resource.h"
 
 class GraphicsComponent : public Component
+class GraphicsComponent : public YEngine::DerivedComponent<GraphicsComponent>
 {
 protected:
 	Matrix m_World;
