@@ -4,11 +4,18 @@
 
 GraphicsComponent::GraphicsComponent()
 {
-	m_ResourceBitmask = 1 << 0;
+	m_ResourceBitmask = 0;
+	m_RenderDepth = 0;
 }
 
 void GraphicsComponent::init()
 {
+}
+
+void GraphicsComponent::init(size_t renderDepth, Matrix& world)
+{
+	m_RenderDepth = renderDepth;
+	m_World = world;
 }
 
 void GraphicsComponent::update(float dt)
@@ -25,7 +32,8 @@ void GraphicsComponent::setResource(std::bitset<RESOURCETYPE::SIZE> resourceBitm
 {
 	if (resourceBitmask.count() == 1)
 	{
-		m_ResourceIDs[resourceBitmask] = resourceID;
+		//m_ResourceIDs[resourceBitmask]; = resourceID;
+		m_ResourceIDs.insert(m_ResourceIDs.end(), std::pair<std::bitset<RESOURCETYPE::SIZE>, size_t>(resourceBitmask, resourceID));
 
 		m_ResourceBitmask |= resourceBitmask;
 	}
@@ -77,4 +85,14 @@ Matrix& GraphicsComponent::getWorld()
 void GraphicsComponent::setWorld(Matrix& val)
 {
 	m_World = val;
+}
+
+size_t GraphicsComponent::getRenderDepth() const
+{
+	return m_RenderDepth;
+}
+
+void GraphicsComponent::setRenderDepth(size_t val)
+{
+	m_RenderDepth = val;
 }
