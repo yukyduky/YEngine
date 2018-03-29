@@ -12,6 +12,11 @@ namespace RESOURCETYPE {
 	enum TYPE { TEXTURE, OBJECT, FONT, SOUND, SIZE };
 }
 
+#define RESOURCE_TEXTURE   1
+#define RESOURCE_OBJECT    2
+#define RESOURCE_FONT      4
+#define RESOURCE_SOUND     8
+
 class Renderer;
 
 struct ObjectData 
